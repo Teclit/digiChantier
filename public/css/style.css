@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&display=swap');
+*{
+    font-family: 'Scheherazade New', serif;
+}
+a {
+color: #000000;
+text-decoration: none;
+}
+
+a:hover { 
+color: #2236a7;
+transform: scale(0.95);
+}
+
+#imgLogo{
+    height: 50%;
+}
+
+.menuactive {
+    border-bottom: 3px solid #000000;
+}
+
+.thumbnail {
+    display: block;
+    position: relative;
+}
+
+.postHeader {
+    color: white;
+    text-align: justify;
+    position: absolute;
+    bottom: 0%;
+    background-color: rgba(0, 0, 0, 0.5);
+    width:100%
+}
+
+.headerTitle:hover{
+    transform: scale(0.9);
+}
+
+/* .readArticle img:hover */
+.imgPostCol {
+    display: block;
+    width: 100vw;
+    height: 30vh;
+    object-fit: cover;
+}
+.imgpost {
+    height: 160px;
+    width: 100%; 
+    object-fit: none; 
+}
+
+.imgpost:hover { 
+    -webkit-filter: grayscale(90%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(90%); 
+    
+}
+
+.textJustify {
+    text-align: justify;
+}
+
+
+footer {
+    position: absolute;
+    right: 0;
+    bottom: -200px;
+    left: 0;
+    padding: 1rem;
+    text-align: center;
+}
+
+
+
