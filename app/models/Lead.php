@@ -8,7 +8,7 @@ Class Lead {
     }
 
     public function findAllLeads() {
-        $this->db->query('SELECT * FROM leads  ORDER BY date_inscrption DESC');
+        $this->db->query('SELECT * FROM lead  ORDER BY date_inscrption DESC');
         $results = $this->db->resultSet();
         return $results;
     }

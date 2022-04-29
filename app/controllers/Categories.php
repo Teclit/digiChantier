@@ -6,8 +6,8 @@ class Categories extends Controller {
     }
 
     public function index() {
-        $categories = $this->categoryModel->findAllPosts();
-        $data = [ 'posts' => $categories ];
+        $categories = $this->categoryModel->findAllCategories();
+        $data = [ 'categories' =>  $categories ];
         $this->view('categories/listCategories', $data);
     }
 

@@ -3,19 +3,34 @@
     require APPROOT . '/views/includes/navigation.php';
 ?>
 
-    <div class="container my-2">  
-            <a class="btn bg-success " href="<?php echo URLROOT; ?>/posts/create">Create</a>
-    </div>
             
     <section class="container my-4">
-        <div class="row g-0">
-            <p class="fs-2 fw-bold"> <span class="fs-1" >|</span>Test Category<hr></p>
-        </div>
-        <div class="row">
-            <?php foreach($data['posts'] as $post): ?>
-                    <h2><?php echo $post->categoryName."<br>";?></h2>
+
+        <h1 class="text-center">Leads Chantier</h1>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                <th scope="col">N°.</th>
+                <th scope="col">Category Nom</th>
+                <th scope="col">Modifier</th>
+                <th scope="col">Supprimer</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            <?php foreach($data['categories'] as $index=>$category):?>
+                    <tr>
+                        <td scope="row"><?php echo $index+1;?></td>
+                        <td><?php echo $category->ctgnom;?></td>
+                        <!-- <td><?php ///echo $category->ctgnom;?></td> -->
+                        <td> <a href="<?php echo URLROOT; ?>/leads/updateLead" class="btn btn-outline-success btn-sm" >Modifier</a></td>
+                        <td><a href="<?php echo URLROOT; ?>/leads/deleteLead" class="btn btn btn-outline-danger btn-sm">supprimer</a></td>
+                    </tr>
             <?php endforeach; ?>
-        </div>
+                
+            </tbody>
+        </table>
     </section>
 
 

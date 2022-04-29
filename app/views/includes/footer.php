@@ -1,6 +1,6 @@
 
     <!-- Footer-->
-    <footer class="container-fluid py-4 bg-dark">
+    <footer class="container-fluid py-4 bg-dark  mt-auto">
         <div class="container">
             <p class="m-0 text-center text-white"> copyRight &copy; Digicotek Chantier</p>
         </div>

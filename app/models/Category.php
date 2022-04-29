@@ -6,7 +6,7 @@ class Category {
         $this->db = new Database;
     }
 
-    public function findAllPosts() {
+    public function findAllCategories() {
         $this->db->query('SELECT * FROM  category');
         $results = $this->db->resultSet();
         return $results;

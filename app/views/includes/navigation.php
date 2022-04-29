@@ -1,7 +1,7 @@
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light p-0">
             <div class="container d-flex justify-content-center p-0 ">
-                <a class="navbar-brand" href="#"><img src="<?php echo URLROOT;?>/public/img/brand.png" id="imgLogo" class="img-thumbnail" alt="Logo"></a>
+                <a class="navbar-brand" href="#"><h2 class="fw-bold">DigicotekPRO</h2></a>
                 <button class="navbar-toggler  " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon "></span>
                 </button>
