@@ -4,7 +4,7 @@
 ?>
 
     <div class="container mt-2">  
-      <a class="btn bg-success text-light" href="<?php echo URLROOT; ?>/leads/create">Add Lead</a>
+      <a class="btn bg-success text-light" href="<?php echo URLROOT; ?>/leads/addlead">Add Lead</a>
     </div>
 <section class="container ">
 

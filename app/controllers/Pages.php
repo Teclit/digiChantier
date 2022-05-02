@@ -7,12 +7,12 @@ class Pages extends Controller {
 
     public function index() {
 
-        $listtravaux = $this->categoryModel->findAllCategories();
-        $stravaux    = $this->souscategoryModel->findAllSousCategories();
+        // $listtravaux = $this->categoryModel->findAllCategories();
+        // $stravaux    = $this->souscategoryModel->findAllSousCategories();
 
         $data = [
-                'travaux'  =>  $listtravaux,
-                'stravaux' =>  $stravaux 
+                'travaux'  =>  $this->categoryModel->findAllCategories(),
+                'stravaux' => $this->souscategoryModel->findAllSousCategories()
             ];
 
         $this->view('index', $data);
