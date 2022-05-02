@@ -32,16 +32,16 @@
 
             <div class="mb-3">
                 <select class="form-select  me-4" id="typetravaux" name="typetravaux"  required>
-                    <option value="<?php echo $data['typeTravaux']->ctid;?>"><?php echo $data['typeTravaux']->ctgnom;?></option>
+                    <option value="<?php echo $data['typeTravaux']->idctg;?>"><?php echo $data['typeTravaux']->ctgnom;?></option>
                     <option>Quels est le type de travaux à réaliser ?</option>
                 </select>
             </div>
             <div class="mb-3">
                 <select class="form-select  me-4" id="natureravaux" name="naturetravaux"  required>
-                    <option value="<?php echo $data['natureTravaux']->sctid;?>"><?php echo $data['natureTravaux']->sctgnom;?></option>
+                    <option value="<?php echo $data['natureTravaux']->idsctg;?>"><?php echo $data['natureTravaux']->sctgnom;?></option>
                     <option>Quels est la nature de ces travaux ?</option>
                     <?php foreach($data['type-natureTravaux'] as $nttravail):  ?>
-                        <option value="<?php echo $nttravail->sctid;?>"><?php echo $nttravail->sctgnom;?></option>
+                        <option value="<?php echo $nttravail->idsct;?>"><?php echo $nttravail->sctgnom;?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

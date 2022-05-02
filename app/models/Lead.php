@@ -37,26 +37,35 @@ Class Lead {
         }
     }
 
-
+    /**
+     * Register new lead
+     *
+     * @param objet $data
+     * @return boolean 
+     */
     public function createLead($data) {
-        // $this->db->query('INSERT INTO users (firstName, lastName,  userTel, userEmail, userName, userPassword, roleID) 
-        // VALUES(:firstName, :lastName, :userTel, :userEmail, :userName,  :userPassword, :roleID)');
+        $this->db->query('INSERT INTO lead (nom, prenom, tel, email, adresse, ville, codepostal, idctg, idsctg, projet, prix)
+        VALUES(:nom, :prenom, :tel, :email, :adresse, :ville, :codepostal, :idctg, :idsctg, :projet, :prix)');
+    
+        //Bind values
+        $this->db->bind(':nom',        $data['nomLead']);
+        $this->db->bind(':prenom',     $data['prenomLead']);
+        $this->db->bind(':tel',        $data['telLead']);
+        $this->db->bind(':email',      $data['emailLead']);
+        $this->db->bind(':adresse',    $data['adresseLead']);
+        $this->db->bind(':ville',      $data['villeLead']);
+        $this->db->bind(':codepostal', $data['codepostalLead']);
+        $this->db->bind(':idctg',      $data['typeTravauxLead']);
+        $this->db->bind(':idsctg',     $data['natureProjetLead']);
+        $this->db->bind(':projet',     $data['projetLead']);
+        $this->db->bind(':prix',       $data['prixLead']);
 
-        // //Bind values
-        // $this->db->bind(':firstName', $data['firstName']);
-        // $this->db->bind(':lastName', $data['lastName']);
-        // $this->db->bind(':userTel', $data['userTel']);
-        // $this->db->bind(':userEmail', $data['userEmail']);
-        // $this->db->bind(':userName', $data['userName']);
-        // $this->db->bind(':userPassword', $data['userPassword']);
-        // $this->db->bind(':roleID', $data['userRoleID']);
-
-        // //Execute function
-        // if ($this->db->execute()) {
-        //     return true;
-        // } else {
-        //     return false;
-        // }
+        //Execute function
+        if ($this->db->execute()) {
+            return  true;
+        } else {
+            return   false;
+        }
     }
 
 
