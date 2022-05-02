@@ -23,7 +23,6 @@
                     <tr>
                         <td scope="row"><?php echo $index+1;?></td>
                         <td><?php echo $category->ctgnom;?></td>
-                        <!-- <td><?php ///echo $category->ctgnom;?></td> -->
                         <td> <a href="<?php echo URLROOT; ?>/leads/updateLead" class="btn btn-outline-success btn-sm" >Modifier</a></td>
                         <td><a href="<?php echo URLROOT; ?>/leads/deleteLead" class="btn btn btn-outline-danger btn-sm">supprimer</a></td>
                     </tr>

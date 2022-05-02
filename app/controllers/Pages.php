@@ -1,15 +1,20 @@
 <?php
 class Pages extends Controller {
     public function __construct() {
-        //$this->userModel = $this->model('User');
+        $this->categoryModel = $this->model('Category');
+        $this->souscategoryModel = $this->model('Souscategory');
     }
 
     public function index() {
+
+        $listtravaux = $this->categoryModel->findAllCategories();
+        $stravaux    = $this->souscategoryModel->findAllSousCategories();
+
         $data = [
-            'pageName ' => 'Home page'
-        ];
-        
-        
+                'travaux'  =>  $listtravaux,
+                'stravaux' =>  $stravaux 
+            ];
+
         $this->view('index', $data);
     }
 

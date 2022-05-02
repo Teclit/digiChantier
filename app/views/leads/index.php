@@ -4,7 +4,7 @@
 ?>
 
     <div class="container mt-2">  
-      <a class="btn bg-success text-light" href="<?php echo URLROOT; ?>/leads/creatLead">Add Lead</a>
+      <a class="btn bg-success text-light" href="<?php echo URLROOT; ?>/leads/create">Add Lead</a>
     </div>
 <section class="container ">
 
@@ -39,13 +39,13 @@
                 <td><?php echo $lead->codepostal;?></td>
                 <td><?php echo $lead->date_inscrption;?></td>
                 <td>
-                    <a href="<?php echo URLROOT; ?>/leads/leadInfos" class="btn btn-outline-info btn-sm">Infos</a>
+                    <a href="<?php echo URLROOT; ?>/leads/linfo" class="btn btn-outline-info btn-sm">Infos</a>
                 </td>
                 <td>
-                    <a href="<?php echo URLROOT; ?>/leads/updateLead" class="btn btn-outline-success btn-sm" >Modifier</a>
+                    <a href="<?php echo URLROOT; ?>/leads/update" class="btn btn-outline-success btn-sm" >Modifier</a>
                 </td>
                 <td>
-                    <a href="<?php echo URLROOT; ?>/leads/deleteLead" class="btn btn btn-outline-danger btn-sm">supprimer</a>
+                    <a href="<?php echo URLROOT; ?>/leads/delete" class="btn btn btn-outline-danger btn-sm">supprimer</a>
                 </td>
             </tr>
         <?php endforeach; ?>
