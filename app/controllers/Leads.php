@@ -43,12 +43,22 @@ class Leads extends Controller {
             // Process form & Sanitize Get data
             $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
             $splitGetUrl = explode('/', trim($_GET['travaux']));
-    
+
             $data = [
                 'typeTravaux'        => $this->categoryModel->findCategoryByID($splitGetUrl[0]),
                 'natureTravaux'      => $this->souscategoryModel->findSousCategoryByID($splitGetUrl[1]),
                 'type-natureTravaux' => $this->souscategoryModel->findSousCategoryByGroup($splitGetUrl[0]),
-                // MESSAGE ERRORS 
+                'nomLead'            => '',
+                'prenomLead'         => '',
+                'telLead'            => '', 
+                'emailLead'          => '', 
+                'adresseLead'        => '',
+                'codepostalLead'     => '',
+                'villeLead'          => '',
+                'typeTravauxLead'    => '',
+                'natureProjetLead'   => '',
+                'projetLead'         => '',
+                // MESSAGE Error
                 'nomLeadError'         => '',
                 'prenomLeadError'      => '',
                 'telLeadError'         => '',
@@ -60,6 +70,7 @@ class Leads extends Controller {
                 'natureProjetLeadError'=> '',
                 'projetLeadError'      => '',
             ];
+            
             $this->view('leads/create', $data);
 
         }else{
@@ -142,12 +153,12 @@ class Leads extends Controller {
                 $data['nomLeadError']   = 'Veuillez saisir votre nom';
             } elseif (empty($data['prenomLead'])){ 
                 $data['prenomLeadError'] = 'Veuillez remplir saisir votre prenom';
-            }elseif (empty($data['telLead']) || strlen($data['telLead'] < 10)){ 
-                $data['telLeadError']     = 'Veuillez remplir saisir votre telephone';
+            }elseif (empty($data['telLead']) || !preg_match('/^[0-9]{10}+$/', $data['telLead'])){ 
+                $data['telLeadError']     = 'Veuillez saisir votre telephone.<br>Example: 06(07) ** ** ** **';
             }elseif (empty($data['adresseLead'])){ 
                 $data['adresseLeadError'] = 'Veuillez remplir saisir votre adresse';
-            }elseif (empty($data['codepostalLead'])){ 
-                $data['codepostalLeadError'] = 'Veuillez saisir votre code postal';
+            }elseif (empty($data['codepostalLead']) || !preg_match('/^[0-9]{5}+$/', $data['codepostalLead'])){ 
+                $data['codepostalLeadError'] = 'Veuillez saisir votre code postal.<br>Example: 75100';
             }elseif (empty($data['villeLead'])){ 
                 $data['villeLeadError']      = 'Veuillez saisir votre ville';
             }elseif (empty($data['typeTravauxLead'])){ 
@@ -185,15 +196,14 @@ class Leads extends Controller {
             ){
                 //Register lead from model function
                 if ($this->leadModel->CreateLead($data)) {
-                    //Redirect to the index
-                    // $msg= "Vous avez bien ajouté le lead";
-                    // Sessions::setSession("SuccessMessage", $msg);
-                    header('location: ' . URLROOT . '/leads/index');
+                    // Redirect to index page
+                    $msg= "Vous avez bien enregistrer le lead";
+                    SessionHelper::setSession("SuccessMessage", $msg);
+                    header('location: ' . URLROOT . '/leads/index');  
                 } else {
                     die('Something went wrong.');
                 }
             }
-
             $this->view('leads/create', $data);
         }
     }
@@ -279,12 +289,12 @@ class Leads extends Controller {
                 $data['nomLeadError']   = 'Veuillez saisir votre nom';
             } elseif (empty($data['prenomLead'])){ 
                 $data['prenomLeadError'] = 'Veuillez remplir saisir votre prenom';
-            }elseif (empty($data['telLead']) || strlen($data['telLead'] < 10)){ 
-                $data['telLeadError']     = 'Veuillez remplir saisir votre telephone';
+            }elseif (empty($data['telLead']) || !preg_match('/^[0-9]{10}+$/', $data['telLead'])){ 
+                $data['telLeadError']     = 'Veuillez remplir saisir votre telephone.<br>Example: 06(07) ** ** ** **';
             }elseif (empty($data['adresseLead'])){ 
                 $data['adresseLeadError'] = 'Veuillez remplir saisir votre adresse';
-            }elseif (empty($data['codepostalLead'])){ 
-                $data['codepostalLeadError'] = 'Veuillez saisir votre code postal';
+            }elseif (empty($data['codepostalLead']) || !preg_match('/^[0-9]{5}+$/', $data['codepostalLead'])){ 
+                $data['codepostalLeadError'] = 'Veuillez saisir votre code postal.<br>Example: 75100';
             }elseif (empty($data['villeLead'])){ 
                 $data['villeLeadError']      = 'Veuillez saisir votre ville';
             }elseif (empty($data['typeTravauxLead'])){ 
@@ -308,8 +318,7 @@ class Leads extends Controller {
             }
 
             // Make sure that errors are empty
-            if (
-                empty($data['nomLeadError' ])        && 
+            if (empty($data['nomLeadError' ])        && 
                 empty($data['prenomLeadError'])      && 
                 empty($data['telLeadError'])         && 
                 empty($data['emailLeadError'])       && 
@@ -318,9 +327,9 @@ class Leads extends Controller {
                 empty($data['villeLeadError'])       && 
                 empty($data['typeTravauxLeadError']) &&
                 empty($data['typeTravauxLeadError']) &&
-                empty($data['projetLeadError'])
-            ){
-                //Register lead from model function
+                empty($data['projetLeadError'])){
+                //Update lead from model function
+
                 if ($this->leadModel->UpdateLead($data)) {
                     //Redirect to the index
                     $msg= "Vous avez bien Modifier le lead";
@@ -411,7 +420,10 @@ class Leads extends Controller {
             ];
 
             if($this->leadModel->DeleteLead($data['idlead'])) {
-                header('location: ' . URLROOT . '/leads/index'); 
+                //Redirect to the index
+                $msg= "Vous avez bien supprimer le lead";
+                SessionHelper::setSession("SuccessMessage", $msg);
+                header('location: ' . URLROOT . '/leads/index');  
             } else {
                 die('Something went wrong!');
             }
