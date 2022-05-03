@@ -38,13 +38,13 @@
                 <td><?php echo $lead->codepostal;?></td>
                 <td><?php echo $lead->date_inscrption;?></td>
                 <td>
-                    <a href="<?php echo URLROOT; ?>/leads/linfo" class="btn btn-outline-info btn-sm">Infos</a>
+                    <a href="<?php echo URLROOT."/leads/linfo/".$lead->idlead ?>" class="btn btn-outline-info btn-sm">Infos</a>
                 </td>
                 <td>
-                    <a href="<?php echo URLROOT; ?>/leads/update" class="btn btn-outline-success btn-sm" >Modifier</a>
+                    <a href="<?php echo URLROOT."/leads/update/".$lead->idlead ?>" class="btn btn-outline-success btn-sm" >Modifier</a>
                 </td>
                 <td>
-                    <a href="<?php echo URLROOT; ?>/leads/delete" class="btn btn btn-outline-danger btn-sm">supprimer</a>
+                    <a href="<?php echo URLROOT."/leads/delete/".$lead->idlead ?>" class="btn btn btn-outline-danger btn-sm">supprimer</a>
                 </td>
             </tr>
         <?php endforeach; ?>
