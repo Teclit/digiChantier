@@ -199,8 +199,13 @@ class Leads extends Controller {
     }
 
 
-    
-    public function update($id) {
+    /**
+     * update lead
+     *
+     * @param Integer $id
+     * @return void
+     */
+    public function update(Int $id) {
 
         $lead = $this->leadModel->findLeadById($id);
         $data = [
@@ -318,48 +323,37 @@ class Leads extends Controller {
                 //Register lead from model function
                 if ($this->leadModel->UpdateLead($data)) {
                     //Redirect to the index
-                    // $msg= "Vous avez bien ajouté le lead";
-                    // Sessions::setSession("SuccessMessage", $msg);
-                    header('location: ' . URLROOT . '/leads/index');
+                    $msg= "Vous avez bien Modifier le lead";
+                    SessionHelper::setSession("SuccessMessage", $msg);
+                    header('location: ' . URLROOT . '/leads/index'); 
                 } else {
-                    die('Something went wrong.');
+                    die("Some thing going wrong.");
+                    //header('location: ' . URLROOT . '/pages/index');
                 }
             }
             $this->view('leads/update', $data);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         // Ridirect to update formulaire
         $this->view('leads/update', $data);
     }
 
     /**
-     * Update lead Controller
+     * Delete lead Controller
      *
      * @return void
      */
-    public function update1($id) {
+    public function delete($id) {
+
         $lead = $this->leadModel->findLeadById($id);
         $data = [
+            'idlead'               => $lead->idlead,
             'lead'                 => $lead,
-            'typeTravaux'          => $lead->idctg,
-            'natureTravaux'        => $lead->idsctg,
-            'type-natureTravaux'   => $lead->idctg,
-            'travaux'              =>  $this->categoryModel->findAllCategories(),
-            'stravaux'             =>  $this->souscategoryModel->findAllSousCategories(),
-
+            'typeTravaux'          => $this->categoryModel->findCategoryByID($lead->idctg),
+            'natureTravaux'        => $this->souscategoryModel->findSousCategoryByID($lead->idsctg),
+            'type-natureTravaux'   => $this->souscategoryModel->findSousCategoryByGroup($lead->idctg),
+            'travaux'              => $this->categoryModel->findAllCategories(),
+            'stravaux'             => $this->souscategoryModel->findAllSousCategories(),
             'nomLead'              => '',
             'prenomLead'           => '',
             'telLead'              => '', 
@@ -382,23 +376,28 @@ class Leads extends Controller {
             'natureProjetLeadError'=> '',
             'projetLeadError'      => '',
         ];
-        
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            // Process form & Sanitize POST data
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $data = [
-                'nomLead'            => trim($_POST['nom']),
-                'prenomLead'         => trim($_POST['prenom']),
-                'telLead'            => trim($_POST['tel']),
-                'emailLead'          => trim($_POST['email']),
-                'adresseLead'        => trim($_POST['adresse']),
-                'codepostalLead'     => trim($_POST['codepostal']),
-                'villeLead'          => trim($_POST['ville']),
-                'typeTravauxLead'    => trim($_POST['typetravaux']),
-                'natureProjetLead'   => trim($_POST['naturetravaux']),
-                'projetLead'         => trim($_POST['projet']),
-                'prixLead'           => 22.18,
-                // MESSAGE ERRORS 
+                'idlead'               => $lead->idlead,
+                'lead'                 => $lead,
+                'typeTravaux'          => $this->categoryModel->findCategoryByID($lead->idctg),
+                'natureTravaux'        => $this->souscategoryModel->findSousCategoryByID($lead->idsctg),
+                'type-natureTravaux'   => $this->souscategoryModel->findSousCategoryByGroup($lead->idctg),
+                'travaux'              => $this->categoryModel->findAllCategories(),
+                'stravaux'             => $this->souscategoryModel->findAllSousCategories(),
+                'nomLead'              => '',
+                'prenomLead'           => '',
+                'telLead'              => '', 
+                'emailLead'            => '', 
+                'adresseLead'          => '',
+                'codepostalLead'       => '',
+                'villeLead'            => '',
+                'typeTravauxLead'      => '',
+                'natureProjetLead'     => '',
+                'projetLead'           => '',
+                // MESSAGE Error
                 'nomLeadError'         => '',
                 'prenomLeadError'      => '',
                 'telLeadError'         => '',
@@ -408,83 +407,18 @@ class Leads extends Controller {
                 'villeLeadError'       => '',
                 'typeTravauxLeadError' => '',
                 'natureProjetLeadError'=> '',
-                'projetLeadError'      => ''
+                'projetLeadError'      => '',
             ];
 
-            //Validate the form
-            if (empty($data['nomLead'])) { 
-                $data['nomLeadError']   = 'Veuillez saisir votre nom';
-            } elseif (empty($data['prenomLead'])){ 
-                $data['prenomLeadError'] = 'Veuillez remplir saisir votre prenom';
-            }elseif (empty($data['telLead']) || strlen($data['telLead'] < 10)){ 
-                $data['telLeadError']     = 'Veuillez remplir saisir votre telephone';
-            }elseif (empty($data['adresseLead'])){ 
-                $data['adresseLeadError'] = 'Veuillez remplir saisir votre adresse';
-            }elseif (empty($data['codepostalLead'])){ 
-                $data['codepostalLeadError'] = 'Veuillez saisir votre code postal';
-            }elseif (empty($data['villeLead'])){ 
-                $data['villeLeadError']      = 'Veuillez saisir votre ville';
-            }elseif (empty($data['typeTravauxLead'])){ 
-                $data['typeTravauxLeadError'] = 'Veuillez choisir votre type de travaux';
-            }elseif (empty($data['natureProjetLead'])){ 
-                $data['emailLeadError']  = 'Veuillez choisir votre nature de travaux';
-            }elseif (empty($data['projetLead'])){ 
-                $data['projetLeadError']  = 'Veuillez remplir préciser votre travaux';
-            } 
-
-            //Validate email and telephone
-            if (empty($data['emailLead'])) {
-                $data['emailLeadError'] = 'Veuillez saisir un email addresse.';
-            } elseif (!filter_var($data['emailLead'], FILTER_VALIDATE_EMAIL)) {
-                $data['emailLeadError'] = 'Veuillez saisir un correct un correct format.';
+            if($this->leadModel->DeleteLead($data['idlead'])) {
+                header('location: ' . URLROOT . '/leads/index'); 
             } else {
-                // Check if email exists.
-                if ($this->leadModel->findUserByEmail($data['emailLead'])) {
-                    $data['emailLeadError'] = 'Cet e-mail est déjà pris.';
-                }
+                die('Something went wrong!');
             }
-
-            // Make sure that errors are empty
-            if (
-                empty($data['nomLeadError' ])        && 
-                empty($data['prenomLeadError'])      && 
-                empty($data['telLeadError'])         && 
-                empty($data['emailLeadError'])       && 
-                empty($data['adresseLeadError'])     && 
-                empty($data['codepostalLeadError'])  && 
-                empty($data['villeLeadError'])       && 
-                empty($data['typeTravauxLeadError']) &&
-                empty($data['typeTravauxLeadError']) &&
-                empty($data['projetLeadError'])
-            ){
-                //Register lead from model function
-                if ($this->leadModel->CreateLead($data)) {
-                    //Redirect to the index
-                    // $msg= "Vous avez bien ajouté le lead";
-                    // Sessions::setSession("SuccessMessage", $msg);
-                    header('location: ' . URLROOT . '/leads/index');
-                } else {
-                    die('Something went wrong.');
-                }
-            }
-            $this->view('leads/update', $data);
         }
-       // $this->view('leads/update', $data);
-    }
-
-    /**
-     * Delete lead Controller
-     *
-     * @return void
-     */
-    public function delete() {
-        $leads = $this->leadModel->findAllLeads();
-        $data = [
-            'leads' => $leads
-        ];
-
         $this->view('leads/delete', $data);
     }
+    
 
 
 

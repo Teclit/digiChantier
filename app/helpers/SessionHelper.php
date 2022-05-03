@@ -1,9 +1,14 @@
 <?php 
 
-Class Sessions {
+Class SessionHelper{
 
     private static $_sessionStarted = false;
 
+    /**
+     * start_session
+     *
+     * @return void
+     */
     public static function sessionStart() {
         if(self::$_sessionStarted == false) {
             session_start();
@@ -11,9 +16,14 @@ Class Sessions {
         }
     }
 
-    
-        
-    public static function setSession($key, $value){
+    /**
+    * set session
+    *
+    * @param String $key
+    * @param String $value
+    * @return String
+    */
+    public static function setSession(String $key, String $value){
         $_SESSION[$key]= $value;
     }
 
@@ -32,7 +42,16 @@ Class Sessions {
         }
         
     }
-    public static function sessionMessage($key, $class) {
+
+
+    /**
+     * Print Message
+     *
+     * @param String $key
+     * @param String $class
+     * @return void
+     */
+    public static function sessionMessage(String $key, String $class) {
 
         $Output = "<div class=\" p-2 mb-5 $class text-center\">" ;
         $Output .= htmlentities($_SESSION[$key]);
@@ -43,6 +62,11 @@ Class Sessions {
 
 
 
+    /**
+     * destroy message
+     *
+     * @return void
+     */
     public static function destroySessions() {
 
         if(self::$_sessionStarted == true) {

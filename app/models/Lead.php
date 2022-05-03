@@ -107,5 +107,22 @@ Class Lead {
     }
 
 
+    /**
+     * delete lead
+     * @param ArrayObject $data
+     * @return Boolean
+     */
+    public function DeleteLead($idlead) { 
+
+        $this->db->query('DELETE FROM lead WHERE idlead=:idlead ');
+        $this->db->bind(':idlead', $idlead);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 
 }

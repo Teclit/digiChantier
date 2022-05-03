@@ -9,6 +9,10 @@
 <section class="container ">
 
     <h1 class="text-center">Leads Chantier</h1>
+    <?php 
+            echo SessionHelper::getSession("SuccessMessage");
+            echo SessionHelper::getSession("ErrorMessage");
+        ?>
     <table class="table table-hover">
         <thead>
             <tr>

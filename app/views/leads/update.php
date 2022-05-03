@@ -64,7 +64,9 @@
             </div>
 
             <div class="mb-3">
-                <textarea class="form-control" name="projet" id="exampleFormControlTextarea1" value="<?php echo $data['lead']->projet ?>"  rows="3"placeholder="Votre Projet"></textarea>
+                <textarea class="form-control text-start" name="projet" id="exampleFormControlTextarea1"  rows="3"placeholder="Votre Projet">
+                    <?php echo $data['lead']->projet ?>
+                </textarea>
                 <span class="invalidFeedback text-start  text-danger fw-bold"> <?php echo $data['projetLeadError']; ?> </span>
             </div>
 
