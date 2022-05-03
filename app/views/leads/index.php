@@ -4,12 +4,11 @@
 ?>
 
     <div class="container mt-2">  
-      <a class="btn bg-success text-light" href="<?php echo URLROOT; ?>/leads/addlead">Add Lead</a>
+        <a class="btn bg-success text-light" href="<?php echo URLROOT; ?>/leads/addlead">Add Lead</a>
     </div>
 <section class="container ">
 
     <h1 class="text-center">Leads Chantier</h1>
-
     <table class="table table-hover">
         <thead>
             <tr>
