@@ -112,17 +112,14 @@ Class Administrateur {
      * @param ArrayObject $data
      * @return Boolean
      */
-    public function DeleteAdmin($idAdmin) { 
-
-        $this->db->query('DELETE FROM administrateur WHERE id=:idAdmin ');
-        $this->db->bind(':idAdmin', $$idAdmin);
+    public function DeleteAdmin($data) { 
+        $this->db->query('DELETE FROM administrateur WHERE id=:idAdmin');
+        $this->db->bind(':idAdmin', $data['idAdmin']);
         if ($this->db->execute()) {
             return true;
         } else {
             return false;
         }
     }
-
-
 
 }

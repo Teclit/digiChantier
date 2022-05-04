@@ -150,7 +150,9 @@ class Administrateurs extends Controller {
                     SessionHelper::setSession("SuccessMessage", $msg);
                     header('location:'. URLROOT .'/administrateurs/indexAdmin');  
                 } else {
-                    die('Something went wrong.');
+                    $msg= "Vous n'avez pas enregistrer l'administrateur";
+                    SessionHelper::setSession("ErrorMessage", $msg);
+                    header('location:'. URLROOT .'/administrateurs/indexAdmin');
                 }
             }
             $this->view('administrateurs/createAdmin', $data);
@@ -286,7 +288,9 @@ class Administrateurs extends Controller {
                     SessionHelper::setSession("SuccessMessage", $msg);
                     header('location:'. URLROOT .'/administrateurs/indexAdmin');  
                 } else {
-                    die('Something went wrong.');
+                    $msg= "Vous n'avez pas Modifier l'administrateur";
+                    SessionHelper::setSession("ErrorMessage", $msg);
+                    header('location:'. URLROOT .'/administrateurs/indexAdmin');
                 }
             }
             $this->view('administrateurs/updateAdmin', $data);
@@ -320,7 +324,7 @@ class Administrateurs extends Controller {
             'villeAdminError'            => '',
 
             //FormAction
-            'actionForm'                 => 'updateAdmin/'.$admins->id,
+            'actionForm'                 => 'deleteAdmin/'.$admins->id,
             'submitBtn'                 => 'Supprimer Admin',
         ];
 
@@ -328,24 +332,22 @@ class Administrateurs extends Controller {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $data = [
             'idAdmin'              => $admins->id,
-            //FormAction
-            'actionForm'                 => 'updateAdmin/'.$admins->id,
-            'submitBtn'                 => 'Modifier Admin',
+            'actionForm'           => 'deleteAdmin/'.$admins->id,
+            'submitBtn'            => 'Modifier Admin',
 
             ];
 
         
-            if ($this->administrateursModel->DevleteAdmin($data) ){
+            if ($this->administrateursModel->DeleteAdmin($data) ){
                 // Redirect to index page
                 $msg= "Vous avez bien supprimer l'administrateur";
                 SessionHelper::setSession("SuccessMessage", $msg);
                 header('location:'. URLROOT .'/administrateurs/indexAdmin');  
             } else {
-                die('Something went wrong.');
+                //die('Something went wrong.');
                 $msg= "Vous n'avez pas supprimer l'administrateur";
                 SessionHelper::setSession("ErrorMessage", $msg);
                 header('location:'. URLROOT .'/administrateurs/indexAdmin');
-                // die('Something went wrong.');
             }
             
             $this->view('administrateurs/deleteAdmin', $data);
