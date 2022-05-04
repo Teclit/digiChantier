@@ -11,16 +11,16 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">N°.</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Prenom</th>
-                <th scope="col-2">Telephone</th>
-                <th scope="col">Email</th>
-                <th scope="col">Ville</th>
-                <th scope="col">Code Postale</th>
-                <th scope="col">Details</th>
-                <th scope="col">Modifier</th>
-                <th scope="col">Supprimer</th>
+                <th scope="col" class="fw-bold">N°.</th>
+                <th scope="col" class="fw-bold">Nom</th>
+                <th scope="col" class="fw-bold">Prenom</th>
+                <th scope="col" class="fw-bold">Telephone</th>
+                <th scope="col" class="fw-bold">Email</th>
+                <th scope="col" class="fw-bold">Ville</th>
+                <th scope="col" class="fw-bold">Code Postale</th>
+                <th scope="col" class="fw-bold">Details</th>
+                <th scope="col" class="fw-bold">Modifier</th>
+                <th scope="col" class="fw-bold">Supprimer</th>
             </tr>
         </thead>
         <tbody>
