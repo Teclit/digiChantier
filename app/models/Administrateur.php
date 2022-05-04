@@ -52,10 +52,6 @@ Class Administrateur {
         }
     }
 
-    // INSERT INTO administrateur(id, nom, prenom, tel, email, password, adresse, ville, codepostal)
-    // UPDATE administrateur SET nom=value-2,prenom=value-3,tel=value-4, email=value-5,password=value-6,adresse=value-7,ville=value-8,codepostal=value-9 WHERE id=value-1
-    // DELETE FROM administrateur WHERE id=value-1
-
     /**
      *REgister new  admin
      *
@@ -83,6 +79,50 @@ Class Administrateur {
         }
 
     }
+
+
+    /**
+     * Update Admin
+     * @param ArrayObject $data
+     * @return Boolean
+     */
+    public function UpdateAdmin($data) {
+        $this->db->query('UPDATE administrateur SET nom=:nom, prenom=:prenom, tel=:tel, email=:email, password=:password, adresse=:adresse, ville=:ville, codepostal=:codepostal WHERE id=:id' );
+        //Bind values
+        $this->db->bind(':nom',        $data['nomAdmin']);
+        $this->db->bind(':prenom',     $data['prenomAdmin']);
+        $this->db->bind(':tel',        $data['telAdmin']);
+        $this->db->bind(':email',      $data['emailAdmin']);
+        $this->db->bind(':password',   $data['passwordAdmin']);
+        $this->db->bind(':adresse',    $data['adresseAdmin']);
+        $this->db->bind(':ville',      $data['villeAdmin']);
+        $this->db->bind(':codepostal', $data['codepostalAdmin']);
+        $this->db->bind(':id',         $data['idAdmin']);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    /**
+     * delete Admin
+     * @param ArrayObject $data
+     * @return Boolean
+     */
+    public function DeleteAdmin($idAdmin) { 
+
+        $this->db->query('DELETE FROM administrateur WHERE id=:idAdmin ');
+        $this->db->bind(':idAdmin', $$idAdmin);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 
 }
