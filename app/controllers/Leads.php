@@ -148,16 +148,20 @@ class Leads extends Controller {
                 'projetLeadError'      => ''
             ];
 
+            $nameValidation        = "/^[a-zA-Z0-9]*$/";
+            $codepostalValidation  = "/^[0-9]{5}+$/";
+            $telephoneValidation   = "/^[0-9]{10}+$/";
+
             //Validate the form
             if (empty($data['nomLead'])) { 
                 $data['nomLeadError']   = 'Veuillez saisir votre nom';
             } elseif (empty($data['prenomLead'])){ 
                 $data['prenomLeadError'] = 'Veuillez remplir saisir votre prenom';
-            }elseif (empty($data['telLead']) || !preg_match('/^[0-9]{10}+$/', $data['telLead'])){ 
+            }elseif (empty($data['telLead']) || !preg_match($telephoneValidation, $data['telLead'])){ 
                 $data['telLeadError']     = 'Veuillez saisir votre telephone.<br>Example: 06(07) ** ** ** **';
             }elseif (empty($data['adresseLead'])){ 
                 $data['adresseLeadError'] = 'Veuillez remplir saisir votre adresse';
-            }elseif (empty($data['codepostalLead']) || !preg_match('/^[0-9]{5}+$/', $data['codepostalLead'])){ 
+            }elseif (empty($data['codepostalLead']) || !preg_match($codepostalValidation, $data['codepostalLead'])){ 
                 $data['codepostalLeadError'] = 'Veuillez saisir votre code postal.<br>Example: 75100';
             }elseif (empty($data['villeLead'])){ 
                 $data['villeLeadError']      = 'Veuillez saisir votre ville';

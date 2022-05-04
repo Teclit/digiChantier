@@ -5,9 +5,12 @@
 
 
 <section class="container my-4 p-5 ">
-
+    <a class="btn bg-success text-light" href="<?php echo URLROOT; ?>/administrateurs/createAdmin">Add Admin</a>
     <h3 class="text-center mb-3">List Administrateur</h3>
-
+        <?php 
+            echo SessionHelper::getSession("SuccessMessage");
+            echo SessionHelper::getSession("ErrorMessage");
+        ?>
     <table class="table table-hover">
         <thead>
             <tr>

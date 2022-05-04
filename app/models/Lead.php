@@ -38,7 +38,7 @@ Class Lead {
      * @param String $email
      * @return Boolean
      */
-    public function findUserByEmail(String $email) {
+    public function findLeadByEmail(String $email) {
         $this->db->query('SELECT * FROM lead WHERE email = :email');
         $this->db->bind(':email', $email);
         if($this->db->rowCount() > 0) {

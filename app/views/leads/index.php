@@ -3,13 +3,14 @@
     require APPROOT . '/views/includes/navigation.php';
 ?>
 
-    <div class="container mt-2">  
+    
+<section class="container ">
+    <div class="container mt-5">  
         <a class="btn bg-success text-light" href="<?php echo URLROOT; ?>/leads/addlead">Add Lead</a>
     </div>
-<section class="container ">
 
     <h1 class="text-center">Leads Chantier</h1>
-    <?php 
+        <?php 
             echo SessionHelper::getSession("SuccessMessage");
             echo SessionHelper::getSession("ErrorMessage");
         ?>
