@@ -34,15 +34,9 @@
                 <td><?php echo $administrateurs->email;?></td>
                 <td><?php echo $administrateurs->ville;?></td>
                 <td><?php echo $administrateurs->codepostal;?></td>
-                <td>
-                    <a href="<?php echo URLROOT; ?>/leads/leadInfos" class="btn btn-outline-info btn-sm">Infos</a>
-                </td>
-                <td>
-                    <a href="<?php echo URLROOT; ?>/leads/updateLead" class="btn btn-outline-success btn-sm" >Modifier</a>
-                </td>
-                <td>
-                    <a href="<?php echo URLROOT; ?>/leads/deleteLead" class="btn btn btn-outline-danger btn-sm">supprimer</a>
-                </td>
+                <td><a href="<?php echo URLROOT . "/administrateurs/detailAdmin/". $administrateurs->id ; ?>" class="btn btn-outline-info btn-sm">Infos</td></a></td>
+                <td><a href="<?php echo URLROOT . "/administrateurs/updateAdmin/". $administrateurs->id ;?>"  class="btn btn-outline-success btn-sm" >Modifier</a></td>
+                <td><a href="<?php echo URLROOT . "/administrateurs/deleteAdmin/". $administrateurs->id ;?>"  class="btn btn btn-outline-danger btn-sm">supprimer</a></td>
             </tr>
             <?php endforeach; ?>
                 
