@@ -178,11 +178,6 @@ class Leads extends Controller {
                 $data['emailLeadError'] = 'Veuillez saisir un email addresse.';
             } elseif (!filter_var($data['emailLead'], FILTER_VALIDATE_EMAIL)) {
                 $data['emailLeadError'] = 'Veuillez saisir un correct un correct format.';
-            } else {
-                // Check if email exists.
-                if ($this->leadModel->findUserByEmail($data['emailLead'])) {
-                    $data['emailLeadError'] = 'Cet e-mail est déjà pris.';
-                }
             }
 
             // Make sure that errors are empty
@@ -205,7 +200,10 @@ class Leads extends Controller {
                     SessionHelper::setSession("SuccessMessage", $msg);
                     header('location: ' . URLROOT . '/leads/index');  
                 } else {
-                    die('Something went wrong.');
+                    //Redirect to the index
+                    $msg= "Vous n'avez pas  enregistrer le lead";
+                    SessionHelper::setSession("ErrorMessage", $msg);
+                    header('location:' . URLROOT . '/leads/index'); 
                 }
             }
             $this->view('leads/create', $data);
@@ -319,12 +317,7 @@ class Leads extends Controller {
                 $data['emailLeadError'] = 'Veuillez saisir un email addresse.';
             } elseif (!filter_var($data['emailLead'], FILTER_VALIDATE_EMAIL)) {
                 $data['emailLeadError'] = 'Veuillez saisir un correct un correct format.';
-            } else {
-                // Check if email exists.
-                if ($this->leadModel->findUserByEmail($data['emailLead'])) {
-                    $data['emailLeadError'] = 'Cet e-mail est déjà pris.';
-                }
-            }
+            } 
 
             // Make sure that errors are empty
             if (empty($data['nomLeadError' ])        && 
@@ -343,10 +336,12 @@ class Leads extends Controller {
                     //Redirect to the index
                     $msg= "Vous avez bien Modifier le lead";
                     SessionHelper::setSession("SuccessMessage", $msg);
-                    header('location: ' . URLROOT . '/leads/index'); 
+                    header('location:'. URLROOT.'/leads/index'); 
                 } else {
-                    die("Some thing going wrong.");
-                    //header('location: ' . URLROOT . '/pages/index');
+                    //Redirect to the index
+                    $msg= "Vous n'avez pas  Modifier le lead";
+                    SessionHelper::setSession("ErrorMessage", $msg);
+                    header('location:' . URLROOT . '/leads/index'); 
                 }
             }
             $this->view('leads/update', $data);

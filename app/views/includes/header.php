@@ -9,4 +9,4 @@
         <link href="<?php echo URLROOT;?>/public/css/bootstrap.css" rel="stylesheet" />
         <link href="<?php echo URLROOT;?>/public/css/style.css" rel="stylesheet" />
     </head>
-    <body>
+    <body class="d-flex flex-column min-vh-100">

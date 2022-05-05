@@ -32,7 +32,7 @@ Class SessionHelper{
             if($key == "SuccessMessage"){
                 return self::sessionMessage("SuccessMessage", "bg-success");
             } elseif ($key =="ErrorMessage") {
-                return self::sessionMessage("ErrorMessage", " bg-danger ");
+                return self::sessionMessage("ErrorMessage", " bg-danger");
             } else {
                 return $_SESSION[$key];
             }
@@ -48,7 +48,7 @@ Class SessionHelper{
      * @return void
      */
     public static function sessionMessage(String $key, String $class) {
-        $Output = "<div class=\" p-2 mb-5 $class text-center text-light fw-bold\">" ;
+        $Output = "<div class=\" p-2 $class text-center text-light fw-bold\">" ;
         $Output .= htmlentities($_SESSION[$key]);
         $Output .= "</div>";
         $_SESSION[$key] = null;

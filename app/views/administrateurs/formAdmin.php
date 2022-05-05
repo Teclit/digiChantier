@@ -21,7 +21,7 @@
             <li><small>Au moins un chiffre</small></li>
             <li><small>Au moins une lettre</small></li>
             <li><small>Au moins un caractère spécial :</small></li>
-            <li><small>Doit contenir au moins 8 caractères</small></li>
+            <li><small>Au moins 8 caractères</small></li>
         </ul>
         <span class="invalidFeedback text-start  text-danger fw-bold"> <?php echo $data['passwordAdminError']; ?> </span>
     </div>

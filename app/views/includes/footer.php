@@ -1,9 +1,9 @@
 
     <!-- Footer-->
-    <footer class="container-fluid py-4 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white"> copyRight &copy; Digicotek Chantier</p>
-        </div>
+    <footer  class=" container-fluid bg-dark  mt-auto">
+            <div class="container py-3">
+                <p class="m-0 text-center text-white"> copyRight &copy; DigicotekPRO</p>
+            </div>
     </footer>
     
     <!-- Bootstrap core JS-->

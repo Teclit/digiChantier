@@ -33,14 +33,14 @@ Class Lead {
 
 
     /**
-     * Find user by email. email is passed in by the Controller.
+     * Find lead by email. email is passed in by the Controller.
      *
-     * @param String $email
+     * @param ArrayObject $email
      * @return Boolean
      */
-    public function findLeadByEmail(String $email) {
+    public function findLeadByEmail($data) {
         $this->db->query('SELECT * FROM lead WHERE email = :email');
-        $this->db->bind(':email', $email);
+        $this->db->bind(':email', $$data['emailLead']);
         if($this->db->rowCount() > 0) {
             return true;
         } else {

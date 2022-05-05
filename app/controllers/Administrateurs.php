@@ -104,7 +104,7 @@ class Administrateurs extends Controller {
             }elseif (empty($data['villeAdmin'])){ 
                 $data['villeAdminError']      = 'Veuillez saisir votre ville';
             }elseif (empty($data['passwordAdmin']) || !preg_match($passwordValidation, $data['passwordAdmin']) || (strlen($data['passwordAdmin'])<6)){ 
-                $data['passwordAdminError'] = 'Veuillez saisir votre mot de passe.';
+                $data['passwordAdminError'] = 'Veuillez saisir un valide mot de passe.';
             }elseif (empty($data['confirmpasswordAdmin']) || !preg_match($passwordValidation, $data['confirmpasswordAdmin'])){ 
                 $data['confirmpasswordAdminError'] = 'Veuillez confirmer votre mot de passe.';
             }else {
@@ -242,7 +242,7 @@ class Administrateurs extends Controller {
             }elseif (empty($data['villeAdmin'])){ 
                 $data['villeAdminError']      = 'Veuillez saisir votre ville';
             }elseif (empty($data['passwordAdmin']) || !preg_match($passwordValidation, $data['passwordAdmin']) || (strlen($data['passwordAdmin'])<6)){ 
-                $data['passwordAdminError'] = 'Veuillez saisir votre mot de passe.';
+                $data['passwordAdminError'] = 'Veuillez saisir un valide mot de passe.';
             }elseif (empty($data['confirmpasswordAdmin']) || !preg_match($passwordValidation, $data['confirmpasswordAdmin'])){ 
                 $data['confirmpasswordAdminError'] = 'Veuillez confirmer votre mot de passe.';
             }else {
