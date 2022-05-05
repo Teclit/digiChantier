@@ -64,7 +64,6 @@ Class SessionHelper{
      */
     public static function destroySessions() {
         if(self::$_sessionStarted == true) {
-            
             session_unset();
             session_destroy();
         }

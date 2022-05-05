@@ -1,14 +1,13 @@
 <?php
 class Users extends Controller {
     public function __construct() {
-        $this->userModel = $this->model('User');
+        $this->userModel = $this->model('Administrateur');
     }
 
     
 
     public function login() {
         $data = [
-            
             'userEmail' => '',
             'userPassword' => '',
             'userEmailError' => '',
@@ -39,8 +38,6 @@ class Users extends Controller {
             //Check if all errors are empty
             if (empty($data['userEmailError']) && empty($data['userPasswordError'])) {
                 $loggedInUser = $this->userModel->LoginAdmin($data); //call Methode user
-                
-                print_r($loggedInUser);
 
                 if ($loggedInUser) {
                     $this->createUserSession($loggedInUser);
@@ -51,16 +48,9 @@ class Users extends Controller {
             }
 
         } else {
-            $data = [
-                'userEmail' => '',
-                'userPassword' => '',
-                'userEmailError' => '',
-                'userPasswordError' => ''
-            ];
+            $this->view('users/login', $data);
         }
-        
-        $this->view('users/login', $data);
-    }
+    }   
 
     public function createUserSession($user) {
 
@@ -73,7 +63,10 @@ class Users extends Controller {
         SessionHelper::setSession("UserCodepostal", $user->codepostal);
         SessionHelper::setSession("UserVille", $user->ville);
 
-        header('location:' . URLROOT . '/pages/index');
+
+        $msg= "Bienvenue dans votre espace personnelle ";
+        SessionHelper::setSession("SuccessMessage", $msg);
+        header('location:'.URLROOT.'/pages/index');
     }
 
 
@@ -90,10 +83,8 @@ class Users extends Controller {
     }
 
     public function logout() {
-        unset($_SESSION['userID']);
-        unset($_SESSION['userEmail']);
-        unset($_SESSION['email']);
-        header('location:' . URLROOT . '/users/login');
+        SessionHelper::destroySessions();
+        header('location:' . URLROOT . '/pages/index');
     }
 
 }

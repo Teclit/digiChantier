@@ -19,11 +19,11 @@
                     </ul>
                     <ul class="navbar-nav bg-dark text-center">
                         <li class="nav-item">
-                            <?php if(isset(SessionHelper::getSession("userId")) ): ?>
+                            <?php if(null !== SessionHelper::getSession("userId")) : ?>
                                 <a class="nav-link text-light fw-bold px-3" href="<?php echo URLROOT; ?>/users/logout">Log out</a>
                             <?php else : ?>
                                 <a class="nav-link text-light fw-bold px-3" href="<?php echo URLROOT; ?>/users/login">Log in</a>
-                            <?php endif; ?>
+                            <?php  endif; ?>
                         </li>
                     </ul>
                 </div>

@@ -9,7 +9,7 @@
                 <div class="card border-0 shadow rounded-3 my-5">
                     <div class="card-body p-4 p-sm-5">
                         <h4 class="card-title text-center mb-5 fw-light fs-5"> Se Connecter </h4>
-                        <form action="<?php echo URLROOT; ?>/views/users/login" method ="POST">
+                        <form action="<?php echo URLROOT; ?>/users/login" method ="POST">
                             <div class="form-floating mb-3">
                                 <input type="email" class="form-control" name="userEmail" id="email" placeholder="Email">
                                 <label for="email">Email :</label>

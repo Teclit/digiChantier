@@ -10,6 +10,27 @@ Class Administrateur {
         $this->db = new Database;
     }
 
+
+    /**
+     * User login
+     *
+     * @param ArrayObject $data
+     * @return object/boolean
+     */
+    public function LoginAdmin($data) {
+        $this->db->query('SELECT * FROM administrateur WHERE email=:useremail');
+        //Bind value
+        $this->db->bind(':useremail', $data['userEmail']);
+        $row = $this->db->single();
+    
+        //row->password est the Hashed password
+        if (password_verify($data['userPassword'], $row->password)) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Get all Adminstrateur 
      *
@@ -36,23 +57,7 @@ Class Administrateur {
     }
 
 
-    /**
-     * Find user by email. email is passed in by the Controller.
-     *
-     * @param String $email
-     * @return Boolean
-     */
-    public function findAdminByEmail(String $email) {
-        $this->db->query('SELECT * FROM administrateur WHERE email = :email');
-        $this->db->bind(':email', $email);
-        if($this->db->rowCount() > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
+        /**
      *REgister new  admin
      *
      * @param ArrayObject $data
@@ -121,5 +126,8 @@ Class Administrateur {
             return false;
         }
     }
+
+
+
 
 }
