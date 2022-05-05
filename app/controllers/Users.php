@@ -70,10 +70,11 @@ class Users extends Controller {
 
 
     public function  profile(){
+        $admins = $this->userModel->findAllAdministrateurByID(SessionHelper::getSession("userId"));
         $data = [
-            'userEmail' => '',
-            'userEmailError' => '',
+            'user' => $admins,
         ];
+
         $this->view('/users/profile', $data);
     }
 

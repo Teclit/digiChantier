@@ -298,7 +298,12 @@ class Administrateurs extends Controller {
         $this->view('administrateurs/updateAdmin', $data);
     }
 
-
+    /**
+     * Delete administrateur
+     *
+     * @param [type] $idAdmin
+     * @return void
+     */
     public function deleteAdmin($idAdmin) {
         $admins = $this->administrateursModel->findAllAdministrateurByID($idAdmin);
         $data = [
