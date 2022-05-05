@@ -68,6 +68,18 @@ Class SessionHelper{
             session_destroy();
         }
     }
+
+    
+    /**
+     * Redirect page 
+     *
+     * @param String $page
+     * @return void
+     */
+    public static function redirectTo($page){
+        header('location:'.URLROOT.$page);
+        exit;
+    }
         
 
 

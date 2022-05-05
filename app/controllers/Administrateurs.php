@@ -148,11 +148,11 @@ class Administrateurs extends Controller {
                     // Redirect to index page
                     $msg= "Vous avez bien enregistrer l'administrateur";
                     SessionHelper::setSession("SuccessMessage", $msg);
-                    header('location:'. URLROOT .'/administrateurs/indexAdmin');  
+                    SessionHelper::redirectTo('/administrateurs/indexAdmin');  
                 } else {
                     $msg= "Vous n'avez pas enregistrer l'administrateur";
                     SessionHelper::setSession("ErrorMessage", $msg);
-                    header('location:'. URLROOT .'/administrateurs/indexAdmin');
+                    SessionHelper::redirectTo('/administrateurs/indexAdmin');
                 }
             }
             $this->view('administrateurs/createAdmin', $data);
@@ -286,11 +286,11 @@ class Administrateurs extends Controller {
                     // Redirect to index page
                     $msg= "Vous avez bien Modifier l'administrateur";
                     SessionHelper::setSession("SuccessMessage", $msg);
-                    header('location:'. URLROOT .'/administrateurs/indexAdmin');  
+                    SessionHelper::redirectTo('/administrateurs/indexAdmin');  
                 } else {
                     $msg= "Vous n'avez pas Modifier l'administrateur";
                     SessionHelper::setSession("ErrorMessage", $msg);
-                    header('location:'. URLROOT .'/administrateurs/indexAdmin');
+                    SessionHelper::redirectTo('/administrateurs/indexAdmin');
                 }
             }
             $this->view('administrateurs/updateAdmin', $data);
@@ -342,12 +342,12 @@ class Administrateurs extends Controller {
                 // Redirect to index page
                 $msg= "Vous avez bien supprimer l'administrateur";
                 SessionHelper::setSession("SuccessMessage", $msg);
-                header('location:'. URLROOT .'/administrateurs/indexAdmin');  
+                SessionHelper::redirectTo('/administrateurs/indexAdmin');  
             } else {
                 //die('Something went wrong.');
                 $msg= "Vous n'avez pas supprimer l'administrateur";
                 SessionHelper::setSession("ErrorMessage", $msg);
-                header('location:'. URLROOT .'/administrateurs/indexAdmin');
+                SessionHelper::redirectTo('/administrateurs/indexAdmin');
             }
             
             $this->view('administrateurs/deleteAdmin', $data);

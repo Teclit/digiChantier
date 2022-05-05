@@ -53,7 +53,6 @@ class Users extends Controller {
     }   
 
     public function createUserSession($user) {
-
         SessionHelper::setSession("userId", $user->id);
         SessionHelper::setSession("userNom", $user->nom);
         SessionHelper::setSession("userPrenom", $user->prenom);
@@ -63,10 +62,21 @@ class Users extends Controller {
         SessionHelper::setSession("UserCodepostal", $user->codepostal);
         SessionHelper::setSession("UserVille", $user->ville);
 
-
         $msg= "Bienvenue dans votre espace personnelle ";
         SessionHelper::setSession("SuccessMessage", $msg);
-        header('location:'.URLROOT.'/pages/index');
+        SessionHelper::redirectTo('/pages/index');
+    }
+
+    ///Track url
+    public static function ConfirmLoginAdmin(){
+        if (null !== SessionHelper::getSession("userId")) {
+            return true;
+        }else {
+
+            $msg= "Vous devez se connecter!";
+            SessionHelper::setSession("SuccessMessage", $msg);
+            SessionHelper::redirectTo("/pages/index");
+        }
     }
 
 
@@ -84,7 +94,7 @@ class Users extends Controller {
 
     public function logout() {
         SessionHelper::destroySessions();
-        header('location:' . URLROOT . '/pages/index');
+        SessionHelper::redirectTo('/pages/index');
     }
 
 }

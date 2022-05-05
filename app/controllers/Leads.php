@@ -198,12 +198,12 @@ class Leads extends Controller {
                     // Redirect to index page
                     $msg= "Vous avez bien enregistrer le lead";
                     SessionHelper::setSession("SuccessMessage", $msg);
-                    header('location: ' . URLROOT . '/leads/index');  
+                    SessionHelper::redirectTo('/leads/index');  
                 } else {
                     //Redirect to the index
                     $msg= "Vous n'avez pas  enregistrer le lead";
                     SessionHelper::setSession("ErrorMessage", $msg);
-                    header('location:' . URLROOT . '/leads/index'); 
+                    SessionHelper::redirectTo('/leads/index'); 
                 }
             }
             $this->view('leads/create', $data);
@@ -336,12 +336,12 @@ class Leads extends Controller {
                     //Redirect to the index
                     $msg= "Vous avez bien Modifier le lead";
                     SessionHelper::setSession("SuccessMessage", $msg);
-                    header('location:'. URLROOT.'/leads/index'); 
+                    SessionHelper::redirectTo('/leads/index'); 
                 } else {
                     //Redirect to the index
                     $msg= "Vous n'avez pas  Modifier le lead";
                     SessionHelper::setSession("ErrorMessage", $msg);
-                    header('location:' . URLROOT . '/leads/index'); 
+                    SessionHelper::redirectTo('/leads/index'); 
                 }
             }
             $this->view('leads/update', $data);
@@ -427,9 +427,12 @@ class Leads extends Controller {
                 //Redirect to the index
                 $msg= "Vous avez bien supprimer le lead";
                 SessionHelper::setSession("SuccessMessage", $msg);
-                header('location: ' . URLROOT . '/leads/index');  
+                SessionHelper::redirectTo('/leads/index');  
             } else {
                 die('Something went wrong!');
+                $msg= "Vous n'avez pas supprimer le lead";
+                SessionHelper::setSession("ErrorMessage", $msg);
+                SessionHelper::redirectTo('/leads/index'); 
             }
         }
         $this->view('leads/delete', $data);
