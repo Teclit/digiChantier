@@ -61,24 +61,21 @@ class Users extends Controller {
         SessionHelper::setSession("UserAdresse", $user->adresse);
         SessionHelper::setSession("UserCodepostal", $user->codepostal);
         SessionHelper::setSession("UserVille", $user->ville);
+        SessionHelper::setSession("userdateUpdated", $user->date_edition);
 
         $msg= "Bienvenue dans votre espace personnelle ";
         SessionHelper::setSession("SuccessMessage", $msg);
         SessionHelper::redirectTo('/pages/index');
     }
 
-    ///Track url
-    public static function ConfirmLoginAdmin(){
-        if (null !== SessionHelper::getSession("userId")) {
-            return true;
-        }else {
 
-            $msg= "Vous devez se connecter!";
-            SessionHelper::setSession("SuccessMessage", $msg);
-            SessionHelper::redirectTo("/pages/index");
-        }
+    public function  profile(){
+        $data = [
+            'userEmail' => '',
+            'userEmailError' => '',
+        ];
+        $this->view('/users/profile', $data);
     }
-
 
     public function forgetpd() {
         $data = [

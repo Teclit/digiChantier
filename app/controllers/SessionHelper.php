@@ -69,6 +69,18 @@ Class SessionHelper{
         }
     }
 
+    ///Track url
+    public static function confirmLoginAdmin(){
+        if (null !== SessionHelper::getSession("userId")) {
+            return true;
+        }else {
+
+            $msg= "Vous devez se connecter!";
+            SessionHelper::setSession("ErrorsMessage", $msg);
+            SessionHelper::redirectTo("/users/login");
+        }
+    }
+
     
     /**
      * Redirect page 

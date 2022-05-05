@@ -17,14 +17,19 @@
                         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/pages/about" target="_self">A propos </a></li>
 
                     </ul>
-                    <ul class="navbar-nav bg-dark text-center">
-                        <li class="nav-item">
-                            <?php if(null !== SessionHelper::getSession("userId")) : ?>
+                    <ul class="navbar-nav  text-center">
+                        <?php if(null !== SessionHelper::getSession("userId")) : ?>
+                            <li class="nav-item">
+                                <a class="nav-link  fw-bold px-3" href="<?php echo URLROOT; ?>/users/profile"><?php echo SessionHelper::getSession("userNom"). " ".SessionHelper::getSession("userPrenom"); ?></a>
+                            </li>
+                            <li class="nav-item bg-dark">
                                 <a class="nav-link text-light fw-bold px-3" href="<?php echo URLROOT; ?>/users/logout">Log out</a>
-                            <?php else : ?>
-                                <a class="nav-link text-light fw-bold px-3" href="<?php echo URLROOT; ?>/users/login">Log in</a>
-                            <?php  endif; ?>
-                        </li>
+                            </li>
+                        <?php else : ?>
+                            <li class="nav-item bg-dark">
+                            <a class="nav-link text-light fw-bold px-3" href="<?php echo URLROOT; ?>/users/login">Log in</a>
+                            </li>
+                        <?php  endif; ?>
                     </ul>
                 </div>
                 <hr>
