@@ -1,12 +1,9 @@
 const menus = document.querySelectorAll('.navbar-nav .nav-item a');
 
-menus.forEach((menu) => {
-    menu.addEventListener('click', () => {
-        const menuLink = document.querySelector('.nav-item .active')
-        menuLink.classList.remove('active');
-        menu.classList.add('active');
-    })
-});
+const selectedInputs = document.querySelector('.travaux');
+const selectedDomain = document.querySelector('.domain');
 
+console.log(selectedInputs);
+console.log(selectedDomain);
 
-
+console.log("hello tk");

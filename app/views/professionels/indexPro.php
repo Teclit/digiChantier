@@ -9,7 +9,7 @@
 
 <section class="container my-4">
     <div class="container mt-5">  
-        <a class="btn bg-success text-light" href="<?php echo URLROOT; ?>/professioneles/createPro">Add Professionel</a>
+        <a class="btn bg-success text-light" href="<?php echo URLROOT; ?>/professionels/createPro">Add Professionel</a>
     </div>
 
     <h1 class="text-center">List des professionels</h1>
@@ -35,21 +35,20 @@
         </thead>
         <tbody>
 
-            <?php foreach($data['professionels'] as $index=>$professionel): ?>
-                    <tr>
-                        <td scope="row"><?php echo $index+1;?></td>
-                        <td><?php echo $professionel->nom;?></td>
-                        <td><?php echo $professionel->telcontact;?></td>
-                        <td><?php echo $professionel->emailcontact;?></td>
-                        <td><?php echo $professionel->ville;?></td>
-                        <td><?php echo $professionel->codepostal;?></td>
-                        <td><?php echo $professionel->dateinscription;?></td>
-                        <td><a href="<?php echo URLROOT; ?>/professioneles/detailPro" class="btn btn-outline-info btn-sm">Infos</a></td>
-                        <td><a href="<?php echo URLROOT; ?>/professioneles/updatePro" class="btn btn-outline-success btn-sm" >Modifier</a></td>
-                        <td><a href="<?php echo URLROOT; ?>/professioneles/deletePro" class="btn btn btn-outline-danger btn-sm">supprimer</a></td>
-                    </tr>
-                <tr>
-            <?php endforeach; ?>
+        <?php foreach($data['professionels'] as $index=>$professionel): ?>
+            <tr>
+                <td scope="row"><?php echo $index+1;?></td>
+                <td><?php echo $professionel->nom;?></td>
+                <td><?php echo $professionel->telcontact;?></td>
+                <td><?php echo $professionel->emailcontact;?></td>
+                <td><?php echo $professionel->ville;?></td>
+                <td><?php echo $professionel->codepostal;?></td>
+                <td><?php echo $professionel->dateinscription;?></td>
+                <td><a href="<?php echo URLROOT ."/professionels/detailPro/". $professionel->idpro;?>" class="btn btn-outline-info btn-sm">Infos</a></td>
+                <td><a href="<?php echo URLROOT ."/professionels/updatePro/". $professionel->idpro;?>" class="btn btn-outline-success btn-sm" >Modifier</a></td>
+                <td><a href="<?php echo URLROOT ."/professionels/deletePro/". $professionel->idpro;?>" class="btn btn btn-outline-danger btn-sm">Supprimer</a></td>
+            </tr>
+        <?php endforeach; ?>
         </tbody>
     </table>
 </section>

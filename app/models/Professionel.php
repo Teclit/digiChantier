@@ -12,4 +12,18 @@ Class Professionel {
         return $results;
     }
 
+
+    /**
+     * Get Admin by Id
+     *
+     * @param Integer $idPro
+     * @return ArrayObject
+     */
+    public function findProfessionelByID(Int $idPro){
+        $this->db->query('SELECT * FROM professionel WHERE idpro = :idPro');
+        $this->db->bind(':idPro', $idPro);
+        $row = $this->db->single();
+        return $row;
+    }
+
 }

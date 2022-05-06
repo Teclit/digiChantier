@@ -6,8 +6,8 @@
 ?>
 
     <section class="container text-center my-3 p-1  ">
-        <h4 class="text-center my-4">Creer Un Nouveau Administrateur</h4>
-        <?php echo require_once 'formAdmin.php';?>
+        <h4 class="text-center my-4">Modifier le Professionel</h4>
+        <?php echo require_once 'formPro.php';?>
     </section>
 
 
