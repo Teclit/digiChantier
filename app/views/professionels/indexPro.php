@@ -8,7 +8,16 @@
 ?>
 
 <section class="container my-4">
-<h1 class="text-center">List des professionels</h1>
+    <div class="container mt-5">  
+        <a class="btn bg-success text-light" href="<?php echo URLROOT; ?>/professioneles/createPro">Add Professionel</a>
+    </div>
+
+    <h1 class="text-center">List des professionels</h1>
+    <?php 
+        echo SessionHelper::getSession("SuccessMessage");
+        echo SessionHelper::getSession("ErrorMessage");
+    ?>
+
 <table class="table table-hover">
         <thead>
             <tr>
@@ -35,15 +44,9 @@
                         <td><?php echo $professionel->ville;?></td>
                         <td><?php echo $professionel->codepostal;?></td>
                         <td><?php echo $professionel->dateinscription;?></td>
-                        <td>
-                            <a href="<?php echo URLROOT; ?>/leads/leadInfos" class="btn btn-outline-info btn-sm">Infos</a>
-                        </td>
-                        <td>
-                            <a href="<?php echo URLROOT; ?>/leads/updateLead" class="btn btn-outline-success btn-sm" >Modifier</a>
-                        </td>
-                        <td>
-                            <a href="<?php echo URLROOT; ?>/leads/deleteLead" class="btn btn btn-outline-danger btn-sm">supprimer</a>
-                        </td>
+                        <td><a href="<?php echo URLROOT; ?>/professioneles/detailPro" class="btn btn-outline-info btn-sm">Infos</a></td>
+                        <td><a href="<?php echo URLROOT; ?>/professioneles/updatePro" class="btn btn-outline-success btn-sm" >Modifier</a></td>
+                        <td><a href="<?php echo URLROOT; ?>/professioneles/deletePro" class="btn btn btn-outline-danger btn-sm">supprimer</a></td>
                     </tr>
                 <tr>
             <?php endforeach; ?>

@@ -12,7 +12,17 @@
                         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/leads/index" target="_self">Leads</a></li>
                         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/categories/listCategories" target="_self">Category</a></li>
                         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/administrateurs/indexAdmin" target="_self">Administrateur</a></li>
-                        <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/professionels/listprofessionel" target="_self">Professionels</a></li>
+                        
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="Professionel" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Professionels
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="Professionel">
+                                <li><a class="dropdown-item" href="<?php echo URLROOT; ?>/professionels/homePro">Trouver des chantier</a></li>
+                                <li><a class="dropdown-item" href="<?php echo URLROOT; ?>/professionels/indexPro">Liste Professionels</a></li>
+                            </ul>
+                        </li>
                         
                         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/pages/about" target="_self">A propos </a></li>
 
