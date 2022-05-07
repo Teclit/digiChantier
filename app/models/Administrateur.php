@@ -56,6 +56,22 @@ Class Administrateur {
         return $row;
     }
 
+    /**
+     * Find Administrateur by email. email is passed in by the Controller.
+     *
+     * @param ArrayObject $email
+     * @return Boolean
+     */
+    public function findAdminByEmail($data) {
+        $this->db->query('SELECT * FROM administrateur WHERE email = :email');
+        $this->db->bind(':email', $$data['email']);
+        if($this->db->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
         /**
      *REgister new  admin

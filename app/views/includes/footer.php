@@ -1,6 +1,6 @@
 
         <!-- Footer-->
-        <footer  class=" container-fluid bg-dark  mt-auto">
+        <footer  class="container-fluid bg-dark  mt-auto">
             <div class="container py-3">
                 <p class="m-0 text-center text-white"> copyRight &copy; DigicotekPRO</p>
             </div>

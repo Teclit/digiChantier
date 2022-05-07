@@ -3,11 +3,14 @@
         <input type="text"  name="nomEnt" class="form-control" id="nom" value="<?php echo $data['nomEnt']; ?>" placeholder="Nom Enterprise" required>
         <span class="invalidFeedback text-start  text-danger fw-bold"> <?php echo $data['nomEntError']; ?> </span>
     </div>
+
+    
     <div class="mb-3 d-flex">
-        <input type="text"  name="travaux" class="form-control w-100" id="travaux" placeholder="Choisissez votre domaine d'activité" required>
+        <input type="hidden"  name="domaine" class="form-control w-100" id="domainTraveaux" >
+        <input type="text"  name="travaux" class="form-control w-100" id="domainSelected" placeholder="Choisissez votre domaine d'activité" required>
         <select class="bg-light flex-shrink-1" id="selectDomain">
             <?php foreach($data['travaux'] as $travail):?>
-                <option  class="domain ms-3" value="<?php echo $travail->idctg;?>" label="<?php echo $travail->ctgnom;?>"></option>
+                <option  class="domain ms-3" data-name="<?php echo $travail->ctgnom;?>" value="<?php echo $travail->idctg;?>" label="<?php echo $travail->ctgnom;?>"></option>
             <?php endforeach; ?>
         </select>
     </div>
@@ -26,6 +29,10 @@
     <div class="mb-3">
         <input type="text"  name="fonction" class="form-control" id="fonction" value="<?php echo $data['telPro']; ?>" placeholder="Votre fonction" required>
         <span class="invalidFeedback text-start  text-danger fw-bold"> <?php echo $data['fonctionProError']; ?> </span>
+    </div>
+    <div class="mb-3">
+        <input type="tel"  name="tel" class="form-control" id="tel" value="<?php echo $data['telPro']; ?>" placeholder="Votre Télephone" required>
+        <span class="invalidFeedback text-start  text-danger fw-bold"> <?php echo $data['telProError']; ?> </span>
     </div>
     <div class="mb-3">
         <input type="email"  name="email" class="form-control" id="email" value="<?php echo $data['emailPro']; ?>" placeholder="Votre Email" required>
@@ -51,7 +58,7 @@
     </div>
     <div class="mb-3">
         <input type="text"  name="ville" class="form-control" id="ville" value="<?php echo $data['villePro']; ?>" placeholder="Ville" required>
-        <span class="invalidFeedback text-start  text-danger fw-bold"> <?php echo $data['villePro']; ?> </span>
+        <span class="invalidFeedback text-start  text-danger fw-bold"> <?php echo $data['villeProError']; ?> </span>
     </div>
     <div class="mb-3">
         <input type="text"  name="codepostal" class="form-control" id="codepostal" value="<?php echo $data['codepostalPro']; ?>" placeholder="Code Postal" required>

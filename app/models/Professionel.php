@@ -14,7 +14,7 @@ Class Professionel {
 
 
     /**
-     * Get Admin by Id
+     * Get Professionel by Id
      *
      * @param Integer $idPro
      * @return ArrayObject
@@ -25,5 +25,23 @@ Class Professionel {
         $row = $this->db->single();
         return $row;
     }
+
+
+    /**
+     * Find Professionel by email. email is passed in by the Controller.
+     *
+     * @param ArrayObject $email
+     * @return Boolean
+     */
+    public function findProByEmail($data) {
+        $this->db->query('SELECT * FROM professionel WHERE emailcontact = :email');
+        $this->db->bind(':email', $$data['emailPro']);
+        if($this->db->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }
