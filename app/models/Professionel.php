@@ -87,7 +87,7 @@ Class Professionel {
      * @return Boolean
      */
     public function UpdatePro($data) {
-        $this->db->query('UPDATE administrateur SET nom=:nom, adresse=:adresse, ville=:ville, codepostal=:codepostal, pays=:pays, nomcontact=:nomcontact, prenomcontact=:prenomcontact, telcontact=:telcontact, emailcontact=:emailcontact, password=:password, fonctioncontact=:fonctioncontact WHERE idpro=:idpro' );
+        $this->db->query('UPDATE professionel SET nom=:nom, adresse=:adresse, ville=:ville, codepostal=:codepostal, pays=:pays, nomcontact=:nomcontact, prenomcontact=:prenomcontact, telcontact=:telcontact, emailcontact=:emailcontact, password=:password, fonctioncontact=:fonctioncontact WHERE idpro=:idpro' );
         //Bind values
         //Bind values
         $this->db->bind(':nom',               $data['nomEnt']);

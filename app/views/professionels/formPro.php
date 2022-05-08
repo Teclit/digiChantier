@@ -23,7 +23,7 @@
         <span class="invalidFeedback text-start  text-danger fw-bold"> <?php echo $data['prenomProError']; ?> </span>
     </div>
     <div class="mb-3">
-        <input type="text"  name="fonction" class="form-control" id="fonction" value="<?php echo $data['telPro']; ?>" placeholder="Votre fonction" required>
+        <input type="text"  name="fonction" class="form-control" id="fonction" value="<?php echo $data['fonctionPro']; ?>" placeholder="Votre fonction" required>
         <span class="invalidFeedback text-start  text-danger fw-bold"> <?php echo $data['fonctionProError']; ?> </span>
     </div>
     <div class="mb-3">

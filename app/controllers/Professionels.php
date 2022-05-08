@@ -374,7 +374,7 @@ class professionels extends Controller {
             $telephoneValidation   = "/^[0-9]{10}+$/";
 
             //Validate the form
-            if (empty($data['nomEnt']) || !preg_match($nameValidation, $data['nomEnt'])) { 
+            if (empty($data['nomEnt'])) { 
                 $data['nomEntError']   = 'Veuillez saisir votre nom d\'enterprise';
             } elseif (empty($data['nomPro']) || !preg_match($nameValidation, $data['nomPro'])) { 
                 $data['nomProError']   = 'Veuillez saisir votre nom';
@@ -383,7 +383,7 @@ class professionels extends Controller {
             } elseif (empty($data['domainesEnt']) ){ 
                 $data['domainesEntError'] = 'Veuillez remplir saisir votre adresse';
             } elseif (empty($data['fonctionPro'])|| !preg_match($nameValidation, $data['fonctionPro'])){ 
-                $data['fonctionProError'] = 'Veuillez remplir saisir votre adresse';
+                $data['fonctionProError'] = 'Veuillez remplir saisir votre fonction';
             } elseif (empty($data['telPro']) || !preg_match($telephoneValidation, $data['telPro'])){ 
                 $data['telProError']     = 'Veuillez saisir votre telephone.<br>Example: 06(07) ** ** ** **';
             } elseif (empty($data['adressePro'])){ 
