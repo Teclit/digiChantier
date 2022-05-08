@@ -81,6 +81,52 @@ Class Professionel {
         }
     }
 
+     /**
+     * Update Admin
+     * @param ArrayObject $data
+     * @return Boolean
+     */
+    public function UpdatePro($data) {
+        $this->db->query('UPDATE administrateur SET nom=:nom, adresse=:adresse, ville=:ville, codepostal=:codepostal, pays=:pays, nomcontact=:nomcontact, prenomcontact=:prenomcontact, telcontact=:telcontact, emailcontact=:emailcontact, password=:password, fonctioncontact=:fonctioncontact WHERE idpro=:idpro' );
+        //Bind values
+        //Bind values
+        $this->db->bind(':nom',               $data['nomEnt']);
+        $this->db->bind(':adresse',           $data['adressePro']);
+        $this->db->bind(':ville',             $data['villePro']);
+        $this->db->bind(':codepostal',        $data['codepostalPro']);
+        $this->db->bind(':pays',              $data['villePro']);
+        $this->db->bind(':nomcontact',        $data['nomPro']);
+        $this->db->bind(':prenomcontact',     $data['prenomPro']);
+        $this->db->bind(':telcontact',        $data['telPro']);
+        $this->db->bind(':emailcontact',      $data['emailPro']);
+        $this->db->bind(':password',          $data['passwordPro']);
+        $this->db->bind(':fonctioncontact',   $data['fonctionPro']);
+        $this->db->bind(':idpro',             $data['idPro']);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    /**
+     * delete Professionel
+     * @param ArrayObject $data
+     * @return Boolean
+     */
+    public function DeletePro($data) { 
+        $this->db->query('DELETE FROM professionel WHERE idpro=:idpro');
+        $this->db->bind(':idpro', $data['idpro']);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
     /**
      * Get last id addes
      *
@@ -99,9 +145,9 @@ Class Professionel {
      * @param ArrayObject $data
      * @return ArrayObject
      */
-    public function GetActivitiesByID($data){
-        $this->db->query('SELECT * FROM  professionel WHERE idpro=:idpto');
-        $this->db->bind(':idpro',     $data['idpro']);
+    public function GetActivitiesByID($idpro){
+        $this->db->query('SELECT * FROM  activity WHERE idpro=:idpro');
+        $this->db->bind(':idpro', $idpro);
         $results = $this->db->resultSet();
         return $results;
     }
@@ -120,7 +166,7 @@ Class Professionel {
         $this->db->bind(':idpro',     $data['idpro']);
         $this->db->bind(':idctg',     $data['idctg']);
         if ($this->db->execute()) {
-            return   false;
+            return   true;
         }else{
             return   false;
         }
@@ -130,15 +176,15 @@ Class Professionel {
     /**
      * Delete domaine activities of professionelle
      *
-     * @param ArrayObject $data
+     * @param  Integer $idPro
      * @return Boolean
      */
-    public function DeleteActivitePro($data){ 
+    public function DeleteActivitePro($idPro){ 
         $this->db->query('DELETE FROM `activity` WHERE idpro=:idpro');
         //Bind values
-        $this->db->bind(':idpro',     $data['idpro']);
+        $this->db->bind(':idpro', $idPro);
         if ($this->db->execute()) {
-            return   false;
+            return   true;
         }else{
             return   false;
         }

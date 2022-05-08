@@ -20,13 +20,27 @@ class professionels extends Controller {
      * @return void
      */
     public function Test() {
-        $idPro = $this->professionelModel->GetLastID();
-        echo "<br>";
-        echo $idPro;
-        $data = [
-            'file' => "Test File",
-        ];
-        $this->view('professionels/test', $data);
+        $idpro = 42;
+        //$idPro = $this->professionelModel->GetLastID();
+        $domainesPro = $this->professionelModel->GetActivitiesByID($idpro);
+        $domainesPro = $this->professionelModel->GetActivitiesByID($idpro);
+        $arrDomaineID = array();
+        $arrDomaineNom = array();
+        foreach ($domainesPro as $item) {
+            array_push($arrDomaineID , $item->idctg);
+            //Get domainnames
+            array_push($arrDomaineNom, $this->categoryModel->findCategoryByID($item->idctg)->ctgnom);
+        }
+
+        $prvDomainesID   = implode(", ",$arrDomaineID );//array to string
+        $prvDomainesNom  =implode(", ",$arrDomaineNom);
+        echo $prvDomainesID;
+        echo "<hr>";
+        echo $prvDomainesNom;
+        echo "<hr>";
+        echo print_r($arrDomaineNom);
+        
+        $this->view('professionels/test', $idpro);
     }
 
     /**
@@ -252,7 +266,7 @@ class professionels extends Controller {
     }
 
 
-     /**
+    /**
      * Controller - Update professionel
      *
      * @return void
@@ -260,14 +274,29 @@ class professionels extends Controller {
     public function UpdatePro($idpro) {
         $professionel = $this->professionelModel->findProfessionelByID($idpro);
 
+        // Get existing Domaines id and Name
+        $domainesPro = $this->professionelModel->GetActivitiesByID($idpro);
+        $arrDomaineID = array();
+        $arrDomaineNom = array();
+        foreach ($domainesPro as $item) {
+            array_push($arrDomaineID , $item->idctg);
+            //Get domainnames
+            array_push($arrDomaineNom, $this->categoryModel->findCategoryByID($item->idctg)->ctgnom);
+        }
+        $prvDomainesID   = implode(", ",$arrDomaineID );//array to string
+        $prvDomainesNom  = implode(", ",$arrDomaineNom);
+        
+
         $data = [
-            'choixDomains'       =>  $this->categoryModel->findAllCategories(),
+            'idPro'              => $professionel->idpro,
+            'existingDomaines'   => $arrDomaineID,
+            'choixDomains'       => $this->categoryModel->findAllCategories(),
             'nomEnt'             => $professionel->nom,
             'nomPro'             => $professionel->nomcontact,
             'prenomPro'          => $professionel->prenomcontact,
             'fonctionPro'        => $professionel->fonctioncontact,
-            'domainesEnt'        => $professionel->nom,
-            'choixDomain'        => $professionel->nom,
+            'domainesEnt'        => $prvDomainesID,
+            'choixDomain'        => $prvDomainesNom,
             'telPro'             => $professionel->telcontact, 
             'emailPro'           => $professionel->emailcontact, 
             'passwordPro'        => $professionel->password, 
@@ -293,13 +322,14 @@ class professionels extends Controller {
             'paysProError'             => '',
 
             //FormAction
-            'actionForm'                 => '/professionels/updatePro',
-            'submitBtn'                 => 'Créer Pro'
+            'actionForm'                => '/professionels/updatePro/'.$professionel->idpro,
+            'submitBtn'                 => 'Modifier Professionel'
         ];
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $data = [
+                'idPro'              => $professionel->idpro,
                 'choixDomains'       =>  $this->categoryModel->findAllCategories(),
                 'nomEnt'             => trim($_POST['nomEnt']),
                 'domainesEnt'        => trim($_POST['domaine']),
@@ -333,8 +363,8 @@ class professionels extends Controller {
                 'paysProError'             => '',
 
                 //FormAction
-                'actionForm'                => '/professionels/updatePro',
-                'submitBtn'                 => 'Créer Professionel'
+                'actionForm'                => '/professionels/updatePro/'.$professionel->idpro,
+                'submitBtn'                 => 'Modifier Professionel'
 
             ];
 
@@ -402,27 +432,29 @@ class professionels extends Controller {
                 empty($data['villeProError'])        
             ){
                 
-                $secteuActivité = explode(",", $data['domainesEnt']);
                 //Hash password
                 $data['passwordPro'] = password_hash($data['passwordPro'], PASSWORD_DEFAULT);
                 //Register lead from model function
                 
                 if ($this->professionelModel->updatePro($data)){
-                        $idPro = $this->professionelModel->GetLastID();
-                        $secteuActivite = explode(",", $data['domainesEnt']);
-                        foreach ($secteuActivite as $item) {
-                            $activite = [
+                        
+                    if($this->professionelModel->DeleteActivitePro($idpro)) {
+                        $newDomaines = explode(",", $data['domainesEnt']);
+                        foreach ($newDomaines as $item) {
+                            $Addactivite = [
                                 'idctg'        =>intval($item),
-                                'idpro'              =>$idPro,
+                                'idpro'        =>$idpro,
                             ];
-                            $this->professionelModel->AddActivitePro($activite);
+                            $this->professionelModel->AddActivitePro($Addactivite);
                         }
-                    // Redirect to index page
-                    $msg= "Vous avez bien enregistrer le professionel";
-                    SessionHelper::setSession("SuccessMessage", $msg);
-                    SessionHelper::redirectTo('/professionels/indexPro');  
+                        // Redirect to index page
+                        $msg= "Vous avez bien modifier le professionel";
+                        SessionHelper::setSession("SuccessMessage", $msg);
+                        SessionHelper::redirectTo('/professionels/indexPro'); 
+                    }
+                
                 } else {
-                    $msg= "Vous n'avez pas enregistrer le professionel";
+                    $msg= "Vous n'avez pas modifier le professionel";
                     SessionHelper::setSession("ErrorMessage", $msg);
                     SessionHelper::redirectTo('/professionels/indexPro');
                 }
@@ -434,6 +466,95 @@ class professionels extends Controller {
 
 
 
-    
+    /**
+     * Controller - delete professionel
+     *
+     * @return void
+     */
+    public function deletePro($idpro) {
+
+        $professionel = $this->professionelModel->findProfessionelByID($idpro);
+
+        // Get existing Domaines id and Name
+        $domainesPro = $this->professionelModel->GetActivitiesByID($idpro);
+        $arrDomaineID = array();
+        $arrDomaineNom = array();
+        foreach ($domainesPro as $item) {
+            array_push($arrDomaineID , $item->idctg);
+            //Get domainnames
+            array_push($arrDomaineNom, $this->categoryModel->findCategoryByID($item->idctg)->ctgnom);
+        }
+        $prvDomainesID   = implode(", ",$arrDomaineID );//array to string
+        $prvDomainesNom  = implode(", ",$arrDomaineNom);
+        
+
+        $data = [
+            'idpro'              => $professionel->idpro,
+            'existingDomaines'   => $arrDomaineID,
+            'choixDomains'       => $this->categoryModel->findAllCategories(),
+            'nomEnt'             => $professionel->nom,
+            'nomPro'             => $professionel->nomcontact,
+            'prenomPro'          => $professionel->prenomcontact,
+            'fonctionPro'        => $professionel->fonctioncontact,
+            'domainesEnt'        => $prvDomainesID,
+            'choixDomain'        => $prvDomainesNom,
+            'telPro'             => $professionel->telcontact, 
+            'emailPro'           => $professionel->emailcontact, 
+            'passwordPro'        => $professionel->password, 
+            'confirmpasswordPro' => $professionel->password, 
+            'adressePro'         => $professionel->adresse,
+            'codepostalPro'      => $professionel->codepostal,
+            'villePro'           => $professionel->ville,
+            'paysPro'            => $professionel->pays,
+            //MESSAGE ERROR
+            'nomEntError'              => '',
+            'nomProError'              => '',
+            'prenomProError'           => '',
+            'fonctionProError'         => '',
+            'domainesEntError'         => '',
+            'choixDomainError'         => '',
+            'telProError'              => '',
+            'passwordProError'         => '', 
+            'confirmpasswordProError'  => '', 
+            'emailProError'            => '',
+            'adresseProError'          => '',
+            'codepostalProError'       => '',
+            'villeProError'            => '',
+            'paysProError'             => '',
+
+            //FormAction
+            'actionForm'                => '/professionels/deletePro/'.$professionel->idpro,
+            'submitBtn'                 => 'Créer Pro'
+        ];
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data = [
+                'idpro'            => $professionel->idpro,
+                //FormAction
+                'actionForm'       => '/professionels/deletePro/'.$professionel->idpro,
+                'submitBtn'        => ' Supprimer Professionel',
+            ];
+
+            if($this->professionelModel->DeleteActivitePro($idpro)){
+
+                if ($this->professionelModel->deletePro($data)){
+                    // Redirect to index page
+                    $msg= "Vous avez bien supprimer le professionel";
+                    SessionHelper::setSession("SuccessMessage", $msg);
+                    SessionHelper::redirectTo('/professionels/indexPro');    
+                } else {
+                    //die('Something went wrong.');
+                    $msg= "Vous n'avez pas supprimer le professionels";
+                    SessionHelper::setSession("ErrorMessage", $msg);
+                    SessionHelper::redirectTo('/professionels/indexPro');
+                }
+            }
+            $this->view('professionels/deletePro', $data);
+        }
+        $this->view('professionels/deletePro', $data);
+    }
+
 
 }
