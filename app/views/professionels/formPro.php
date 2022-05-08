@@ -6,10 +6,10 @@
 
     
     <div class="mb-3 d-flex">
-        <input type="hidden"  name="domaine" class="form-control w-100" id="domainTraveaux" >
-        <input type="text"  name="travaux" class="form-control w-100" id="domainSelected" placeholder="Choisissez votre domaine d'activité" required>
+        <input type="hidden"  name="domaine" class="form-control" id="domainTraveaux" value="<?php echo $data['domainesEnt']; ?>">
+        <input type="text"  name="choixDomains" class="form-control w-100" id="domainSelected" value="<?php echo $data['choixDomain']; ?>"  placeholder="Choisissez votre domaine d'activité" required>
         <select class="bg-light flex-shrink-1" id="selectDomain">
-            <?php foreach($data['travaux'] as $travail):?>
+            <?php foreach($data['choixDomains'] as $travail):?>
                 <option  class="domain ms-3" data-name="<?php echo $travail->ctgnom;?>" value="<?php echo $travail->idctg;?>" label="<?php echo $travail->ctgnom;?>"></option>
             <?php endforeach; ?>
         </select>
@@ -17,10 +17,6 @@
     <div class="mb-3">
         <input type="text"  name="nom" class="form-control" id="nom" value="<?php echo $data['nomPro']; ?>" placeholder="Votre Nom" required>
         <span class="invalidFeedback text-start  text-danger fw-bold"> <?php echo $data['nomProError']; ?> </span>
-    </div>
-    <div class="mb-3">
-        <input type="text"  name="prenom" class="form-control" id="prenom" value="<?php echo $data['prenomPro']; ?>" placeholder="Votre Prenom" required>
-        <span class="invalidFeedback text-start  text-danger fw-bold"> <?php echo $data['prenomProError']; ?> </span>
     </div>
     <div class="mb-3">
         <input type="text"  name="prenom" class="form-control" id="prenom" value="<?php echo $data['prenomPro']; ?>" placeholder="Votre Prenom" required>

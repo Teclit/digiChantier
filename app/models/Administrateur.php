@@ -73,7 +73,7 @@ Class Administrateur {
     }
 
 
-        /**
+    /**
      *REgister new  admin
      *
      * @param ArrayObject $data
@@ -98,7 +98,6 @@ Class Administrateur {
         } else {
             return   false;
         }
-
     }
 
 

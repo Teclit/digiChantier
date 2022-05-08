@@ -1,23 +1,27 @@
-const menus = document.querySelectorAll('.navbar-nav .nav-item a');
-
+//Professionel and Domain d'activite
 const selectedInputs = document.querySelector('#domainTraveaux');
 const SelectedDomain = document.querySelector('#domainSelected');
 const Domains = document.querySelectorAll('.domain');
 
-
-
 /**
  * Select multiple domaine
  */
+var SelectedDomainID   = [];
+var SelectedDomainName = [];
+if (selectedInputs.value.length > 0 ){
+    var SelectedDomainID   = selectedInputs.value.split(",");
+}
+
+if(SelectedDomain.value){
+    var SelectedDomainName = SelectedDomain.value.split(",");
+}
+
 for (const domain of Domains) {
-    selectDomainID = [];
-    selectDomainName = [];
     domain.addEventListener('click', function(){
-        selectDomainID .push(domain.value);
-        selectDomainName.push(this.getAttribute('data-name'));
-        
-        selectedInputs.value  = getUnique(selectDomainID);
-        SelectedDomain.value = getUnique(selectDomainName);
+        SelectedDomainID.push(domain.value);
+        SelectedDomainName.push(this.getAttribute('data-name'));
+        selectedInputs.value  =  getUnique(SelectedDomainID);
+        SelectedDomain.value  =  getUnique(SelectedDomainName);
     });
 }
 

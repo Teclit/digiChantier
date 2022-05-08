@@ -21,6 +21,7 @@
                             <ul class="dropdown-menu" aria-labelledby="Professionel">
                                 <li><a class="dropdown-item" href="<?php echo URLROOT; ?>/professionels/homePro">Trouver des chantier</a></li>
                                 <li><a class="dropdown-item" href="<?php echo URLROOT; ?>/professionels/indexPro">Liste Professionels</a></li>
+                                <li><a class="dropdown-item" href="<?php echo URLROOT; ?>/professionels/Test">Test-file</a></li>
                             </ul>
                         </li>
                         
