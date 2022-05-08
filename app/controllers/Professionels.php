@@ -86,6 +86,62 @@ class professionels extends Controller {
     
     }
 
+
+    public function detailPro($idpro){
+        $professionel = $this->professionelModel->findProfessionelByID($idpro);
+        // Get existing Domaines id and Name
+        $domainesPro = $this->professionelModel->GetActivitiesByID($idpro);
+        $arrDomaineID = array();
+        $arrDomaineNom = array();
+        foreach ($domainesPro as $item) {
+            array_push($arrDomaineID , $item->idctg);
+            //Get domainnames
+            array_push($arrDomaineNom, $this->categoryModel->findCategoryByID($item->idctg)->ctgnom);
+        }
+        $prvDomainesID   = implode(", ",$arrDomaineID );//array to string
+        $prvDomainesNom  = implode(", ",$arrDomaineNom);
+        
+        $data = [
+            'idPro'              => $professionel->idpro,
+            'professionel'       => $professionel,
+            'choixDomains'       => $this->categoryModel->findAllCategories(),
+            'nomEnt'             => $professionel->nom,
+            'nomPro'             => $professionel->nomcontact,
+            'prenomPro'          => $professionel->prenomcontact,
+            'fonctionPro'        => $professionel->fonctioncontact,
+            'domainesEnt'        => $prvDomainesID,
+            'choixDomain'        => $prvDomainesNom,
+            'telPro'             => $professionel->telcontact, 
+            'emailPro'           => $professionel->emailcontact, 
+            'passwordPro'        => $professionel->password, 
+            'confirmpasswordPro' => $professionel->password, 
+            'adressePro'         => $professionel->adresse,
+            'codepostalPro'      => $professionel->codepostal,
+            'villePro'           => $professionel->ville,
+            'paysPro'            => $professionel->pays,
+            //MESSAGE ERROR
+            'nomEntError'              => '',
+            'nomProError'              => '',
+            'prenomProError'           => '',
+            'fonctionProError'         => '',
+            'domainesEntError'         => '',
+            'choixDomainError'         => '',
+            'telProError'              => '',
+            'passwordProError'         => '', 
+            'confirmpasswordProError'  => '', 
+            'emailProError'            => '',
+            'adresseProError'          => '',
+            'codepostalProError'       => '',
+            'villeProError'            => '',
+            'paysProError'             => '',
+
+            //FormAction
+            'actionForm'                => '/professionels/detailPro/'.$professionel->idpro,
+            'submitBtn'                 => 'Modifier Professionel'
+        ];
+        $this->view('professionels/detailPro', $data);
+    }
+
     /**
      * Controller - create professionel
      *

@@ -26,13 +26,9 @@ for (const domain of Domains) {
         selectedInputs.value  =  getUnique(SelectedDomainID);
         SelectedDomain.value  =  getUnique(SelectedDomainName);
     });
-
-    console.log(SelectedDomainID );
-    console.log(SelectedDomainName );  
 }
 
-console.log(SelectedDomainID );
-console.log(SelectedDomainName );
+
 
 /**Delete deplicate item from the array */
 function getUnique(array){
@@ -45,11 +41,3 @@ function getUnique(array){
     return uniqueArray;
 }
 
-// const input = document.querySelector('input');
-// const log = document.getElementById('log');
-
-// SelectedDomain.addEventListener('change', updateValue);
-
-// function updateValue() {
-//     log.textContent = target.value;
-// }

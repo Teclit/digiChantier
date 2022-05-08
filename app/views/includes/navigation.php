@@ -24,6 +24,7 @@
                                 <li><a class="dropdown-item" href="<?php echo URLROOT; ?>/professionels/Test">Test-file</a></li>
                             </ul>
                         </li>
+                        <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/personnels/indexPerso" target="_self">Espace personnel</a></li>
                         
                         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/pages/about" target="_self">A propos </a></li>
 
