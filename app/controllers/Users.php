@@ -54,6 +54,7 @@ class Users extends Controller {
 
     public function createUserSession($user) {
         SessionHelper::setSession("userId", $user->id);
+        SessionHelper::setSession("userRole", boolval($user->status_role));
         SessionHelper::setSession("userNom", $user->nom);
         SessionHelper::setSession("userPrenom", $user->prenom);
         SessionHelper::setSession("userEmail", $user->email);

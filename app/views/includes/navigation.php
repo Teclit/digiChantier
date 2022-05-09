@@ -8,6 +8,8 @@
                 <div class=" collapse navbar-collapse py-3" id="navbarSupportedContent">
                     <ul class="mx-auto navbar-nav  text-center ">
                         <li class="nav-item me-2"><a class="nav-link active" href="<?php echo URLROOT; ?>/index" target="_self">Accueil</a></li>
+
+                        <?php if(SessionHelper::getSession("userRole")) {?>
                         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/pages/dashboard/" target="_self">dashboard</a></li>
                         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/leads/index" target="_self">Leads</a></li>
                         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/categories/listCategories" target="_self">Category</a></li>
@@ -19,15 +21,16 @@
                                     Professionels
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="Professionel">
-                                <li><a class="dropdown-item" href="<?php echo URLROOT; ?>/professionels/homePro">Trouver des chantier</a></li>
                                 <li><a class="dropdown-item" href="<?php echo URLROOT; ?>/professionels/indexPro">Liste Professionels</a></li>
                                 <li><a class="dropdown-item" href="<?php echo URLROOT; ?>/professionels/Test">Test-file</a></li>
                             </ul>
                         </li>
+                        <?php } else if(!SessionHelper::getSession("userRole")) {?>
+                        <li><a class="dropdown-item" href="<?php echo URLROOT; ?>/professionels/homePro">Trouver des chantier</a></li>
                         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/personnels/indexPerso" target="_self">Espace personnel</a></li>
+                        <?php } ?>
                         
                         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/pages/about" target="_self">A propos </a></li>
-
                     </ul>
                     <ul class="navbar-nav  text-center">
                         <?php if(null !== SessionHelper::getSession("userId")) : ?>

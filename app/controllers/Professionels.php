@@ -34,11 +34,11 @@ class professionels extends Controller {
 
         $prvDomainesID   = implode(", ",$arrDomaineID );//array to string
         $prvDomainesNom  =implode(", ",$arrDomaineNom);
-        echo $prvDomainesID;
-        echo "<hr>";
-        echo $prvDomainesNom;
-        echo "<hr>";
-        echo print_r($arrDomaineNom);
+        // echo $prvDomainesID;
+        // echo "<hr>";
+        // echo $prvDomainesNom;
+        // echo "<hr>";
+        // echo print_r($arrDomaineNom);
         
         $this->view('professionels/test', $idpro);
     }
