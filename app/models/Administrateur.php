@@ -12,7 +12,7 @@ Class Administrateur {
 
 
     /**
-     * User login
+     * Admin login
      *
      * @param ArrayObject $data
      * @return object/boolean
@@ -22,10 +22,11 @@ Class Administrateur {
         //Bind value
         $this->db->bind(':useremail', $data['userEmail']);
         $row = $this->db->single();
-    
-        //row->password est the Hashed password
-        if (password_verify($data['userPassword'], $row->password)) {
-            return $row;
+        
+        if(!empty($row)){
+            if (password_verify($data['userPassword'], $row->password)) {
+                return $row;
+            }
         } else {
             return false;
         }

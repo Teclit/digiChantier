@@ -10,6 +10,48 @@ Class Professionel {
     }
 
     /**
+     * professionel login
+     *
+     * @param ArrayObject $data
+     * @return object/boolean
+     */
+    public function LoginPro($data) {
+        $this->db->query('SELECT * FROM professionel WHERE emailcontact=:emailcontact');
+        //Bind value
+        $this->db->bind(':emailcontact', $data['userEmail']);
+        $row = $this->db->single();
+        
+        var_dump($row) ;
+            echo "<hr>";
+        var_dump($data) ;
+        //row->password est the Hashed password
+        if(!empty($row)){
+
+            echo "<hr>";
+            var_dump($row) ;
+            echo "<hr>";
+            echo $row->password;
+            echo "<hr>";
+            $hash = $row->password;//rasmuslerdorf
+           // $hash = '$2y$07$BCryptRequires22Chrcte/VlQH0piJtjXl.0t1XkA8pw9dMXTpOq';
+            print_r(password_verify( $data['userPassword'], $hash));
+            echo "<hr> <br>";
+            echo  $data['userPassword'];
+
+            if (password_verify($data['userPassword'], $row->password)) {
+                echo "<hr> verified";
+                echo $row->password;
+                return $row;
+            }
+            
+        } else {
+            echo "<hr> not verified";
+            return false;
+        }
+    }
+
+
+    /**
      * Get all Professionels
      *
      * @return void
@@ -81,7 +123,7 @@ Class Professionel {
         }
     }
 
-     /**
+    /**
      * Update Admin
      * @param ArrayObject $data
      * @return Boolean

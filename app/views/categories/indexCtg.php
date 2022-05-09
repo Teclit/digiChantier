@@ -7,9 +7,12 @@
 
             
     <section class="container my-4">
-
-        <h1 class="text-center">Leads Chantier</h1>
-
+    <a class="btn bg-success text-light" href="<?php echo URLROOT; ?>/categories/createCtg">Add Category</a>
+    <h3 class="text-center mb-3">List Administrateur</h3>
+        <?php 
+            echo SessionHelper::getSession("SuccessMessage");
+            echo SessionHelper::getSession("ErrorMessage");
+        ?>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -25,8 +28,8 @@
                     <tr>
                         <td scope="row"><?php echo $index+1;?></td>
                         <td><?php echo $category->ctgnom;?></td>
-                        <td> <a href="<?php echo URLROOT; ?>/leads/updateLead" class="btn btn-outline-success btn-sm" >Modifier</a></td>
-                        <td><a href="<?php echo URLROOT; ?>/leads/deleteLead" class="btn btn btn-outline-danger btn-sm">supprimer</a></td>
+                        <td><a href="<?php echo URLROOT . "/categories/updateCtg/".$category->idctg;?>"  class="btn btn-outline-success btn-sm" >Modifier</a></td>
+                        <td><a href="<?php echo URLROOT . "/categories/deleteCtg/".$category->idctg;?>"  class="btn btn btn-outline-danger btn-sm">supprimer</a></td>
                     </tr>
             <?php endforeach; ?>
                 

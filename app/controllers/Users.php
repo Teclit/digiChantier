@@ -1,7 +1,8 @@
 <?php
 class Users extends Controller {
     public function __construct() {
-        $this->userModel = $this->model('Administrateur');
+        $this->adminModel = $this->model('Administrateur');
+        $this->proModel   = $this->model('Professionel');
     }
 
     
@@ -37,12 +38,21 @@ class Users extends Controller {
 
             //Check if all errors are empty
             if (empty($data['userEmailError']) && empty($data['userPasswordError'])) {
-                $loggedInUser = $this->userModel->LoginAdmin($data); //call Methode user
-
-                if ($loggedInUser) {
+                $loggedInUser = '';//call Methode user
+                if ($this->adminModel->LoginAdmin($data)) {
+                    $loggedInUser = $this->adminModel->LoginAdmin($data);
+                    print_r($loggedInUser);
+                    $this->createUserSession($loggedInUser);
+                //Test12&&DD
+                //test1@gmail.com
+                } else if ($this->proModel->LoginPro($data)){
+                    //var_dump($data);
+                    echo "<hr>";
+                    print_r($loggedInUser);
+                    $loggedInUser =$this->proModel->LoginPro($data);
                     $this->createUserSession($loggedInUser);
                 } else {
-                    $data['userPasswordError'] = 'Password or userEmail is incorrect. Please try again.';
+                    $data['userPasswordError'] = 'Le mot de passe ou l\'adresse e-mail de l\'utilisateur est incorrect. Veuillez réessayer.';
                     $this->view('users/login', $data);
                 }
             }
@@ -71,7 +81,7 @@ class Users extends Controller {
 
 
     public function  profile(){
-        $admins = $this->userModel->findAllAdministrateurByID(SessionHelper::getSession("userId"));
+        $admins = $this->adminModel->findAllAdministrateurByID(SessionHelper::getSession("userId"));
         $data = [
             'user' => $admins,
         ];

@@ -580,7 +580,7 @@ class professionels extends Controller {
 
             //FormAction
             'actionForm'                => '/professionels/deletePro/'.$professionel->idpro,
-            'submitBtn'                 => 'Créer Pro'
+            'submitBtn'                 => 'Supprimer Professionel'
         ];
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){

@@ -11,11 +11,7 @@
 
                         <?php if(SessionHelper::getSession("userRole")) {?>
                         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/pages/dashboard/" target="_self">dashboard</a></li>
-                        <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/leads/index" target="_self">Leads</a></li>
-                        <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/categories/listCategories" target="_self">Category</a></li>
                         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/administrateurs/indexAdmin" target="_self">Administrateur</a></li>
-                        
-
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="Professionel" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Professionels
@@ -25,8 +21,12 @@
                                 <li><a class="dropdown-item" href="<?php echo URLROOT; ?>/professionels/Test">Test-file</a></li>
                             </ul>
                         </li>
+                        <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/leads/index" target="_self">Leads</a></li>
+                        <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/categories/indexCtg" target="_self">Category</a></li>
+                        <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/souscategories/indexSousctg" target="_self">Sous Category</a></li>
+                        
                         <?php } else if(!SessionHelper::getSession("userRole")) {?>
-                        <li><a class="dropdown-item" href="<?php echo URLROOT; ?>/professionels/homePro">Trouver des chantier</a></li>
+                        <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/professionels/homePro">Trouver des chantier</a></li>
                         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/personnels/indexPerso" target="_self">Espace personnel</a></li>
                         <?php } ?>
                         
