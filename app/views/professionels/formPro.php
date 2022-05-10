@@ -45,7 +45,7 @@
         <span class="invalidFeedback text-start  text-danger fw-bold"> <?php echo $data['passwordProError']; ?> </span>
     </div>
     <div class="mb-3">
-        <input type="password"  name="confirmpassword" class="form-control" id="confirmpassword" value="<?php echo $data['confirmpasswordPro']; ?>" placeholder=" confirm votre password" required>
+        <input type="password"  name="confirmpassword" class="form-control" id="confirmpassword" value="<?php echo $data['confirmpasswordPro']; ?>" placeholder="Confirm votre password" required>
         <span class="invalidFeedback text-start  text-danger fw-bold"> <?php echo $data['confirmpasswordProError']; ?> </span>
     </div>
     <div class="mb-3">

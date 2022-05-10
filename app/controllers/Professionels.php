@@ -490,6 +490,7 @@ class professionels extends Controller {
                 
                 //Hash password
                 $data['passwordPro'] = password_hash($data['passwordPro'], PASSWORD_DEFAULT);
+                // $data['passwordPro'] = password_hash($data['passwordPro'], PASSWORD_DEFAULT);
                 //Register lead from model function
                 
                 if ($this->professionelModel->updatePro($data)){

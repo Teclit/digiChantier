@@ -39,18 +39,15 @@ class Users extends Controller {
             //Check if all errors are empty
             if (empty($data['userEmailError']) && empty($data['userPasswordError'])) {
                 $loggedInUser = '';//call Methode user
-                if ($this->adminModel->LoginAdmin($data)) {
+                
+                if ($this->proModel->LoginPro($data)){
+                    $loggedInUser =$this->proModel->LoginPro($data);
+                    $this->createUserSessionPro($loggedInUser);
+
+                } elseif ($this->adminModel->LoginAdmin($data)) {
                     $loggedInUser = $this->adminModel->LoginAdmin($data);
                     print_r($loggedInUser);
-                    $this->createUserSession($loggedInUser);
-                //Test12&&DD
-                //test1@gmail.com
-                } else if ($this->proModel->LoginPro($data)){
-                    //var_dump($data);
-                    echo "<hr>";
-                    print_r($loggedInUser);
-                    $loggedInUser =$this->proModel->LoginPro($data);
-                    $this->createUserSession($loggedInUser);
+                    $this->createUserSessionAdmin($loggedInUser);
                 } else {
                     $data['userPasswordError'] = 'Le mot de passe ou l\'adresse e-mail de l\'utilisateur est incorrect. Veuillez réessayer.';
                     $this->view('users/login', $data);
@@ -62,9 +59,9 @@ class Users extends Controller {
         }
     }   
 
-    public function createUserSession($user) {
+    public function createUserSessionAdmin($user) {
         SessionHelper::setSession("userId", $user->id);
-        SessionHelper::setSession("userRole", boolval($user->status_role));
+        SessionHelper::setSession("userRoleAdmin", boolval($user->admin_role));
         SessionHelper::setSession("userNom", $user->nom);
         SessionHelper::setSession("userPrenom", $user->prenom);
         SessionHelper::setSession("userEmail", $user->email);
@@ -77,6 +74,26 @@ class Users extends Controller {
         $msg= "Bienvenue dans votre espace personnelle ";
         SessionHelper::setSession("SuccessMessage", $msg);
         SessionHelper::redirectTo('/pages/index');
+    }
+
+    public function createUserSessionPro($user) {
+        SessionHelper::setSession("userId",              $user->idpro);
+        SessionHelper::setSession("userRolePro",         boolval($user->pro_role));
+        SessionHelper::setSession("userNom",             $user->nom);
+        SessionHelper::setSession("UserAdresse",         $user->adresse);
+        SessionHelper::setSession("UserCodepostal",      $user->codepostal);
+        SessionHelper::setSession("UserVille",           $user->ville);
+        SessionHelper::setSession("UserPays",            $user->pays);
+        SessionHelper::setSession("userNomContact",      $user->nomcontact);
+        SessionHelper::setSession("userPrenomContact",   $user->prenomcontact);
+        SessionHelper::setSession("userEmailContact",    $user->emailcontact);
+        SessionHelper::setSession("userTelContact",      $user->telcontact);
+        SessionHelper::setSession("userFonctionContact", $user->fonctioncontact);
+        SessionHelper::setSession("userdateUpdated",     $user->date_edition);
+
+        $msg= "Bienvenue dans votre espace personnelle ";
+        SessionHelper::setSession("SuccessMessage", $msg);
+        SessionHelper::redirectTo('/personnels/indexPerso/'.$user->idpro);
     }
 
 

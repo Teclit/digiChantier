@@ -6,9 +6,9 @@ class Personnels extends Controller {
         $this->professionelModel  = $this->model('Professionel');
     }
 
-    public function indexPerso() { 
+    public function indexPerso($idPro) { 
         $data = [
-            'professionel'  => $this->professionelModel->findProfessionelByID(20),
+            'professionel'  => $this->professionelModel->findProfessionelByID($idPro),
         ];
 
         $this->view('personnels/indexPerso', $data);

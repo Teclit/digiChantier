@@ -21,31 +21,11 @@ Class Professionel {
         $this->db->bind(':emailcontact', $data['userEmail']);
         $row = $this->db->single();
         
-        var_dump($row) ;
-            echo "<hr>";
-        var_dump($data) ;
-        //row->password est the Hashed password
         if(!empty($row)){
-
-            echo "<hr>";
-            var_dump($row) ;
-            echo "<hr>";
-            echo $row->password;
-            echo "<hr>";
-            $hash = $row->password;//rasmuslerdorf
-           // $hash = '$2y$07$BCryptRequires22Chrcte/VlQH0piJtjXl.0t1XkA8pw9dMXTpOq';
-            print_r(password_verify( $data['userPassword'], $hash));
-            echo "<hr> <br>";
-            echo  $data['userPassword'];
-
             if (password_verify($data['userPassword'], $row->password)) {
-                echo "<hr> verified";
-                echo $row->password;
                 return $row;
             }
-            
         } else {
-            echo "<hr> not verified";
             return false;
         }
     }
