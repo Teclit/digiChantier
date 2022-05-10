@@ -1,5 +1,6 @@
     <ul class="mx-auto navbar-nav  text-center ">                       
         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/pages/dashboard/" target="_self">Dashboard</a></li>
+        <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/prixs/indexPrix" target="_self">Modalité Prix</a></li>
         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/administrateurs/indexAdmin" target="_self">Administrateur</a></li>
         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/professionels/indexPro">Professionels</a></li>
         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/leads/index" target="_self">Leads</a></li>

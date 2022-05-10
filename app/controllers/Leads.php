@@ -134,7 +134,6 @@ class Leads extends Controller {
                 'typeTravauxLead'    => trim($_POST['typetravaux']),
                 'natureProjetLead'   => trim($_POST['naturetravaux']),
                 'projetLead'         => trim($_POST['projet']),
-                'prixLead'           => 22.18,
                 // MESSAGE ERRORS 
                 'nomLeadError'         => '',
                 'prenomLeadError'      => '',
@@ -272,7 +271,6 @@ class Leads extends Controller {
                 'typeTravauxLead'    => trim($_POST['typetravaux']),
                 'natureProjetLead'   => trim($_POST['naturetravaux']),
                 'projetLead'         => trim($_POST['projet']),
-                'prixLead'           => 22.18,
                 // MESSAGE ERRORS 
                 'nomLeadError'         => '',
                 'prenomLeadError'      => '',
