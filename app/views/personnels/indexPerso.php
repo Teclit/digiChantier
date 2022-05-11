@@ -5,12 +5,12 @@
     require APPROOT . '/views/includes/navigation.php';
 ?>
 
-<section class="container my-4 p-5 ">
+<section class="container my-3 ">
 
-    <h3 class="text-center mb-3">Espace Personel</h3>
+    <h3 class="text-center mb-4">Espace Personel</h3>
 
-    <div class="row justify-content-center"> 
-        <div class="col-3">
+    <div class="row justify-content-center gy-5"> 
+        <div class="col-lg-3 ">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title fw-bold"><?php echo $data['professionel']->nom ?></h5>
@@ -27,38 +27,37 @@
             </div>
         </div>
 
-        <div class="col-9">
+        <div class="col-lg-9">
 
-            <div class="bg-light p-5"">
-                <h3 class="text-start ">Votre Commande</h3>
-                <p class="text-justify" style="text-align:justify;">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                In nulla posuere sollicitudin aliquam ultrices sagittis orci a scelerisque. Molestie a iaculis at erat. Nec nam aliquam sem et tortor. 
-                Vitae tortor condimentum lacinia quis. Vulputate enim nulla aliquet porttitor. Porttitor leo a diam sollicitudin tempor.
-                Fringilla ut morbi tincidunt augue. Leo a diam sollicitudin tempor. Sollicitudin nibh sit amet commodo nulla facilisi nullam.
-                Vitae congue mauris rhoncus aenean vel. Vitae tempus quam pellentesque nec. Luctus accumsan tortor posuere ac ut consequat semper viverra.
-                Faucibus scelerisque eleifend donec pretium vulputate sapien nec sagittis. Sapien faucibus et molestie ac feugiat sed lectus. 
-                Non tellus orci ac auctor augue. Elit sed vulputate mi sit amet mauris commodo.
+            <div class="d-flex justify-content-between mb-3">
+                <!-- <h3 class="text-start ">Votre Commande</h3> -->
+                <div class="card border border-primary">
+                    <div class="card-body px-4">
+                        <h4 class="card-title text-secondary">Commandes</h4>
+                        <h2 class="card-text text-primary text-center"><?php echo $data['commandes']->totalcmd; ?></h2>
+                    </div>
+                </div>
 
-                Arcu non sodales neque sodales ut etiam sit amet nisl. At erat pellentesque adipiscing commodo elit. 
-                Nisl rhoncus mattis rhoncus urna neque viverra justo nec. Diam vulputate ut pharetra sit. 
-                Egestas pretium aenean pharetra magna ac placerat vestibulum lectus. Ut consequat semper viverra nam libero. 
-                Integer vitae justo eget magna fermentum. Massa id neque aliquam vestibulum morbi blandit cursus risus at. 
-                Aliquet risus feugiat in ante. Ipsum a arcu cursus vitae congue mauris rhoncus. Volutpat blandit aliquam etiam erat. 
-                Risus at ultrices mi tempus imperdiet nulla malesuada pellentesque. Ac tortor dignissim convallis aenean et tortor at risus viverra. 
-                Mauris in aliquam sem fringilla ut morbi tincidunt.
+                
 
-                Mauris in aliquam sem fringilla. Purus sit amet luctus venenatis lectus magna fringilla. At auctor urna nunc id cursus. 
-                Nulla facilisi etiam dignissim diam quis enim lobortis scelerisque. Nulla facilisi cras fermentum odio eu. 
-                A scelerisque purus semper eget duis at tellus. Tempor orci dapibus ultrices in. Tincidunt dui ut ornare lectus sit amet est placerat in. 
-                Gravida in fermentum et sollicitudin. Posuere sollicitudin aliquam ultrices sagittis orci a scelerisque purus. Ac turpis egestas sed 
-                tempus urna et pharetra pharetra massa. Id eu nisl nunc mi ipsum faucibus vitae aliquet nec. Aliquam etiam erat velit scelerisque in dictum. 
-                Id ornare arcu odio ut. Facilisis leo vel fringilla est ullamcorper. Vel facilisis volutpat est velit.
-                </p>
+                <div class="card border border-success">
+                    <div class="card-body px-4">
+                        <h4 class="card-title text-secondary">Prospects Livrés</h4>
+                        <h2 class="card-text text-success text-center">165</h2>
+                    </div>
+                </div>
+
+                <div class="card border border-danger">
+                    <div class="card-body px-4">
+                        <h4 class="text-secondary">Prospects achetés</h4>
+                        <h2 class="card-text text-danger text-center">5</h2>
+                    </div>
+                </div>
+
             </div>
 
 
-            <div class="bg-light p-5">
+            <div class="bg-light my-4">
                 <h3 class="text-start ">Votre Potentiel Prospect:</h3>
                 <p>
                 Curabitur gravida arcu ac tortor dignissim convallis. Nibh nisl condimentum id venenatis a condimentum vitae sapien. 

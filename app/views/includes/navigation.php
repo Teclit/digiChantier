@@ -6,14 +6,15 @@
                 <span class="navbar-toggler-icon "></span>
             </button>
             <div class=" collapse navbar-collapse py-3" id="navbarSupportedContent">
-                
-                <?php if( !SessionHelper::getSession("userRoleAdmin") && !SessionHelper::getSession("userRolepro") ){ ?> 
-                    <?php echo require_once 'navDefaut.php';?>
-                <?php } elseif(SessionHelper::getSession("userRoleAdmin")) { ?>
-                    <?php echo require_once 'navAdmin.php';?>
-                <?php } elseif(SessionHelper::getSession("userRolepro")) {?>
-                    <?php echo require_once 'navPro.php';?>
-                <?php } ?>
+                <?php 
+                    if(SessionHelper::getSession("userRolePro")) {
+                        echo require_once 'navPro.php';
+                    } elseif(SessionHelper::getSession("userRoleAdmin")) { 
+                        echo require_once 'navAdmin.php';
+                    } else{  
+                        echo require_once 'navDefaut.php';
+                    } 
+                ?>
             </div>
             <hr>
         </div>
