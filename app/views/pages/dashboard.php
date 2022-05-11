@@ -16,8 +16,8 @@
         <div class="col-md-6 ">
             <canvas id="myChart" ></canvas>
         </div>
-        <div class="col-md-6">
-            <canvas id="myChartBar"></canvas>
+        <div class="col-md-6 d-flex align-items-center">
+            <canvas id="myChartBar" ></canvas>
         </div>
     </div>
 

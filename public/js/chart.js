@@ -6,12 +6,12 @@
                 'Commande'
             ],
             datasets: [{
-                label: 'My First Dataset',
+                //label: 'My First Dataset',
                 data: [300, 50, 100],
                 backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(54, 162, 235)',
-                    'rgb(255, 205, 86)'
+                    '#000066',
+                    '#cc0000',
+                    '#ffaa00'
                 ],
                 hoverOffset: 4
             }]
@@ -27,7 +27,7 @@
             config
         );
 
-   // bar graph
+   //Bar graph
 
     const dataBar = {
         labels: [
@@ -36,10 +36,10 @@
             'Sous Category'
         ],
         datasets: [{
-        label: 'My First dataset',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: [10, 20, 55],
+            label: 'My First dataset',
+            backgroundColor: '#000066',
+            borderColor: '#000066',
+            data: [10, 20, 55],
         }]
     };
 
