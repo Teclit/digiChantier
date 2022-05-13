@@ -54,14 +54,18 @@ class Commandes extends Controller {
     public function deletePanier(Int $idLead){
         $key =  'panier-'.SessionHelper::getSession("userId");
         $monPanier = [];
-
         if(null != SessionHelper::getSession($key)){
+
             $panierExistant = json_decode(SessionHelper::getSession($key));
             $panierExistant = array_unique($panierExistant); //Get unigue id
+            $panierExistant = array_diff( $panierExistant, [$idLead]);
+
+            SessionHelper::setSession($key, json_encode($panierExistant));
 
             foreach ($panierExistant as $idlead) {
                 array_push($monPanier, $this->leadModel->findLeadById($idlead));
             }
+            
         }
 
         $data = [

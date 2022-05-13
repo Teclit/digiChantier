@@ -14,22 +14,13 @@
             
 
             $key =  "panier-".SessionHelper::getSession("userId");
-            
-             $panierExistant = json_decode(SessionHelper::getSession($key));
-             print_r($panierExistant);
-             echo "<br>";
-             echo count($panierExistant);
-             echo "<hr>";
-            $panierExistant = array_unique($panierExistant);
-            print_r($panierExistant);
-            echo "<br>";
-            echo count($panierExistant);
-            echo "<hr>";
-            foreach ($panierExistant as $item) {
-                echo($item);
-                echo "<br>";
-            }
 
+            $monPn = [312, 401, 15, 401, 3];
+            $monPn = (array_diff( [312, 401, 15, 401, 3], [401] ));
+
+            foreach($monPn as $key => $value) {
+                echo "$key is at $value <br>";
+            }
 
             ?>
 
