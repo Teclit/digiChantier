@@ -60,6 +60,8 @@ class Users extends Controller {
     }   
 
     public function createUserSessionAdmin($user) {
+        $date = new DateTime();
+        SessionHelper::setSession("userLogin", $date->getTimestamp());
         SessionHelper::setSession("userId", $user->id);
         SessionHelper::setSession("userRoleAdmin", boolval($user->admin_role));
         SessionHelper::setSession("userNom", $user->nom);
@@ -77,6 +79,8 @@ class Users extends Controller {
     }
 
     public function createUserSessionPro($user) {
+        $date = new DateTime();
+        SessionHelper::setSession("userLogin", $date->getTimestamp());
         SessionHelper::setSession("userId",              $user->idpro);
         SessionHelper::setSession("userRolePro",         boolval($user->pro_role));
         SessionHelper::setSession("userNom",             $user->nom);

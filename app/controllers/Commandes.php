@@ -56,16 +56,14 @@ class Commandes extends Controller {
         $monPanier = [];
         if(null != SessionHelper::getSession($key)){
 
-            $panierExistant = json_decode(SessionHelper::getSession($key));
+            $panierExistant = json_decode(SessionHelper::getSession($key), true);
             $panierExistant = array_unique($panierExistant); //Get unigue id
-            $panierExistant = array_diff( $panierExistant, [$idLead]);
+            $panierExistant = array_diff($panierExistant, [$idLead]);
 
             SessionHelper::setSession($key, json_encode($panierExistant));
-
             foreach ($panierExistant as $idlead) {
                 array_push($monPanier, $this->leadModel->findLeadById($idlead));
             }
-            
         }
 
         $data = [
@@ -78,7 +76,7 @@ class Commandes extends Controller {
 
 
     /**
-     * Mon Panier 
+     * Show Mon Panier 
      *
      * @return void
      */
@@ -87,7 +85,7 @@ class Commandes extends Controller {
         $monPanier = [];
 
         if(null != SessionHelper::getSession($key)){
-            $panierExistant = json_decode(SessionHelper::getSession($key));
+            $panierExistant = json_decode(SessionHelper::getSession($key), true);
             $panierExistant = array_unique($panierExistant); //Get unigue id
             foreach ($panierExistant as $idlead) {
                 array_push($monPanier, $this->leadModel->findLeadById($idlead));

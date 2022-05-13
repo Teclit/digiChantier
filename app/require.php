@@ -9,8 +9,15 @@
     
     //Class SESION START
 	SessionHelper::sessionStart();
-	//Default Time zone
+    //Default Time zone
 	date_default_timezone_set("Europe/Paris");
+
+    $date = new DateTime();
+    
+    if(SessionHelper::getSession("userLogin") > (2*$date->getTimestamp())) {
+        SessionHelper::destroySessions();
+    } 
+	
     //Instantiate core class
     $init = new Core();
 

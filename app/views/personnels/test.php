@@ -25,7 +25,12 @@
             ?>
 
             <hr> 
-        
+            <?php
+                $date = new DateTime();
+                echo $date->getTimestamp();
+                echo " <br>";
+                echo 2*$date->getTimestamp();
+            ?>
 
     </section>
 <?php
