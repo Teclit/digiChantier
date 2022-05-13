@@ -2,60 +2,102 @@
 class Commandes extends Controller {
 
     public function __construct() {
-        $this->prixModel = $this->model('Prix');
-        $this->CommandeModel = $this->model('Commande');
+        //Param Prix
+        $this->prixUnite = packUnite ;
+        $this->prixDapt  = packDepartment;
+        $this->prixRgn   = packRegion;
+        $this->prixPys   = packPays;
+
+        $this->prixModel          = $this->model('Prix');
+        $this->personnelModel     = $this->model('Personnel');
+        $this->professionelModel  = $this->model('Professionel');
+        $this->commandeModel      = $this->model('Commande');
+        $this->leadModel          = $this->model('Lead');
+        $this->categoryModel      = $this->model('Category');
+        $this->souscategoryModel  = $this->model('Souscategory');
     }
 
+    /**
+     * Ajouter lead au panier
+     *
+     * @param Int $idLead
+     * @return void
+     */
+    public function addPanier(Int $idLead){
+        $key = 'panier-'.SessionHelper::getSession("userId");
 
-    public function ajouterPanier($idLead){
+        if(NULL != SessionHelper::getSession($key) ){ 
+            $panierExistant = json_decode(SessionHelper::getSession($key));
+            array_push($panierExistant, intval($idLead));
 
-        //var_dump(SessionHelper::getSession(SessionHelper::getSession("userId")));
-
-        if(NULL != SessionHelper::getSession(SessionHelper::getSession("userId")) ){
-
-            // echo "<hr>";
-            // $panierExistant = SessionHelper::getSession(SessionHelper::getSession("userId"));
-            // var_dump($panierExistant );
-            // $panierExistant = json_decode($panierExistant);
-            // array_push($panierExistant, $idLead);
-            // echo "<hr>";
-            // var_dump($panierExistant);
-            // // echo  "id-lead --".$idLead;
-            // // echo "<hr>";
-            // // echo "Lets go !!";
-            // // Add new command to session commande line
-            // SessionHelper::setSession(SessionHelper::getSession("userId"), json_encode($panierExistant));
-            // SessionHelper::redirectTo('/personnels/indexPerso/'.SessionHelper::getSession("userId"));  
+            SessionHelper::setSession($key, json_encode($panierExistant));
+            SessionHelper::redirectTo('/personnels/projetDisponible/'.$idLead);  
 
         }else{
             $panier = [];
-            array_push($panier, $idLead);
-
-            var_dump($panier);
-            // SessionHelper::setSession(SessionHelper::getSession("userId"), json_encode($panier));
-            // $panierExistant = SessionHelper::getSession(SessionHelper::getSession("userId"));
-
-            // echo "<hr> vide    ";
-            // //var_dump($panierExistant );
-
-            // $panierExistant = json_decode($panierExistant);
-            // array_push($panierExistant , 5,6,3);
-            // // array_push($panierExistant, $idLead);
-            // // echo "<hr> exist-pan    --  ";
-            // var_dump($panierExistant);
-
-            // Add new command to session commande line
-            // SessionHelper::setSession(SessionHelper::getSession("userId"), json_encode($panierExistant));
-            //SessionHelper::redirectTo('/personnels/indexPerso/'.SessionHelper::getSession("userId"));  
-
-
+            array_push($panier, intval($idLead));
+            SessionHelper::setSession($key, json_encode($panier));
+            SessionHelper::redirectTo('/personnels/projetDisponible/'.$idLead);  
             
         }
         
-        
-
-       // $this->view('commandes/ajouterPanier/', $data);
+        //$this->view('personnels/projetDisponible/'.$key);
     }
+
+    
+    /**
+     * Ajouter lead au panier
+     *
+     * @param Int $idLead
+     * @return void
+     */
+    public function deletePanier(Int $idLead){
+        $key =  'panier-'.SessionHelper::getSession("userId");
+        $monPanier = [];
+
+        if(null != SessionHelper::getSession($key)){
+            $panierExistant = json_decode(SessionHelper::getSession($key));
+            $panierExistant = array_unique($panierExistant); //Get unigue id
+
+            foreach ($panierExistant as $idlead) {
+                array_push($monPanier, $this->leadModel->findLeadById($idlead));
+            }
+        }
+
+        $data = [
+            'prixunite'     => $this->commandeModel->GetUnitePrixLead($this->prixUnite),
+            'panier'        => $monPanier,
+        ];
+        
+        $this->view('commandes/panier', $data);
+    }
+
+
+    /**
+     * Mon Panier 
+     *
+     * @return void
+     */
+    public function panier(){
+        $key =  'panier-'.SessionHelper::getSession("userId");
+        $monPanier = [];
+
+        if(null != SessionHelper::getSession($key)){
+            $panierExistant = json_decode(SessionHelper::getSession($key));
+            $panierExistant = array_unique($panierExistant); //Get unigue id
+            foreach ($panierExistant as $idlead) {
+                array_push($monPanier, $this->leadModel->findLeadById($idlead));
+            }
+        }
+
+        $data = [
+            'prixunite'     => $this->commandeModel->GetUnitePrixLead($this->prixUnite),
+            'panier'        => $monPanier,
+        ];
+        
+        $this->view('commandes/panier', $data);
+    }
+
 
 
 

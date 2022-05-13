@@ -95,7 +95,7 @@
                 <td><?php echo substr($lead->projet, 0, 180)."..";?></td>
                 <td><a href="<?php echo URLROOT."/personnels/leadPotentiel/".$lead->idlead ?>" class="btn btn-secondary btn-sm">Infos</a></td>
                 <td><?php echo $data['prixunite']->prix ."€";?></td>
-                <td><a href="<?php echo URLROOT."/commandes/ajouterPanier/".$lead->idlead ?>" class="btn btn-dark btn-sm">Ajouter au Panier</a></td>
+                <td><a href="<?php echo URLROOT."/commandes/addPanier/".$lead->idlead ?>" class="btn btn-dark btn-sm">Ajouter au Panier</a></td>
             </tr>
             <?php endforeach; ?>
                 

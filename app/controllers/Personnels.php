@@ -61,6 +61,8 @@ class Personnels extends Controller {
             'professionel'  => $this->professionelModel->findProfessionelByID($idPro),
             'commandes'     => $this->commandeModel->findAllCommandeByPRO($idPro),
             'commandeLines' => $this->commandeModel->findAllCommandLineByPRO($idPro),
+            'leads'         => $this->commandeModel->findAllLeadsDispo($idPro),
+            'prixunite'     => $this->commandeModel->GetUnitePrixLead($this->prixUnite),
         ];
         $this->view('personnels/projetAccepter', $data);
     }
@@ -76,6 +78,8 @@ class Personnels extends Controller {
     public function projetDisponible(int $idPro) { 
         $data = [
             'professionel'  => $this->professionelModel->findProfessionelByID($idPro),
+            'commandes'     => $this->commandeModel->findAllCommandeByPRO($idPro),
+            'commandeLines' => $this->commandeModel->findAllCommandLineByPRO($idPro),
             'leads'         => $this->commandeModel->findAllLeadsDispo($idPro),
             'prixunite'     => $this->commandeModel->GetUnitePrixLead($this->prixUnite),
         ];

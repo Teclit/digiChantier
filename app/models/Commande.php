@@ -54,8 +54,6 @@ class Commande {
     }
 
 
-    
-
     /**
      *   
      *  Get All commandelines by professionel
@@ -73,9 +71,6 @@ class Commande {
         $results = $this->db->resultSet();
         return $results;
     }
-
-
-    
 
 
 
