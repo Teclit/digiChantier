@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="card-footer bg-transparent border-dark">
-                        <p><a  id="ajouterpanier" href="<?php echo URLROOT."/personnels/ajouterPanier/".$data['lead']->idlead ;?>" class="btn btn-dark px-5">Ajouter au Panier</a></tp>
+                        <p><a  id="ajouterpanier" href="<?php echo URLROOT."/commandes/ajouterPanier/".$data['lead']->idlead ;?>" class="btn btn-dark px-5">Ajouter au Panier</a></tp>
                     </div>
                 </div>
             </div>

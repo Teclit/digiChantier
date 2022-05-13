@@ -20,12 +20,26 @@ class Personnels extends Controller {
     }
 
     /**
-     * Undocumented function
+     * test file
      *
-     * @param [type] $idPro
+     * @param [type] $idLead
      * @return void
      */
-    public function indexPerso($idPro) { 
+    public function test(int $idLead){
+        $data = [ 
+            'prixs' => 20,
+        ];
+
+        $this->view('personnels/test', $data);
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param int $idPro
+     * @return void
+     */
+    public function indexPerso(int $idPro) { 
         $data = [
             'professionel'  => $this->professionelModel->findProfessionelByID($idPro),
             'commandes'     => $this->commandeModel->findAllCommandeByPRO($idPro),
@@ -35,6 +49,39 @@ class Personnels extends Controller {
         ];
         $this->view('personnels/indexPerso', $data);
     }
+
+    /**
+     * projetAccepter function
+     *
+     * @param int $idPro
+     * @return void
+     */
+    public function projetAccepter(int $idPro) { 
+        $data = [
+            'professionel'  => $this->professionelModel->findProfessionelByID($idPro),
+            'commandes'     => $this->commandeModel->findAllCommandeByPRO($idPro),
+            'commandeLines' => $this->commandeModel->findAllCommandLineByPRO($idPro),
+        ];
+        $this->view('personnels/projetAccepter', $data);
+    }
+
+
+
+    /**
+     * projetDisponible function
+     *
+     * @param int $idPro
+     * @return void
+     */
+    public function projetDisponible(int $idPro) { 
+        $data = [
+            'professionel'  => $this->professionelModel->findProfessionelByID($idPro),
+            'leads'         => $this->commandeModel->findAllLeadsDispo($idPro),
+            'prixunite'     => $this->commandeModel->GetUnitePrixLead($this->prixUnite),
+        ];
+        $this->view('personnels/projetDisponible', $data);
+    }
+
 
 
     /**

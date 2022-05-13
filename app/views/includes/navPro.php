@@ -24,9 +24,9 @@
             </ul>
         </li>
 
-        <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT."/personnels/indexPerso/".SessionHelper::getSession("userId") ; ?>">Mes Projet Accepté</a></li>
-        <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT."/personnels/indexPerso/".SessionHelper::getSession("userId") ; ?>">Projet Disponible</a></li>
-        <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT."/personnels/indexPerso/".SessionHelper::getSession("userId") ; ?>">Service</a></li>
+        <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT."/personnels/projetAccepter/".SessionHelper::getSession("userId") ; ?>">Mes Projet Accepté</a></li>
+        <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT."/personnels/projetDisponible/".SessionHelper::getSession("userId") ; ?>">Projet Disponible</a></li>
+        <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT."/personnels/test/".SessionHelper::getSession("userId") ; ?>">Test file</a></li>
         <li class="nav-item me-2"><a class="nav-link text-dark fw-bold" href="<?php echo URLROOT."/personnels/indexPerso/".SessionHelper::getSession("userId") ; ?>">Espace Personnel</a></li>
 
     </ul>

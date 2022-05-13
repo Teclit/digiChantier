@@ -7,7 +7,7 @@
 
 <section class="container my-4 p-5 ">
 
-    <h3 class="text-center mb-3">Détail du Adminidtrateur </h3>
+    <h3 class="text-center mb-3">Mon profile </h3>
 
     <div class="row justify-content-center"> 
         <div class="card col-md-4">
@@ -38,7 +38,7 @@
                     <p class="card-text"><span class="fw-bold">Pays:</span> <?php echo SessionHelper::getSession("UserPays"); ?></p>
                     <p class="card-text"><span class="fw-bold">Updated:</span> le <small class="text-muted"><?php echo  SessionHelper::getSession("userdateUpdated"); ?></small></p>
                     <hr>
-                <a href="<?php echo URLROOT . "/professionels/updatePro/".  SessionHelper::getSession("userId");?>"  class="btn btn-success btn-sm">Modifier</a>
+                    <a  class="btn btn-success btn-sm d-flex justify-content-center"href="<?php echo URLROOT . "/professionels/updatePro/".  SessionHelper::getSession("userId");?>" >Modifier</a>
                 <?php } ?>
             </div>
         </div>
