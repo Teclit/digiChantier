@@ -69,8 +69,8 @@ Class SessionHelper{
         }
     }
 
-    ///Track url
-    public static function confirmLoginAdmin(){
+    ///Track url and confirm login 
+    public static function confirmLogin(){
         if (null !== SessionHelper::getSession("userId")) {
             return true;
         }else {
@@ -80,6 +80,31 @@ Class SessionHelper{
             SessionHelper::redirectTo("/users/login");
         }
     }
+
+    // Confirm admin login
+    public static function confirmLoginAdmin(){
+        if (SessionHelper::getSession("userRoleAdmin")) {
+            return true;
+        }else {
+
+            $msg= "Vous devez se connecter!";
+            SessionHelper::setSession("ErrorsMessage", $msg);
+            SessionHelper::redirectTo("/users/login");
+        }
+    }
+
+    //Confirm pro login
+    public static function confirmLoginPro(){
+        if (SessionHelper::getSession("userRolePro")) {
+            return true;
+        }else {
+
+            $msg= "Vous devez se connecter!";
+            SessionHelper::setSession("ErrorsMessage", $msg);
+            SessionHelper::redirectTo("/users/login");
+        }
+    }
+
 
     
     /**

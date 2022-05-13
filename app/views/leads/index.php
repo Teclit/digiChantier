@@ -1,6 +1,7 @@
 <?php
+    SessionHelper::confirmLogin();
     SessionHelper::confirmLoginAdmin();
-    
+
     require APPROOT . '/views/includes/header.php';
     require APPROOT . '/views/includes/navigation.php';
 ?>
@@ -11,7 +12,7 @@
         <a class="btn bg-success text-light" href="<?php echo URLROOT; ?>/leads/addlead">Add Lead</a>
     </div>
 
-    <h1 class="text-center">Leads Chantier</h1>
+    <h5 class="text-center mb-3">List des Chantiers</h5>
         <?php 
             echo SessionHelper::getSession("SuccessMessage");
             echo SessionHelper::getSession("ErrorMessage");
@@ -19,17 +20,17 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">N°.</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Prenom</th>
-                <th scope="col-2">Telephone</th>
-                <th scope="col">Email</th>
-                <th scope="col">Ville</th>
-                <th scope="col">Code Postale</th>
-                <th scope="col">Date inscrption</th>
-                <th scope="col">Details</th>
-                <th scope="col">Modifier</th>
-                <th scope="col">Supprimer</th>
+                <th class="fw-bold">N°.</th>
+                <th class="fw-bold">Nom</th>
+                <th class="fw-bold">Prenom</th>
+                <th class="fw-bold">Telephone</th>
+                <th class="fw-bold">Email</th>
+                <th class="fw-bold">Ville</th>
+                <th class="fw-bold">Code Postale</th>
+                <th class="fw-bold">Date inscrption</th>
+                <th class="fw-bold">Details</th>
+                <th class="fw-bold">Modifier</th>
+                <th class="fw-bold">Supprimer</th>
             </tr>
         </thead>
         <tbody>

@@ -5,5 +5,5 @@
         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/professionels/Test">Test-file</a></li>
     </ul>
     <ul class="navbar-nav  text-center">
-        <li class="nav-item bg-dark"><a class="nav-link text-light fw-bold px-3" href="<?php echo URLROOT; ?>/users/login">Log in</a> </li>
+        <li class="nav-item bg-dark"><a class="nav-link text-light fw-bold px-3" href="<?php echo URLROOT; ?>/users/login">Se connecter </a> </li>
     </ul>

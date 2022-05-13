@@ -71,9 +71,9 @@ class Users extends Controller {
         SessionHelper::setSession("UserVille", $user->ville);
         SessionHelper::setSession("userdateUpdated", $user->date_edition);
 
-        $msg= "Bienvenue dans votre espace personnelle ";
+        $msg= "Bienvenue dans votre espace administrateur ";
         SessionHelper::setSession("SuccessMessage", $msg);
-        SessionHelper::redirectTo('/pages/index');
+        SessionHelper::redirectTo('/pages/dashboard');
     }
 
     public function createUserSessionPro($user) {
@@ -96,13 +96,12 @@ class Users extends Controller {
         SessionHelper::redirectTo('/personnels/indexPerso/'.$user->idpro);
     }
 
-
+    //Redirect to rofile page
     public function  profile(){
-        $admins = $this->adminModel->findAllAdministrateurByID(SessionHelper::getSession("userId"));
+        //$admins = $this->adminModel->findAllAdministrateurByID(SessionHelper::getSession("userId"));
         $data = [
-            'user' => $admins,
+            'file' => "Profile.php",
         ];
-
         $this->view('/users/profile', $data);
     }
 

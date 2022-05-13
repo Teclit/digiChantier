@@ -19,19 +19,28 @@ class Leads extends Controller {
         $this->view('leads/index', $data);
     }
 
+    
     /**
-     * for test
+     * Get all information about lead
      *
+     * @param INT $idLead
      * @return void
      */
-    public function linfos() {
-        $leads = $this->leadModel->findAllLeads();
+    public function linfo(INT $idLead){
+        $lead = $this->leadModel->findLeadById($idLead);
         $data = [
-            'leads' => $leads
+            'idlead'               => $lead->idlead,
+            'lead'                 => $lead,
+            'typeTravaux'          => $this->categoryModel->findCategoryByID($lead->idctg),
+            'natureTravaux'        => $this->souscategoryModel->findSousCategoryByID($lead->idsctg),
+            'type-natureTravaux'   => $this->souscategoryModel->findSousCategoryByGroup($lead->idctg),
+            'travaux'              => $this->categoryModel->findAllCategories(),
+            'stravaux'             => $this->souscategoryModel->findAllSousCategories()
         ];
 
-        $this->view('leads/linfos', $data);
+        $this->view('leads/linfo', $data);
     }
+
 
     /**
      * Reditrect to create lead/ home page 

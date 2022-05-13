@@ -1,5 +1,7 @@
 <?php
+    SessionHelper::confirmLogin();    
     SessionHelper::confirmLoginAdmin();
+
     
     require APPROOT . '/views/includes/header.php';
     require APPROOT . '/views/includes/navigation.php';
@@ -8,7 +10,7 @@
             
     <section class="container my-4">
     <a class="btn bg-success text-light" href="<?php echo URLROOT; ?>/categories/createCtg">Add Category</a>
-    <h3 class="text-center mb-3">List Administrateur</h3>
+    <h5 class="text-center mb-2">List des categories</h5>
         <?php 
             echo SessionHelper::getSession("SuccessMessage");
             echo SessionHelper::getSession("ErrorMessage");
@@ -16,10 +18,10 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                <th scope="col">N°.</th>
-                <th scope="col">Category Nom</th>
-                <th scope="col">Modifier</th>
-                <th scope="col">Supprimer</th>
+                <th class="fw-bold" >N°.</th>
+                <th class="fw-bold">Category Nom</th>
+                <th class="fw-bold">Modifier</th>
+                <th class="fw-bold">Supprimer</th>
                 </tr>
             </thead>
             <tbody>

@@ -5,6 +5,12 @@
     define('DB_PASS', ''); //Add your DB pass
     define('DB_NAME', 'digicotekchantier'); //Add your DB Name
 
+    //Prix Param
+    define('packUnite',      'PKUNITE'); //Prix un lead by unite
+    define('packDepartment', 'PKDEPARTMENT');// Prix des lead by deparment
+    define('packRegion',     'PKREGION'); //Prix des lead by Region
+    define('packPays',        'PKPAYS'); //Prix des lead by pays
+    
     //APPROOT
     define('APPROOT', dirname(dirname(__FILE__)));
 

@@ -1,6 +1,7 @@
 
 <?php
 
+    SessionHelper::confirmLogin();
     SessionHelper::confirmLoginAdmin();
     
     require APPROOT . '/views/includes/header.php';

@@ -1,3 +1,7 @@
+<?php
+    SessionHelper::confirmLogin();
+    SessionHelper::confirmLoginAdmin();
+?>
 <form action="<?php echo URLROOT; ?><?php echo $data['actionForm'];?>" method="POST" enctype="multipart/form-data" class="mx-5 mb-5" >
     <div class="mb-3">
         <input type="text"  name="nomSctg" class="form-control" id="nom" value="<?php echo $data['nomSctg']; ?>" placeholder="Nom du sous category" required>

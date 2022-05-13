@@ -4,23 +4,3 @@
     font-family: 'Barlow', sans-serif;
     font-weight: 400;
 }
-
-.containerAccueil{
-    background-image: url("../img/banner.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 500px; 
-}
-
-footer {
-    position:relative;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 1rem;
-    text-align: center;
-}
-
-
-

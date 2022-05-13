@@ -1,3 +1,6 @@
+<?php
+    SessionHelper::confirmLoginAdmin();
+?>
 <form action="<?php echo URLROOT; ?>/Prixs/<?php echo $data['actionForm'];?>" method="POST" enctype="multipart/form-data" class="mx-5 mb-5" >
     <div class="mb-3">
         <input type="number"  name="nbleads" class="form-control" id="nom" value="<?php echo $data['nbleads']; ?>" placeholder="Entrer le nombre de leads" required>

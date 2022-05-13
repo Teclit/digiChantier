@@ -1,6 +1,6 @@
 <?php
     SessionHelper::confirmLogin();
-    SessionHelper::confirmLoginAdmin();
+    SessionHelper::confirmLoginPro();
     
     require APPROOT . '/views/includes/header.php';
     require APPROOT . '/views/includes/navigation.php';
@@ -24,9 +24,7 @@
                     <h5 class="card-title"> <?php echo $data['typeTravaux']->ctgnom;?> </h5>
                         <h6 class="card-title"> <?php echo $data['natureTravaux']->sctgnom;?> </h6>
                         <hr>
-                        <p class="card-text mb-3 text-wrap"><?php echo $data['lead']->projet ?></p>
-                        <hr>
-                        <a href="<?php echo URLROOT . "/leads/index"?>"  class="btn btn-secondary">Retour</a>
+                        <p class="card-text mb-3"><?php echo $data['lead']->projet ?></p>
                     </div>
                 </div>
             </div>

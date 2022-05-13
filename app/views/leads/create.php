@@ -4,7 +4,7 @@
 ?>
 
     <section class="container text-center my-3 p-1  ">
-        <h4 class="text-center my-4">Creer Un Nouveau Lead</h4>
+        <h4 class="text-center my-3">Précisez votre projet</h4>
 
         <form action="<?php echo URLROOT; ?>/leads/create" method="POST" enctype="multipart/form-data" class="mx-5 mb-5" >
 

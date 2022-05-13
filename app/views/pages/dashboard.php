@@ -1,4 +1,5 @@
 <?php
+    SessionHelper::confirmLogin();
     SessionHelper::confirmLoginAdmin();
 
     require APPROOT . '/views/includes/header.php';
@@ -9,9 +10,11 @@
 
 
 <section class="container my-4">
-
+    <?php 
+        echo SessionHelper::getSession("SuccessMessage");
+        echo SessionHelper::getSession("ErrorMessage");
+    ?>
     <h3 class="my-4 text-center"> Dashboad  Page</h3>
-    
     <div class="row justify-content-between">
         <div class="col-md-6 ">
             <canvas id="myChart" ></canvas>

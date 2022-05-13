@@ -1,5 +1,6 @@
 <?php
-    SessionHelper::confirmLoginAdmin();
+    SessionHelper::confirmLogin();    SessionHelper::confirmLoginAdmin();
+
     
     require APPROOT . '/views/includes/header.php';
     require APPROOT . '/views/includes/navigation.php';
@@ -8,7 +9,7 @@
 
 <section class="container my-4 p-5 ">
     <a class="btn bg-success text-light" href="<?php echo URLROOT; ?>/administrateurs/createAdmin">Add Admin</a>
-    <h3 class="text-center mb-3">List Administrateur</h3>
+    <h5 class="text-center mb-3">List des  Administrateur</h5>
         <?php 
             echo SessionHelper::getSession("SuccessMessage");
             echo SessionHelper::getSession("ErrorMessage");
@@ -16,16 +17,16 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col" class="fw-bold">N°.</th>
-                <th scope="col" class="fw-bold">Nom</th>
-                <th scope="col" class="fw-bold">Prenom</th>
-                <th scope="col" class="fw-bold">Telephone</th>
-                <th scope="col" class="fw-bold">Email</th>
-                <th scope="col" class="fw-bold">Ville</th>
-                <th scope="col" class="fw-bold">Code Postale</th>
-                <th scope="col" class="fw-bold">Details</th>
-                <th scope="col" class="fw-bold">Modifier</th>
-                <th scope="col" class="fw-bold">Supprimer</th>
+                <th  class="fw-bold">N°.</th>
+                <th  class="fw-bold">Nom</th>
+                <th  class="fw-bold">Prenom</th>
+                <th  class="fw-bold">Telephone</th>
+                <th  class="fw-bold">Email</th>
+                <th  class="fw-bold">Ville</th>
+                <th  class="fw-bold">Code Postale</th>
+                <th  class="fw-bold">Details</th>
+                <th  class="fw-bold">Modifier</th>
+                <th  class="fw-bold">Supprimer</th>
             </tr>
         </thead>
         <tbody>
