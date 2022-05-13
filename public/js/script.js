@@ -41,3 +41,31 @@ function getUnique(array){
     return uniqueArray;
 }
 
+
+//Stickr en locale storage
+console.log("---------------------------Local Storage-------------------------");
+localStorage.setItem('users', 'vilh'); 
+
+users = [
+	{
+    	id: 1,
+        name: 'vilh',
+    },
+    {
+    	id: 2,
+        name: 'zidane'
+    },
+]
+
+// set string 
+localStorage.setItem('users', users);	// stored objects
+localStorage.setItem('users', JSON.stringify(users));	// stored string
+
+// get
+var retrievedUsername = localStorage.getItem('users'); 
+
+console.log(localStorage.setItem('users', users) );
+console.log(localStorage.setItem('users', JSON.stringify(users)))
+
+
+

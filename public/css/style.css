@@ -4,3 +4,12 @@
     font-family: 'Barlow', sans-serif;
     font-weight: 400;
 }
+
+
+.containerAccueil{
+    background-image: url("../img/banner.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 400px;
+}

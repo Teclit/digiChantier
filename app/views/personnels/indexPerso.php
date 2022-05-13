@@ -12,27 +12,27 @@
 
     <div class="row justify-content-center gy-5"> 
         <div class="col-lg-2 ">
-            <div class="card border-2 border-primary mb-4">
+            <div class="card border-4 shadow  border-primary mb-4">
                 <div class="card-body px-4 text-center">
                     <h4 class="card-title text-secondary">Commandes</h4>
                     <h2 class="card-text text-primary"><?php echo $data['commandes']->totalcmd; ?></h2>
                 </div>
             </div>
-            <div class="card border-2 border-success mb-4">
+            <div class="card  border-4 shadow  border-success mb-4">
                 <div class="card-body px-4 text-center">
                     <h4 class="card-title text-secondary">Prospects Livrés</h4>
                     <h2 class="card-text text-success"><?php echo Count($data['commandeLines']); ?></h2>
                 </div>
             </div>
 
-            <div class="card border-2 border-danger mb-4">
+            <div class="card  border-4 shadow  border-danger mb-4">
                 <div class="card-body px-4 text-center">
                     <h4 class="text-secondary">Prospects achetés</h4>
                     <h2 class="card-text text-danger ">0</h2>
                 </div>
             </div>
 
-            <div class="card border-2 border-warning mb-4">
+            <div class="card  border-4 shadow  border-warning mb-4">
                 <div class="card-body px-4 text-center">
                     <h4 class="text-secondary">Rendez-vous</h4>
                     <h2 class="card-text text-warning ">0</h2>
