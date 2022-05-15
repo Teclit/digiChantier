@@ -26,68 +26,24 @@
 <section class="container">
     <h4 class="text-center fw-bold">Notre Blog</h4>
     <div class="row row-cols-1 row-cols-md-3 g-4 my-5">
+        <?php foreach($data['posts'] as $post): ?>
             <div class="col ">
                 <div class="card border-0 shadow rounded-3 ">
-                    <img src="https://picsum.photos/500/300?random=1" class="card-img-top" alt="...">
+                    <img src="<?php echo $post->image; ?>" class="card-img-top" alt="<?php echo substr($post->title, 0, 20); ?>">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <a href="#" class="btn btn-dark">Read more</a>
+                        <h5 class="card-title"><?php echo substr($post->title, 0, 200)." .."; ?></h5>
+                        <small class="text-secondary"><?php echo $post->created_at; ?></small>
+                        <p class="card-text"><?php echo  substr($post->body, 0, 250)." ..."; ?></p>
+                        <a href="<?php echo URLROOT . "/pages/fullpost/".$post->idpost ?>" class="btn btn-dark">Lire la suite</a>
                     </div>
                     
                 </div>
             </div>
-            <div class="col">
-                <div class="card border-0 shadow rounded-3">
-                    <img src="https://picsum.photos/500/300?random=2" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <a href="#" class="btn btn-dark">Read more</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card border-0 shadow rounded-3">
-                    <img src="https://picsum.photos/500/300?random=3" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-dark">Read more</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card border-0 shadow rounded-3">
-                    <img src="https://picsum.photos/500/300?random=4" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <a href="#" class="btn btn-dark">Read more</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card border-0 shadow rounded-3">
-                    <img src="https://picsum.photos/500/300?random=5" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <a href="#" class="btn btn-dark">Read more</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card border-0 shadow rounded-3">
-                    <img src="https://picsum.photos/500/300?random=6" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <a href="#" class="btn btn-dark">Read more</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php endforeach; ?>
+    </div>
+
+    <div class="row justify-content-center ">
+        <a href="<?php echo URLROOT . "/posts/indexPost" ?>" class=" col-2 btn btn-dark mb-5 d-inline ">+ Posts</a>
     </div>
 </section>
 

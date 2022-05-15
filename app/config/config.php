@@ -16,7 +16,7 @@
 
     //URLROOT (Dynamic links)
     define('URLROOT', 'http://localhost/DigicotekStage/digicotekchantier');
-    // define('URLDOCS', '/Projects/acranatblog/public/uploads/');
+    define('URLDOCS', '/DigicotekStage/digicotekchantier/public/uploads/');
 
     //Sitename
     define('SITENAME', 'Digicotek Chantier');
