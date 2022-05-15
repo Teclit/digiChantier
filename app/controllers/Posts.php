@@ -46,7 +46,10 @@ class Posts extends Controller {
                 
                 'titleError' => '',
                 'bodyError'  => '',
-                'imageError' => ''
+                'imageError' => '',
+                 //FormAction
+                'actionForm' => '/posts/createPost',
+                'submitBtn'  => 'Creer'
             ];
 
             if(empty($data['title'])) {
@@ -64,12 +67,12 @@ class Posts extends Controller {
 
             if ( empty($data['titleError']) && empty($data['bodyError']) && empty($data['imageError'])  ) {
                     
-                if ($this->postModel->addPost($data)) {
+                if ($this->postModel->AddPost($data)) {
                     $msg= "Vous avez bien creer le post";
                     SessionHelper::setSession("SuccessMessage", $msg);
                     SessionHelper::redirectTo('/posts/indexPost');
                 } else {
-                    // die("Something went wrong, please try again!");
+                    die("Something went wrong, please try again!");
                     $msg= "Vous n'avez pas supprimer le post";
                     SessionHelper::setSession("ErrorMessage", $msg);
                     SessionHelper::redirectTo('/posts/indexPost');
@@ -83,19 +86,25 @@ class Posts extends Controller {
         $this->view('posts/createPost', $data);
     }
 
+    /**
+     * update post
+     *
+     * @param int $postID
+     * @return void
+     */
     public function updatePost($postID) {
 
         $post = $this->postModel->findPostById($postID);
 
         $data = [
-            'updatePost'        => $post,
-            'updatetitle'   =>'',
-            'updatebody'    =>'',
-            'updateimage'   =>'',
+            'idpost' =>$postID,
+            'title ' => $post->title,
+            'body'   => $post->body,
+            'image'  => $post->image,
 
-            'updatetitleError'       => '',
-            'updatebodyError'        => '',
-            'updateimageError'       => '',
+            'titleError' => '',
+            'bodyError'  => '',
+            'imageError' => '',
 
             //FormAction
             'actionForm'                => '/posts/updatePost/'.$postID,
@@ -106,49 +115,53 @@ class Posts extends Controller {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'updatePostID'          => $postID,
-                'post'                  => $post,
-                'userID'                => SessionHelper::getSession('userId'),
-                'updatePost'            =>$post,
-                'updatetitle'       =>trim($_POST['updatetitle']),
-                'updatebody'        =>trim($_POST['updatebody']),
-                'updateimage'       =>trim($_FILES["updateimage"]["name"]),
+                'idpost'      => $postID,
+                'userID'      => SessionHelper::getSession('userId'),
+                'title'       =>trim($_POST['title']),
+                'body'        =>trim($_POST['body']),
+                'image'       =>trim($_FILES["image"]["name"]),
                 
 
-                'updatetitleError'      => '',
-                'updatebodyError'       => '',
-                'updateimageError'      => '',
+                'titleError'      => '',
+                'bodyError'       => '',
+                'imageError'      => '',
                 //FormAction
-                'actionForm'                => '/posts/updatePost/'.$postID,
-                'submitBtn'                 => 'Modifier'
+                'actionForm'      => '/posts/updatePost/'.$postID,
+                'submitBtn'        => 'Modifier'
             ];
 
         
 
-            if(empty($data['updatetitle'])) {
-                $data['updatetitleError'] = 'The title  of a post cannot be empty';
+            if(empty($data['title'])) {
+                $data['titleError'] = 'The title  of a post cannot be empty';
             }
 
-            if(empty($data['updatebody'])) {
-                $data['updatebodyError'] = 'The body of a post cannot be empty';
+            if(empty($data['body'])) {
+                $data['bodyError'] = 'The body of a post cannot be empty';
             }
 
-            if($data['updatetitle'] == $this->postModel->findPostById($postID)->title ) {
-                $data['updatetitleError'] == 'At least change the title !';
+            if($data['title'] == $this->postModel->findPostById($postID)->title ) {
+                $data['titleError'] == 'At least change the title !';
             }
 
-            if($data['updatebody'] == $this->postModel->findPostById($postID)->body) {
-                $data['updatebodyError'] == 'At least change the body!';
+            if($data['body'] == $this->postModel->findPostById($postID)->body) {
+                $data['bodyError'] == 'At least change the body!';
             }
 
-            if (empty($data['updatetitleError']) && empty($data['updatebodyError'])) {
+            if (empty($data['titleError']) && empty($data['bodyError']) ) {
 
-                if ($this->postModel->updatePost($data)) {
-                    
-                    header("Location: " . URLROOT . "/posts");
+                if ($this->postModel->UpdatePost($data)) {
+                    $msg= "Vous avez bien editer le post";
+                    SessionHelper::setSession("SuccessMessage", $msg);
+                    SessionHelper::redirectTo('/posts/indexPost');
                 } else {
-                    die("Something went wrong, please try again!");
+                    // die("Something went wrong, please try again!");
+                    $msg= "Vous n'avez pas editer le post";
+                    SessionHelper::setSession("ErrorMessage", $msg);
+                    SessionHelper::redirectTo('/posts/indexPost');
                 }
+
+
             } else {
                 $this->view('posts/updatePost', $data);
             }
@@ -157,14 +170,23 @@ class Posts extends Controller {
         $this->view('posts/updatePost', $data);
     }
 
+    /**
+     * Delete 
+     *
+     * @param int $postID
+     * @return void
+     */
     public function deletePost($postID) {
 
         $post = $this->postModel->findPostById($postID);
         $data = [
-            'post' => $post,
-            'title ' => '',
-            'body' => '',
-            'title Error' => '',
+            
+            'idpost' =>$postID,
+            'title ' => $post->title,
+            'body'   => $post->body,
+            'image'  => $post->image,
+            'titleError' => '',
+            'imageError' => '',
             'bodyError' => '',
 
             //FormAction
@@ -173,14 +195,35 @@ class Posts extends Controller {
         ];
 
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $data = [
+                'idpost' =>$postID,
+                'title ' => $post->title,
+                'body'   => $post->body,
+                'image'  => $post->image,
+                'titleError' => '',
+                'imageError' => '',
+                'bodyError' => '',
+    
+                //FormAction
+                'actionForm'                => '/posts/deletePost/'.$postID,
+                'submitBtn'                 => 'Supprimer'
+            ];
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            if($this->postModel->deletePost($postID)) {
-                    header("Location: " . URLROOT . "/posts");
+            if($this->postModel->DeletePost($data)) {
+                $msg= "Vous avez bien supprimer le post";
+                SessionHelper::setSession("SuccessMessage", $msg);
+                SessionHelper::redirectTo('/posts/indexPost');
             } else {
-                die('Something went wrong!');
+                // die("Something went wrong, please try again!");
+                $msg= "Vous n'avez pas supprimer le post";
+                SessionHelper::setSession("ErrorMessage", $msg);
+                SessionHelper::redirectTo('/posts/indexPost');
             }
+            $this->view('posts/updatePost', $data);
         }
+        $this->view('posts/updatePost', $data);
     }
 }
 

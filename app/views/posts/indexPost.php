@@ -18,7 +18,7 @@
             <?php foreach($data['posts'] as $post): ?>
                 <div class="col ">
                     <div class="card border-0 shadow rounded-3 ">
-                        <img src="<?php echo $post->image; ?>" class="card-img-top" alt="<?php echo substr($post->title, 0, 20); ?>">
+                        <img src="<?php echo URLROOT;?>/public/uploads/<?php echo $post->image; ?>" class="card-img-top" alt="<?php echo substr($post->title, 0, 20); ?>">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo substr($post->title, 0, 200)." .."; ?></h5>
                             <small class="text-secondary"><?php echo $post->created_at; ?></small>
