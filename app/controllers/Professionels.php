@@ -14,34 +14,6 @@ class professionels extends Controller {
         $this->view('professionels/indexPro', $data);
     }
 
-    /**
-     * Test file
-     *
-     * @return void
-     */
-    public function Test() {
-        $idpro = 42;
-        //$idPro = $this->professionelModel->GetLastID();
-        $domainesPro = $this->professionelModel->GetActivitiesByID($idpro);
-        $domainesPro = $this->professionelModel->GetActivitiesByID($idpro);
-        $arrDomaineID = array();
-        $arrDomaineNom = array();
-        foreach ($domainesPro as $item) {
-            array_push($arrDomaineID , $item->idctg);
-            //Get domainnames
-            array_push($arrDomaineNom, $this->categoryModel->findCategoryByID($item->idctg)->ctgnom);
-        }
-
-        $prvDomainesID   = implode(", ",$arrDomaineID );//array to string
-        $prvDomainesNom  =implode(", ",$arrDomaineNom);
-        // echo $prvDomainesID;
-        // echo "<hr>";
-        // echo $prvDomainesNom;
-        // echo "<hr>";
-        // echo print_r($arrDomaineNom);
-        
-        $this->view('professionels/test', $idpro);
-    }
 
     /**
      * Home page professionelle
@@ -50,8 +22,11 @@ class professionels extends Controller {
      */
     public function homePro() {
         $data = [
-            'travaux'  =>  $this->categoryModel->findAllCategories(),
-            'stravaux' => $this->souscategoryModel->findAllSousCategories()
+            'jobs'   =>'',
+            'category'  =>'',
+            'scategory' =>'',
+            'travaux'   => $this->categoryModel->findAllCategories(),
+            'stravaux'  => $this->souscategoryModel->findAllSousCategories()
         ];
         $this->view('professionels/homePro', $data);
     }
@@ -63,27 +38,49 @@ class professionels extends Controller {
      */
 
     public function getJob() {
+        $data = [
+            'jobs'   =>'',
+            'category'           =>'',
+            'scategory'          =>'',
+            'travaux'            =>$this->categoryModel->findAllCategories(),
+            'stravaux'           =>$this->souscategoryModel->findAllSousCategories(),
+        ];
+        
         if($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['travaux']) ){
-            $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
             $splitGetUrl = explode('/', trim($_GET['travaux']));
-
-            $data = [
-                'typeTravaux'        => $this->categoryModel->findCategoryByID($splitGetUrl[0]),
-                'natureTravaux'      => $this->souscategoryModel->findSousCategoryByID($splitGetUrl[1]),
-                'type-natureTravaux' => $this->souscategoryModel->findSousCategoryByGroup($splitGetUrl[0]),
-            ];
             
-            var_dump($splitGetUrl);
-            //$this->view('professionels/createPro', $data);
+            if(count($splitGetUrl)>1){
+                $idcategory  =  intval($splitGetUrl[0]);
+                $idscategory =  intval($splitGetUrl[1]);
+                $data = [
+                    'jobs'   =>'',
+                    'category'           =>$idcategory,
+                    'scategory'          =>$idscategory,
+                ];
 
-        }else{
-            $data = [
-                'travaux'  =>  $this->categoryModel->findAllCategories(),
-                'stravaux' =>  $this->souscategoryModel->findAllSousCategories() 
-            ];
+                if ($this->professionelModel->GetJob($data)){
+                    // Redirect to index page
+                    $data = [
+                        'jobs'     =>$this->professionelModel->GetJob($data),
+                        'travaux'  =>$this->categoryModel->findAllCategories(),
+                        'stravaux' =>$this->souscategoryModel->findAllSousCategories(),
+                    ];
+                    $msg= "Voici les travaux à votre proposition.";
+                    SessionHelper::setSession("SuccessMessage", $msg);
+                    $this->view('professionels/homePro', $data);  
+                } else {
+                    $msg= "Aucun travaux disponible.";
+                    SessionHelper::setSession("ErrorMessage", $msg);
+                    SessionHelper::redirectTo('/professionels/homePro');
+                }
+                
+            
+            }
+
             $this->view('professionels/homePro', $data);
         }
-    
+        
+        $this->view('professionels/homePro', $data);
     }
 
 
@@ -290,8 +287,6 @@ class professionels extends Controller {
                 empty($data['codepostalProError'])       && 
                 empty($data['villeProError'])        
             ){
-                
-                $secteuActivité = explode(",", $data['domainesEnt']);
                 //Hash password
                 $data['passwordPro'] = password_hash($data['passwordPro'], PASSWORD_DEFAULT);
                 //Register lead from model function
@@ -596,12 +591,12 @@ class professionels extends Controller {
 
             if($this->professionelModel->DeleteActivitePro($idpro)){
 
-                if ($this->professionelModel->deletePro($data)){
+                if($this->professionelModel->deletePro($data)){
                     // Redirect to index page
                     $msg= "Vous avez bien supprimer le professionel";
                     SessionHelper::setSession("SuccessMessage", $msg);
                     SessionHelper::redirectTo('/professionels/indexPro');    
-                } else {
+                }else{
                     //die('Something went wrong.');
                     $msg= "Vous n'avez pas supprimer le professionels";
                     SessionHelper::setSession("ErrorMessage", $msg);

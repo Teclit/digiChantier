@@ -56,6 +56,20 @@ Class Professionel {
         return $row;
     }
 
+    /**
+     * Get alltravaux
+     *
+     * @return void
+     */
+    public function GetJob($data) {
+        $this->db->query('SELECT * FROM  lead WHERE idctg=:idctg OR idsctg=:idsctg');
+        $this->db->bind(':idctg',  $data['category']);
+        $this->db->bind(':idsctg', $data['scategory']);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+
 
     /**
      * Find Professionel by email. email is passed in by the Controller.

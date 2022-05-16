@@ -98,7 +98,7 @@ class Posts extends Controller {
 
         $data = [
             'idpost' =>$postID,
-            'title ' => $post->title,
+            'title'  => $post->title,
             'body'   => $post->body,
             'image'  => $post->image,
 
@@ -121,7 +121,6 @@ class Posts extends Controller {
                 'body'        =>trim($_POST['body']),
                 'image'       =>trim($_FILES["image"]["name"]),
                 
-
                 'titleError'      => '',
                 'bodyError'       => '',
                 'imageError'      => '',
