@@ -10,6 +10,17 @@ class Commande {
     }
 
     /**
+     * Get All commandes
+     *
+     * @return void
+     */
+    public function findAllCommandes() {
+        $this->db->query('SELECT * FROM commande ');
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    /**
      * Undocumented function
      *
      * @return array

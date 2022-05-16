@@ -9,18 +9,26 @@
 
 
 
-<section class="container my-4">
+<section class="container">
     <?php 
         echo SessionHelper::getSession("SuccessMessage");
         echo SessionHelper::getSession("ErrorMessage");
     ?>
-    <h3 class="my-4 text-center"> Dashboad  Page</h3>
+    <h5 class=" pt-5 text-center"> Dashboad</h5>
     <div class="row justify-content-between">
-        <div class="col-md-6 ">
-            <canvas id="myChart" ></canvas>
+        <input type="hidden" id="totalLeads" name="totalLeads" value="<?php echo count($data['totalLeads']); ?>">
+        <input type="hidden" id="totalProfessionels" name="totalProfessionels" value="<?php echo count($data['totalProfessionels']); ?>">
+        <input type="hidden" id="totalCommandes" name="totalCommandes" value="<?php echo count($data['totalCommandes']); ?>">
+        <input type="hidden" id="totalAdmin" name="totalAdmin" value="<?php echo count($data['totalAdmin']); ?>">
+        <input type="hidden" id="totalCategory" name="totalCategory" value="<?php echo count($data['totalCategory']); ?>">
+        <input type="hidden" id="totalSouCategory" name="totalSouCategory" value="<?php echo count($data['totalSouCategory']); ?>">
+        <input type="hidden" id="totalPosts" name="totalPosts" value="<?php echo count($data['totalPosts']); ?>">
+    
+        <div class="col-md-6  d-flex align-items-center">
+            <canvas class="shadow-lg p-5 " id="myChart" ></canvas>
         </div>
         <div class="col-md-6 d-flex align-items-center">
-            <canvas id="myChartBar" ></canvas>
+            <canvas class="shadow-lg p-3" id="myChartBar" ></canvas>
         </div>
     </div>
 

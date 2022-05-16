@@ -1,9 +1,17 @@
 <?php
 class Pages extends Controller {
     public function __construct() {
-        $this->categoryModel     = $this->model('Category');
-        $this->souscategoryModel = $this->model('Souscategory');
-        $this->postModel         = $this->model('Post');
+        $this->administrateursModel = $this->model('Administrateur');
+        $this->categoryModel      = $this->model('Category');
+        $this->souscategoryModel  = $this->model('Souscategory');
+        $this->postModel          = $this->model('Post');
+        $this->personnelModel     = $this->model('Personnel');
+        $this->professionelModel  = $this->model('Professionel');
+        $this->commandeModel      = $this->model('Commande');
+        $this->leadModel          = $this->model('Lead');
+        $this->categoryModel      = $this->model('Category');
+        $this->souscategoryModel  = $this->model('Souscategory');
+        
     }
 
     public function index() {
@@ -36,11 +44,16 @@ class Pages extends Controller {
         $this->view('pages/about', $data);
     }
 
-    
 
     public function dashboard() {
         $data = [
-            'pageName ' => 'posts page'
+            'totalLeads'         => $this->leadModel->findAllLeads(),
+            'totalProfessionels' => $this->professionelModel->findAllProfessionels(),
+            'totalCommandes'     => $this->commandeModel->findAllCommandes(),
+            'totalAdmin'         => $this->administrateursModel->findAllAdministrateurs(),
+            'totalCategory'      => $this->categoryModel->findAllCategories(),
+            'totalSouCategory'   => $this->souscategoryModel->findAllSousCategories(),
+            'totalPosts'          => $this->postModel->findAllPosts(),
         ];
         $this->view('pages/dashboard', $data);
     }
