@@ -26,6 +26,7 @@
                             </div>
                             <hr class="my-4">
                             <p class="options"> Vous avez oublié votre mot de passe?<a class="text-primary" href="<?php echo URLROOT; ?>/users/forgetpd"> Cliquer ici!</a></p>
+                            <p class="options"> Créer un compte?<a class="text-primary" href="<?php echo URLROOT; ?>/professionels/createPro"> Cliquer ici!</a></p>
 
                         </form>
                     </div>

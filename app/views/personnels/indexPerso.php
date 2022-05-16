@@ -74,7 +74,7 @@
 <section class="container-fluid ">
     <h4 class="text-center text-secondary mt-5">Projet Disponible:</h4>
     <div class="bg-light mx-5">
-        <table class="table table-hover">
+        <table class="table table-hover px-5">
             <thead>
                 <tr>
                     <th scope="col" class="fw-bold">N°.</th>

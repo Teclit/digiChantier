@@ -44,6 +44,8 @@
                             <?php foreach($data['stravaux'] as $stravail):if($job->idsctg == $stravail->idsctg ){ ?>
                                 <h5 class="card-title fw-bold"><?php echo $stravail->sctgnom; ?></h5>
                             <?php } endforeach; ?>
+                            <h5 class="card-title"><?php echo $job->ville; ?></h5>
+                            <h5 class="card-title"><?php echo $job->codepostal; ?></h5>
                             <p class="card-text"><?php echo substr($job->projet, 0, 250)." ..."; ?></p>
                             <a href="<?php echo URLROOT."/personnels/leadPotentiel/".$job->idlead ?>"class="btn btn-dark px-4">Voir</a>
                         </div>

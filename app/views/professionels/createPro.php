@@ -4,7 +4,7 @@
 ?>
 
     <section class="container text-center my-3 p-1  ">
-        <h4 class="text-center my-4">Creer Un Nouveau Professionel</h4>
+        <h5 class="text-center my-4">Creer votre compte professionel</h5>
         <?php echo require_once 'formPro.php';?>
     </section>
 
