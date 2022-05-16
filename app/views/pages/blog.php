@@ -8,7 +8,7 @@
         <div class="row row-cols-1 row-cols-md-3 g-4 my-5">
             <?php 
             $nbPost = 6;
-            foreach($data['posts'] as $key=>$post): if($key < $nbPost){?>
+            foreach($data['posts'] as $key=>$post): if($key<$nbPost){?>
                 <div class="col ">
                     <div class="card border-0 shadow rounded-3 ">
                         <img src="<?php echo URLROOT;?>/public/uploads/<?php echo $post->image; ?>" class="card-img-top" alt="<?php echo substr($post->title, 0, 20); ?>">
@@ -24,7 +24,7 @@
             <?php } endforeach; ?>
         </div>
         <div class="row justify-content-center ">
-            <a href="<?php echo URLROOT . "/pages/blog" ?>" class=" col-2 btn btn-dark mb-5 d-inline ">+ Posts</a>
+            <a href="<?php echo URLROOT ."/pages/blog" ?>" class=" col-2 btn btn-dark mb-5 d-inline">+ Posts</a>
         </div>
     </section>
 
