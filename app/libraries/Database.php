@@ -65,6 +65,6 @@
 
         //Get's the row count
         public function rowCount() {
-            return $this->statement->rowCount();
+            return $this->statement->ROW_COUNT();
         }
     }

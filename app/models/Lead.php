@@ -32,21 +32,6 @@ Class Lead {
     }
 
 
-    /**
-     * Find lead by email. email is passed in by the Controller.
-     *
-     * @param ArrayObject $email
-     * @return Boolean
-     */
-    public function findLeadByEmail($data) {
-        $this->db->query('SELECT * FROM lead WHERE email = :email');
-        $this->db->bind(':email', $$data['emailLead']);
-        if($this->db->rowCount() > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     /**
      * Register new lead

@@ -18,7 +18,7 @@
 
     const dataBar = {
         labels: ['Administrateur', 'Category', 'Sous Category', 'Posts'],
-        datasets: [{label: 'Nombres ',backgroundColor: '#000066',borderColor: '#000066',data: [nbAdmin, nbCategory, nbSouCategory, nbPosts],}]
+        datasets: [{label: 'Total ',backgroundColor: '#000066',borderColor: '#000066',data: [nbAdmin, nbCategory, nbSouCategory, nbPosts],}]
     };
     const configBar = {type: 'bar', data: dataBar, options: {}};
     const myChartBar = new Chart(document.querySelector('#myChartBar'),configBar);

@@ -64,9 +64,10 @@ Class Administrateur {
      * @return Boolean
      */
     public function findAdminByEmail($data) {
-        $this->db->query('SELECT * FROM administrateur WHERE email = :email');
+        $this->db->query('SELECT COUNT(*) As nbemail FROM administrateur WHERE email = :email');
         $this->db->bind(':email', $$data['email']);
-        if($this->db->rowCount() > 0) {
+        $result = $this->db->single();
+        if($result->nbemail > 0) {
             return true;
         } else {
             return false;

@@ -121,7 +121,7 @@ class Administrateurs extends Controller {
             } else {
                 // Check if email exists.
                 if ($this->administrateursModel->findAdminByEmail($data['emailAdmin'])) {
-                    $data['emailAdminError'] = 'Cet e-mail est déjà pris.';
+                    $data['emailAdminError'] = 'Cet e-mail est déjà pris. Si vous avez oublier votre mot de passe, Veuillez modifier.';
                 }
             }
 
@@ -259,7 +259,7 @@ class Administrateurs extends Controller {
             } else {
                 // Check if email exists.
                 if ($this->administrateursModel->findAdminByEmail($data['emailAdmin'])) {
-                    $data['emailAdminError'] = 'Cet e-mail est déjà pris.';
+                    $data['emailAdminError'] = 'Cet e-mail est déjà pris.Si vous avez oublier votre mot de passe, Veuillez modifier.';
                 }
             }
 

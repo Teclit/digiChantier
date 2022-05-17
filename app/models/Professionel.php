@@ -56,6 +56,24 @@ Class Professionel {
         return $row;
     }
 
+
+    /**
+     * Find Professionel by email. email is passed in by the Controller.
+     *
+     * @param ArrayObject $email
+     * @return Boolean
+     */
+    public function findProByEmail($data) {
+        $this->db->query('SELECT COUNT(*) As nbemail FROM professionel WHERE emailcontact=:emailcontact');
+        $this->db->bind(':emailcontact', $data['emailPro']);
+        $result = $this->db->single();
+        if($result->nbemail > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Get alltravaux
      *
@@ -70,22 +88,6 @@ Class Professionel {
     }
 
 
-
-    /**
-     * Find Professionel by email. email is passed in by the Controller.
-     *
-     * @param ArrayObject $email
-     * @return Boolean
-     */
-    public function findProByEmail($data) {
-        $this->db->query('SELECT * FROM professionel WHERE emailcontact=:email');
-        $this->db->bind(':email', $data['emailPro']);
-        if($this->db->rowCount() > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     /**
      *REgister new  professionel

@@ -237,12 +237,18 @@ class professionels extends Controller {
             } elseif (empty($data['prenomPro']) || !preg_match($nameValidation, $data['prenomPro'])){ 
                 $data['prenomProError'] = 'Veuillez remplir saisir votre prenom';
             } elseif (empty($data['domainesEnt']) ){ 
-                $data['domainesEntError'] = 'Veuillez remplir saisir votre adresse';
-            } elseif (empty($data['fonctionPro'])|| !preg_match($nameValidation, $data['fonctionPro'])){ 
-                $data['fonctionProError'] = 'Veuillez remplir saisir votre adresse';
+                $data['domainesEntError'] = 'Veuillez choisir votre domanine d\'activité';
+            } elseif (empty($data['fonctionPro'])){ 
+                $data['fonctionProError'] = 'Veuillez remplir votre fonction dans l\'enterprise ';
             } elseif (empty($data['telPro']) || !preg_match($telephoneValidation, $data['telPro'])){ 
                 $data['telProError']     = 'Veuillez saisir votre telephone.<br>Example: 06(07) ** ** ** **';
-            } elseif (empty($data['adressePro'])){ 
+            }  if (empty($data['emailPro'])) { //Validate email 
+                $data['emailProError'] = 'Veuillez saisir un email addresse.';
+            } elseif (!filter_var($data['emailPro'], FILTER_VALIDATE_EMAIL)) {
+                $data['emailProError'] = 'Veuillez saisir un correct un correct format.';
+            } elseif ($this->professionelModel->findProByEmail($data)) {
+                    $data['emailProError'] = 'Cet e-mail est déjà pris. Si vous avez oublier votre mot de passe, Veuillez modifier.';
+            }elseif (empty($data['adressePro'])){ 
                 $data['adresseProError'] = 'Veuillez remplir saisir votre adresse';
             } elseif (empty($data['codepostalPro']) || !preg_match($codepostalValidation, $data['codepostalPro'])){ 
                 $data['codepostalProError'] = 'Veuillez saisir votre code postal.<br>Example: 75100';
@@ -260,17 +266,6 @@ class professionels extends Controller {
                 }
             }
 
-            //Validate email and telephone
-            if (empty($data['emailPro'])) {
-                $data['emailProError'] = 'Veuillez saisir un email addresse.';
-            } elseif (!filter_var($data['emailPro'], FILTER_VALIDATE_EMAIL)) {
-                $data['emailProError'] = 'Veuillez saisir un correct un correct format.';
-            } else {
-                // Check if email exists.
-                if ($this->professionelModel ->findProByEmail($data) ) {
-                    $data['emailProError'] = 'Cet e-mail est déjà pris.';
-                }
-            }
 
             // Make sure that errors are empty
             if (
@@ -433,7 +428,7 @@ class professionels extends Controller {
                 $data['prenomProError'] = 'Veuillez remplir saisir votre prenom';
             } elseif (empty($data['domainesEnt']) ){ 
                 $data['domainesEntError'] = 'Veuillez remplir saisir votre adresse';
-            } elseif (empty($data['fonctionPro'])|| !preg_match($nameValidation, $data['fonctionPro'])){ 
+            } elseif (empty($data['fonctionPro'])){ 
                 $data['fonctionProError'] = 'Veuillez remplir saisir votre fonction';
             } elseif (empty($data['telPro']) || !preg_match($telephoneValidation, $data['telPro'])){ 
                 $data['telProError']     = 'Veuillez saisir votre telephone.<br>Example: 06(07) ** ** ** **';
@@ -463,7 +458,7 @@ class professionels extends Controller {
             } else {
                 // Check if email exists.
                 if ($this->professionelModel ->findProByEmail($data) ) {
-                    $data['emailProError'] = 'Cet e-mail est déjà pris.';
+                    $data['emailProError'] = 'Cet e-mail est déjà pris. Si vous avez oublier votre mot de passe, Veuillez modifier.';
                 }
             }
 
