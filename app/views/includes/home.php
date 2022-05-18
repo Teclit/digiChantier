@@ -1,9 +1,11 @@
 
 
 <section class="container-fluid my-5 containerAccueil" >
-    <div class="container justify-centent-center text-center  p-5">
-        <h3 class="text-light"> <span class="bg-dark p-3 mb-5"> UN PROFESSIONNEL DE CONFIANCE POUR VOS TRAVAUX </span></h3>
-        <p class="text-light">  <span class="bg-dark p-3 my-5">Depuis des années, tous nos professionnels sont évalués par leurs clients</span></p>
+    <div class="container justify-centent-center text-center py-5">
+        <div class="d-flex flex-column text-light bg-dark p-3">
+            <h3>  UN PROFESSIONNEL DE CONFIANCE POUR VOS TRAVAUX </h3>
+            <p > Depuis des années, tous nos professionnels sont évalués par leurs clients</p>
+        </div>
         <form class="form-inline my-5 m" action="<?php echo URLROOT; ?>/leads/addlead" method="GET" enctype="multipart/form-data" >
             <div class="form-group d-flex">
                 <select class="form-select  me-4" id="sel1" name="travaux">

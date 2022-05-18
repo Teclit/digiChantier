@@ -9,7 +9,6 @@ class Personnels extends Controller {
         $this->prixRgn   = packRegion;
         $this->prixPys   = packPays;
 
-        $this->personnelModel     = $this->model('Personnel');
         $this->professionelModel  = $this->model('Professionel');
         $this->commandeModel      = $this->model('Commande');
         $this->leadModel          = $this->model('Lead');
@@ -50,22 +49,6 @@ class Personnels extends Controller {
         $this->view('personnels/indexPerso', $data);
     }
 
-    /**
-     * projetAccepter function
-     *
-     * @param int $idPro
-     * @return void
-     */
-    public function projetAccepter(int $idPro) { 
-        $data = [
-            'professionel'  => $this->professionelModel->findProfessionelByID($idPro),
-            'commandes'     => $this->commandeModel->findAllCommandeByPRO($idPro),
-            'commandeLines' => $this->commandeModel->findAllCommandLineByPRO($idPro),
-            'leads'         => $this->commandeModel->findAllLeadsDispo($idPro),
-            'prixunite'     => $this->commandeModel->GetUnitePrixLead($this->prixUnite),
-        ];
-        $this->view('personnels/projetAccepter', $data);
-    }
 
 
 
@@ -76,12 +59,18 @@ class Personnels extends Controller {
      * @return void
      */
     public function projetDisponible(int $idPro) { 
+        $key =  'panier-'.SessionHelper::getSession("userId");
+        $panierExistant = json_decode(SessionHelper::getSession($key), true);
+        $panierExistant = array_unique($panierExistant); //Get unigue id
+    
+
         $data = [
             'professionel'  => $this->professionelModel->findProfessionelByID($idPro),
             'commandes'     => $this->commandeModel->findAllCommandeByPRO($idPro),
             'commandeLines' => $this->commandeModel->findAllCommandLineByPRO($idPro),
             'leads'         => $this->commandeModel->findAllLeadsDispo($idPro),
             'prixunite'     => $this->commandeModel->GetUnitePrixLead($this->prixUnite),
+            'leadsEnpanier' => $panierExistant,
         ];
         $this->view('personnels/projetDisponible', $data);
     }

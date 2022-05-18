@@ -5,7 +5,6 @@ class Pages extends Controller {
         $this->categoryModel      = $this->model('Category');
         $this->souscategoryModel  = $this->model('Souscategory');
         $this->postModel          = $this->model('Post');
-        $this->personnelModel     = $this->model('Personnel');
         $this->professionelModel  = $this->model('Professionel');
         $this->commandeModel      = $this->model('Commande');
         $this->leadModel          = $this->model('Lead');

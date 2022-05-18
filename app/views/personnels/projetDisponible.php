@@ -32,8 +32,7 @@
                     <td><?php echo $data['prixunite']->prix ."€";?></td>
                     <td><a href="<?php echo URLROOT."/commandes/addPanier/".$lead->idlead ?>" class="btn btn-dark btn-sm">Ajouter</a></td>
                 </tr>
-            <?php endforeach; ?>
-                
+            <?php  endforeach; ?>  
             </tbody>
         </table>
     </div>

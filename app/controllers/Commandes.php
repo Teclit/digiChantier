@@ -9,7 +9,6 @@ class Commandes extends Controller {
         $this->prixPys   = packPays;
 
         $this->prixModel          = $this->model('Prix');
-        $this->personnelModel     = $this->model('Personnel');
         $this->professionelModel  = $this->model('Professionel');
         $this->commandeModel      = $this->model('Commande');
         $this->leadModel          = $this->model('Lead');
@@ -40,8 +39,6 @@ class Commandes extends Controller {
             SessionHelper::redirectTo('/personnels/projetDisponible/'.$idLead);  
             
         }
-        
-        //$this->view('personnels/projetDisponible/'.$key);
     }
 
     
@@ -98,6 +95,34 @@ class Commandes extends Controller {
         ];
         
         $this->view('commandes/panier', $data);
+    }
+
+
+    /**
+     * Ajouter lead au panier
+     *
+     * @param Int $idLead
+     * @return void
+     */
+    public function payPanier(){
+        $key =  'panier-'.SessionHelper::getSession("userId");
+        $monPanier = [];
+
+        if(null != SessionHelper::getSession($key)){
+            $panierExistant = json_decode(SessionHelper::getSession($key), true);
+            $panierExistant = array_unique($panierExistant); //Get unigue id
+            foreach ($panierExistant as $idlead) {
+                array_push($monPanier, $this->leadModel->findLeadById($idlead));
+            }
+        }
+
+        $data = [
+            'prixunite'     => $this->commandeModel->GetUnitePrixLead($this->prixUnite),
+            'panier'        => $monPanier,
+        ];
+        
+        
+        $this->view('commandes/payPanier', $data);
     }
 
 
