@@ -10,9 +10,7 @@
     </ul>
     <ul class="navbar-nav  text-center">
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-light fw-bold" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Mon Profile
-            </a>
+            <a class="nav-link dropdown-toggle text-light fw-bold" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Mon Profile </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
                 <li><a class="dropdown-item" href="<?php echo URLROOT."/users/profile" ; ?>"><?php echo SessionHelper::getSession("userNom"); ?></a></li>
                 <li><a class="dropdown-item" href="<?php echo URLROOT."/personnels/indexPerso/".SessionHelper::getSession("userId") ; ?>">Espace Personnel</a></li>

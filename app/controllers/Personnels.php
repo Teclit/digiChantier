@@ -59,18 +59,14 @@ class Personnels extends Controller {
      * @return void
      */
     public function projetDisponible(int $idPro) { 
-        $key =  'panier-'.SessionHelper::getSession("userId");
-        $panierExistant = json_decode(SessionHelper::getSession($key), true);
-        $panierExistant = array_unique($panierExistant); //Get unigue id
-    
-
+        
         $data = [
             'professionel'  => $this->professionelModel->findProfessionelByID($idPro),
             'commandes'     => $this->commandeModel->findAllCommandeByPRO($idPro),
             'commandeLines' => $this->commandeModel->findAllCommandLineByPRO($idPro),
             'leads'         => $this->commandeModel->findAllLeadsDispo($idPro),
             'prixunite'     => $this->commandeModel->GetUnitePrixLead($this->prixUnite),
-            'leadsEnpanier' => $panierExistant,
+
         ];
         $this->view('personnels/projetDisponible', $data);
     }

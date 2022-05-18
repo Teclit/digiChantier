@@ -6,9 +6,8 @@
 
 
 
-<section class="container my-4">
-
-    <h3 class="my-4"> A propos de nous</h3>
+<section class="container  p-5">
+    <h3 class="my-3"> A propos de nous</h3>
     <p class="text-justify">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nunc sed blandit libero volutpat sed cras ornare arcu. Maecenas volutpat blandit aliquam etiam erat velit. Sit amet cursus sit amet dictum sit amet justo donec. Metus vulputate eu scelerisque felis imperdiet proin. Viverra mauris in aliquam sem fringilla. Sit amet nisl suscipit adipiscing bibendum est ultricies integer. Ut pharetra sit amet aliquam. Bibendum neque egestas congue quisque egestas. Eget gravida cum sociis natoque penatibus et. Mattis nunc sed blandit libero volutpat sed cras. Lacinia quis vel eros donec. Semper feugiat nibh sed pulvinar proin gravida hendrerit lectus a. Dictumst vestibulum rhoncus est pellentesque. Vulputate enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Netus et malesuada fames ac. Et tortor at risus viverra adipiscing at.
         In nisl nisi scelerisque eu ultrices vitae. Elit duis tristique sollicitudin nibh sit amet commodo. Quis commodo odio aenean sed adipiscing. Ultrices dui sapien eget mi proin. Donec ac odio tempor orci dapibus ultrices. Condimentum lacinia quis vel eros. Proin libero nunc consequat interdum varius sit. Nunc id cursus metus aliquam eleifend mi in nulla. Curabitur vitae nunc sed velit dignissim sodales. Varius quam quisque id diam vel. Neque ornare aenean euismod elementum nisi quis eleifend quam adipiscing. Diam sit amet nisl suscipit adipiscing bibendum est. Amet nulla facilisi morbi tempus iaculis urna.

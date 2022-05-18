@@ -5,10 +5,12 @@
 
 
 <section class="container-fluid my-5 containerAccueil" >
-    <div class="container justify-centent-center text-center  p-5">
-        <h3 class="text-light"> <span class="bg-dark p-3 mb-5"> Trouvez de nouveaux chantiers en toute simplicité ! </span></h3>
-        <form class="form-inline my-5 m" action="<?php echo URLROOT; ?>/professionels/getJob" method="GET" enctype="multipart/form-data" >
-            <div class="form-group d-flex">
+    <div class="container justify-centent-center text-center py-5">
+        <div class="d-flex flex-column text-light bg-dark pt-3">
+            <h3>Trouvez de nouveaux chantiers en toute simplicité !</h3>
+        </div>
+        <form class="row form-inline g-3 my-5 " action="<?php echo URLROOT; ?>/professionels/getJob" method="GET" enctype="multipart/form-data" >
+            <div class="col-md-9 form-group ">
                 <select class="form-select  me-4" id="sel1" name="travaux">
                     <option>Quels travaux souhaitez-vous réaliser ?</option>
                     <?php foreach($data['travaux'] as $travail):?>
@@ -19,6 +21,8 @@
                     </optgroup>
                     <?php endforeach; ?>
                 </select>
+            </div>
+            <div class="col-md-2" >
                 <button type="submit" class="btn btn-dark px-5">Recherche</button>
             </div>
         </form>

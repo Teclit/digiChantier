@@ -14,11 +14,26 @@ class Pages extends Controller {
     }
 
     public function index() {
+
+        $monPanier = [];
+        if(SessionHelper::confirmLoginPro()){
+            $key =  'panier-'.SessionHelper::getSession("userId");
+            if(null != SessionHelper::getSession($key)){
+                $panierExistant = json_decode(SessionHelper::getSession($key), true);
+                $panierExistant = array_unique($panierExistant); //Get unigue id
+                foreach ($panierExistant as $idlead) {
+                    array_push($monPanier, $this->leadModel->findLeadById($idlead));
+                }
+            }
+        }
+
         $data = [
                 'posts'    => $this->postModel->findAllPosts(),
-                'travaux'  =>  $this->categoryModel->findAllCategories(),
-                'stravaux' => $this->souscategoryModel->findAllSousCategories()
-            ];
+                'travaux'  => $this->categoryModel->findAllCategories(),
+                'stravaux' => $this->souscategoryModel->findAllSousCategories(),
+                'panier'   => $monPanier,
+        ];
+
         $this->view('index', $data);
     }
 

@@ -1,3 +1,4 @@
+
 <?php
     SessionHelper::confirmLogin();
     SessionHelper::confirmLoginPro();
@@ -7,11 +8,10 @@
 ?>
 
     <section class="container text-center my-3 p-1  ">
-            <div class="mb-3">
+            <div class="p-4">
                 <div class="card border-dark mb-3" >
-                    <div class="card-header bg-transparent border-dark">Potentiel Prospect</div>
+                    <h5 class="card-header p-3 fw-bold"> <?php echo $data['typeTravaux']->ctgnom;?> </h5>
                     <div class="card-body text-dark">
-                        <h5 class="card-title"> <?php echo $data['typeTravaux']->ctgnom;?> </h5>
                         <h6 class="card-title"> <?php echo $data['natureTravaux']->sctgnom;?> </h6>
                         <p class="card-text "><?php echo $data['lead']->adresse ?> </p>
                         <p class="card-text fw-bold"> <?php echo $data['lead']->codepostal ?></p> 
@@ -19,11 +19,12 @@
                         <div class="bg-transparent border-dark">
                             <p class="card-text mb-3"><?php echo $data['lead']->projet ?></p>
                         </div>
-                    </div>
-                    <div class="card-footer bg-transparent border-dark">
-                        <p><a  id="ajouterpanier" href="<?php echo URLROOT."/commandes/addPanier/".$data['lead']->idlead ;?>" class="btn btn-dark px-5">Ajouter au Panier</a></tp>
+                        <div class="card-footer bg-transparent border-dark">
+                            <a  id="ajouterpanier" href="<?php echo URLROOT."/commandes/addPanier/".$data['lead']->idlead ;?>" class="btn btn-dark  mt-3 px-5">Ajouter au Panier</a>
+                        </div> 
                     </div>
                 </div>
+                    <a class="btn btn-dark px-5 fw-bold" href="<?php echo URLROOT."/personnels/projetDisponible/".SessionHelper::getSession("userId") ; ?>">Retour </a>
             </div>
     </section>
 <?php
