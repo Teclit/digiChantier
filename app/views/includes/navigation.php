@@ -11,7 +11,7 @@
                         echo require 'navPro.php';
                     } elseif(SessionHelper::getSession("userRoleAdmin")) { 
                         echo require 'navAdmin.php';
-                    } else{  
+                    } else {  
                         echo require 'navDefaut.php';
                     } 
                 ?>
