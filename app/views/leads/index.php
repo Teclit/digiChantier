@@ -7,8 +7,7 @@
 ?>
 
     
-<section class="container ">
-
+<section class="container">
     <a class="btn bg-success text-light mt-5" href="<?php echo URLROOT; ?>/leads/addlead">Add Lead</a>
     <h5 class="text-center my-4">List des Chantiers</h5>
     <?php 
@@ -16,7 +15,7 @@
         echo SessionHelper::getSession("ErrorMessage");
     ?>
     <div class="mb-2  d-flex justify-content-between align-items-center">
-        <form class="d-flex" action="ListAdmin.jsp" method="post">
+        <form class="d-flex" action="<?php echo URLROOT; ?>/leads/search" method="GET">
             <input class="form-control me-2" type="text" name="search" placeholder="Rechercher... " aria-label="Search">
             <button class="btn btn-dark" type="submit">Rechercher</button>
         </form>
@@ -41,7 +40,16 @@
             </thead>
             <tbody>
 
-            <?php foreach($data['leads'] as $index=>$lead): ?>
+            <?php 
+                $listLeads = '';
+                if(isset($data['searchLead'])){
+                    $listLeads = $data['searchLead'];
+                }else{
+                    $listLeads = $data['leads'];
+                }
+
+                foreach($listLeads as $index=>$lead):
+            ?>
                 <tr>
                     <td scope="row"><?php echo $index+1;?></td>
                     <td ><?php echo $lead->nom;?></td>

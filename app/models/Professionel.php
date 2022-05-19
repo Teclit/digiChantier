@@ -42,6 +42,24 @@ Class Professionel {
         return $results;
     }
 
+    /**
+     * Find all leads
+     * @return ArrayObject
+     * * nom, adresse, ville, codepostal, pays , nomcontact, prenomcontact, telcontact, emailcontact, password, fonctioncontact
+     */
+    public function findSearchPro($search) {
+        $search=strtolower($search);
+        $this->db->query("SELECT * FROM professionel  WHERE LOWER(nom) LIKE :search OR LOWER(nomcontact) LIKE :search  
+        OR LOWER(prenomcontact) LIKE :search OR LOWER(emailcontact) LIKE :search  OR LOWER(fonctioncontact) LIKE :search 
+        OR LOWER(adresse) LIKE :search OR LOWER(ville) LIKE :search OR codepostal LIKE :search OR telcontact LIKE :search
+        ORDER BY nom, nomcontact, prenomcontact, emailcontact, adresse, ville, codepostal, telcontact  ASC ");
+        $this->db->bind(':search', '%'.$search.'%');
+        $results = $this->db->resultSet();
+        
+        return $results;
+            
+    }
+
 
     /**
      * Get Professionel by Id

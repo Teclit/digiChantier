@@ -17,6 +17,42 @@ class professionels extends Controller {
 
 
     /**
+     * Searche form professionel 
+     *
+     * @return void
+     */
+    public function search() {
+        $professionels = $this->professionelModel->findAllProfessionels();
+        $data = [
+            'leads' => $professionels
+        ];
+
+        // var_dump(!empty($_GET['search']));
+        if($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['search']) ){
+            $search = trim($_GET['search']);
+            $data = [
+                'searchPro' => $this->professionelModel->findSearchPro($search),
+            ];
+            
+            //Register lead from model function
+            if (count($data['searchPro']) > 0) {
+                // Redirect to index page
+                $msg = COUNT($data['searchPro'])." - résultat trouvé pour la recherche  -> '".$search."'";
+                SessionHelper::setSession("SuccessMessage", $msg); 
+            } else {
+                //Redirect to the index
+                $msg= " Aucun résultat n'est trouvé pour la recherche  -> '".$search."'";
+                SessionHelper::setSession("ErrorMessage", $msg);
+            }
+            $this->view('professionels/indexPro', $data);
+        }else{
+            SessionHelper::redirectTo('/professionels/indexPro'); 
+        }
+
+    }
+
+
+    /**
      * Home page professionelle
      *
      * @return void

@@ -5,7 +5,7 @@ Class Lead {
     public function __construct() {
         $this->db = new Database;
     }
-
+    
 
     /**
      * Find all leads
@@ -16,6 +16,23 @@ Class Lead {
         $results = $this->db->resultSet();
         return $results;
     }
+
+    /**
+     * Find all leads
+     * @return ArrayObject
+     */
+    public function findSearchLead($search) {
+        $search=strtolower($search);
+        $this->db->query("SELECT * FROM lead  WHERE LOWER(nom) LIKE :search OR LOWER(prenom) LIKE :search OR LOWER(email) LIKE :search 
+        OR LOWER(adresse) LIKE :search OR LOWER(ville) LIKE :search OR codepostal LIKE :search OR tel  LIKE :search
+        ORDER BY nom, prenom, email, adresse, ville, codepostal, tel  ASC ");
+        $this->db->bind(':search', '%'.$search.'%');
+        $results = $this->db->resultSet();
+        
+        return $results;
+            
+    }
+
 
 
     /**

@@ -9,7 +9,12 @@ class Leads extends Controller {
         $this->categoryModel = $this->model('Category');
         $this->souscategoryModel = $this->model('Souscategory');
     }
-
+    
+    /**
+     * index page leads 
+     *
+     * @return void
+     */
     public function index() {
         $leads = $this->leadModel->findAllLeads();
         $data = [
@@ -18,6 +23,40 @@ class Leads extends Controller {
 
         $this->view('leads/index', $data);
     }
+
+    /**
+     * Searche  form leads 
+     *
+     * @return void
+     */
+    public function search() {
+        $leads = $this->leadModel->findAllLeads();
+        $data = [
+            'leads' => $leads
+        ];
+
+        if($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['search']) ){
+            $search = trim($_GET['search']);
+            $data = [
+                'searchLead' => $this->leadModel->findSearchLead($search),
+            ];
+            
+            //Register lead from model function
+            if (count($data['searchLead']) > 0) {
+                // Redirect to index page
+                $msg = COUNT($data['searchLead'])." - résultat trouvé pour la recherche  -> '".$search."'";
+                SessionHelper::setSession("SuccessMessage", $msg); 
+            } else {
+                //Redirect to the index
+                $msg= " Aucun résultat n'est trouvé pour la recherche  -> '".$search."'";
+                SessionHelper::setSession("ErrorMessage", $msg);
+            }
+            $this->view('leads/index', $data);
+        }else{
+            SessionHelper::redirectTo('/leads/index');
+        }
+    }
+
 
     
     /**
