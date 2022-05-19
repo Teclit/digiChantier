@@ -12,7 +12,7 @@
         <a class="btn bg-success text-light" href="<?php echo URLROOT; ?>/leads/addlead">Add Lead</a>
     </div>
 
-    <h5 class="text-center mb-3">List des Chantiers</h5>
+    <h5 class="text-center m-3">List des Chantiers</h5>
         <?php 
             echo SessionHelper::getSession("SuccessMessage");
             echo SessionHelper::getSession("ErrorMessage");
@@ -22,12 +22,12 @@
             <tr>
                 <th class="fw-bold">N°.</th>
                 <th class="fw-bold">Nom</th>
-                <th class="fw-bold">Prenom</th>
-                <th class="fw-bold">Telephone</th>
-                <th class="fw-bold">Email</th>
-                <th class="fw-bold">Ville</th>
-                <th class="fw-bold">Code Postale</th>
-                <th class="fw-bold">Date inscrption</th>
+                <th class="fw-bold d-none d-lg-table-cell">Prenom</th>
+                <th class="fw-bold d-none d-lg-table-cell">Telephone</th>
+                <th class="fw-bold d-none d-lg-table-cell">Email</th>
+                <th class="fw-bold d-none d-lg-table-cell">Ville</th>
+                <th class="fw-bold d-none d-lg-table-cell">Code Postale</th>
+                <th class="fw-bold d-none d-lg-table-cell">Date inscrption</th>
                 <th class="fw-bold">Details</th>
                 <th class="fw-bold">Modifier</th>
                 <th class="fw-bold">Supprimer</th>
@@ -38,22 +38,16 @@
         <?php foreach($data['leads'] as $index=>$lead): ?>
             <tr>
                 <td scope="row"><?php echo $index+1;?></td>
-                <td><?php echo $lead->nom;?></td>
-                <td><?php echo $lead->prenom;?></td>
-                <td ><?php echo$lead->tel;?></td>
-                <td><?php echo $lead->email;?></td>
-                <td><?php echo $lead->ville;?></td>
-                <td><?php echo $lead->codepostal;?></td>
-                <td><?php echo $lead->date_inscrption;?></td>
-                <td>
-                    <a href="<?php echo URLROOT."/leads/linfo/".$lead->idlead ?>" class="btn btn-outline-info btn-sm">Infos</a>
-                </td>
-                <td>
-                    <a href="<?php echo URLROOT."/leads/update/".$lead->idlead ?>" class="btn btn-outline-success btn-sm" >Modifier</a>
-                </td>
-                <td>
-                    <a href="<?php echo URLROOT."/leads/delete/".$lead->idlead ?>" class="btn btn btn-outline-danger btn-sm">supprimer</a>
-                </td>
+                <td ><?php echo $lead->nom;?></td>
+                <td class="d-none d-lg-table-cell"><?php echo $lead->prenom;?></td>
+                <td class="d-none d-lg-table-cell"><?php echo$lead->tel;?></td>
+                <td class="d-none d-lg-table-cell"><?php echo $lead->email;?></td>
+                <td class="d-none d-lg-table-cell"><?php echo $lead->ville;?></td>
+                <td class="d-none d-lg-table-cell"><?php echo $lead->codepostal;?></td>
+                <td class="d-none d-lg-table-cell"><?php echo $lead->date_inscrption;?></td>
+                <td><small><a href="<?php echo URLROOT."/leads/linfo/".$lead->idlead ?>" class="btn btn-info btn-sm">Infos</a></small></td>
+                <td><small><a href="<?php echo URLROOT."/leads/update/".$lead->idlead ?>" class="btn btn-success btn-sm" >Modifier</a></small></td>
+                <td><small><a href="<?php echo URLROOT."/leads/delete/".$lead->idlead ?>" class="btn btn btn-danger btn-sm">supprimer</a></small></td>
             </tr>
         <?php endforeach; ?>
             

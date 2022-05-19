@@ -1,6 +1,15 @@
     <ul class="mx-auto navbar-nav  text-center ">                       
         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/pages/dashboard/" target="_self">Dashboard</a></li>
-        <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/posts/indexPost" target="_self">Blog</a></li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Blog
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="<?php echo URLROOT; ?>/pages/listBlog"  target="_self">Blog List</a></li>
+                <li><a class="dropdown-item" href="<?php echo URLROOT; ?>/posts/indexPost" target="_self">Blog Grid</a></li>
+            </ul>
+        </li>
+        
         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/prixs/indexPrix" target="_self">Modalité Prix</a></li>
         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/administrateurs/indexAdmin" target="_self">Administrateur</a></li>
         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/professionels/indexPro">Professionels</a></li>

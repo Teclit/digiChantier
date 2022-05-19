@@ -19,19 +19,19 @@
         echo SessionHelper::getSession("ErrorMessage");
     ?>
 
-<table class="table table-hover">
+    <table class="table table-hover px-5">
         <thead>
             <tr>
-            <th scope="col">N°.</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Telephone</th>
-            <th scope="col">Email</th>
-            <th scope="col">Ville</th>
-            <th scope="col">Code Postale</th>
-            <th scope="col">Date inscrption</th>
-            <th scope="col">Details</th>
-            <th scope="col">Modifier</th>
-            <th scope="col">Supprimer</th>
+            <th class="fw-bold ">N°.</th>
+            <th class="fw-bold ">Nom</th>
+            <th class="fw-bold d-none d-lg-table-cell">Telephone</th>
+            <th class="fw-bold d-none d-lg-table-cell">Email</th>
+            <th class="fw-bold d-none d-lg-table-cell">Ville</th>
+            <th class="fw-bold d-none d-lg-table-cell">Code Postale</th>
+            <th class="fw-bold d-none d-lg-table-cell">Date inscrption</th>
+            <th class="fw-bold ">Details</th>
+            <th class="fw-bold ">Modifier</th>
+            <th class="fw-bold ">Supprimer</th>
             </tr>
         </thead>
         <tbody>
@@ -40,11 +40,11 @@
             <tr>
                 <td scope="row"><?php echo $index+1;?></td>
                 <td><?php echo $professionel->nom;?></td>
-                <td><?php echo $professionel->telcontact;?></td>
-                <td><?php echo $professionel->emailcontact;?></td>
-                <td><?php echo $professionel->ville;?></td>
-                <td><?php echo $professionel->codepostal;?></td>
-                <td><?php echo $professionel->dateinscription;?></td>
+                <td class=" d-none d-lg-table-cell"><?php echo $professionel->telcontact;?></td>
+                <td class=" d-none d-lg-table-cell"><?php echo $professionel->emailcontact;?></td>
+                <td class=" d-none d-lg-table-cell"><?php echo $professionel->ville;?></td>
+                <td class=" d-none d-lg-table-cell"><?php echo $professionel->codepostal;?></td>
+                <td class=" d-none d-lg-table-cell"><?php echo $professionel->dateinscription;?></td>
                 <td><a href="<?php echo URLROOT ."/professionels/detailPro/". $professionel->idpro;?>" class="btn btn-outline-info btn-sm">Infos</a></td>
                 <td><a href="<?php echo URLROOT ."/professionels/updatePro/". $professionel->idpro;?>" class="btn btn-outline-success btn-sm" >Modifier</a></td>
                 <td><a href="<?php echo URLROOT ."/professionels/deletePro/". $professionel->idpro;?>" class="btn btn btn-outline-danger btn-sm">Supprimer</a></td>

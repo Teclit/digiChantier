@@ -13,36 +13,53 @@ class Pages extends Controller {
         
     }
 
+    /**
+     * Page d'acceuille
+     *
+     * @return void
+     */
     public function index() {
-
-        $monPanier = [];
-        if(SessionHelper::confirmLoginPro()){
-            $key =  'panier-'.SessionHelper::getSession("userId");
-            if(null != SessionHelper::getSession($key)){
-                $panierExistant = json_decode(SessionHelper::getSession($key), true);
-                $panierExistant = array_unique($panierExistant); //Get unigue id
-                foreach ($panierExistant as $idlead) {
-                    array_push($monPanier, $this->leadModel->findLeadById($idlead));
-                }
-            }
-        }
-
         $data = [
                 'posts'    => $this->postModel->findAllPosts(),
                 'travaux'  => $this->categoryModel->findAllCategories(),
                 'stravaux' => $this->souscategoryModel->findAllSousCategories(),
-                'panier'   => $monPanier,
         ];
 
         $this->view('index', $data);
     }
 
-    public function blog() {
-        $data = ['posts'    => $this->postModel->findAllPosts(), ];
-        $this->view('pages/blog', $data);
+
+    /**
+     * Get all Posts
+     *
+     * @return void
+     */
+    public function listBlog() {
+        $data = [
+            'posts' => $this->postModel->findAllPosts(),
+        ];
+        $this->view('pages/listBlog', $data);
     }
 
-    public function fullpost($idpost) {
+    /**
+     * Get all Posts
+     *
+     * @return void
+     */
+    public function gridBlog() {
+        $data = [
+            'posts' => $this->postModel->findAllPosts(),
+        ];
+        $this->view('pages/gridBlog', $data);
+    }
+
+    /**
+     * Page Full post 
+     *
+     * @param int $idpost
+     * @return void
+     */
+    public function fullpost(int $idpost) {
         $data = [
                 'post'    => $this->postModel->findPostById($idpost)
             ];
@@ -51,6 +68,11 @@ class Pages extends Controller {
     }
 
 
+    /**
+     * Page about
+     *
+     * @return void
+     */
     public function about() {
         $data = [
             'pageName ' => 'about page'
@@ -59,6 +81,11 @@ class Pages extends Controller {
     }
 
 
+    /**
+     * Page dashbord
+     *
+     * @return void
+     */
     public function dashboard() {
         $data = [
             'totalLeads'         => $this->leadModel->findAllLeads(),

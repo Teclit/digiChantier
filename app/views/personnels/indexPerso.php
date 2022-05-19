@@ -7,6 +7,10 @@
 ?>
 
 <section class="container mt-5 ">
+    <?php 
+        echo SessionHelper::getSession("SuccessMessage");
+        echo SessionHelper::getSession("ErrorMessage");
+    ?>
     <h5 class="text-center mb-4">Espace Personel</h5>
     <div class="row justify-content-center gy-5"> 
         <div class="col-lg-2 ">
