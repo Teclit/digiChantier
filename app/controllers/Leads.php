@@ -91,8 +91,9 @@ class Leads extends Controller {
             // Process form & Sanitize Get data
             $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
             $splitGetUrl = explode('/', trim($_GET['travaux']));
-
             $data = [
+                'travaux'            =>  $this->categoryModel->findAllCategories(),
+                'stravaux'           =>  $this->souscategoryModel->findAllSousCategories() ,
                 'typeTravaux'        => $this->categoryModel->findCategoryByID($splitGetUrl[0]),
                 'natureTravaux'      => $this->souscategoryModel->findSousCategoryByID($splitGetUrl[1]),
                 'type-natureTravaux' => $this->souscategoryModel->findSousCategoryByGroup($splitGetUrl[0]),
@@ -117,6 +118,10 @@ class Leads extends Controller {
                 'typeTravauxLeadError' => '',
                 'natureProjetLeadError'=> '',
                 'projetLeadError'      => '',
+    
+                //FormAction
+                'actionForm'                => '/leads/create',
+                'submitBtn'                 => 'créer'
             ];
             
             $this->view('leads/create', $data);
@@ -163,6 +168,10 @@ class Leads extends Controller {
             'typeTravauxLeadError' => '',
             'natureProjetLeadError'=> '',
             'projetLeadError'      => '',
+
+            //FormAction
+            'actionForm'                => '/leads/create',
+            'submitBtn'                 => 'créer'
         ];
         
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -192,7 +201,11 @@ class Leads extends Controller {
                 'villeLeadError'       => '',
                 'typeTravauxLeadError' => '',
                 'natureProjetLeadError'=> '',
-                'projetLeadError'      => ''
+                'projetLeadError'      => '',
+
+                //FormAction
+                'actionForm'                => '/leads/create',
+                'submitBtn'                 => 'créer'
             ];
 
             $nameValidation        = "/^[a-zA-Z0-9]*$/";
@@ -275,16 +288,14 @@ class Leads extends Controller {
             'type-natureTravaux'   => $this->souscategoryModel->findSousCategoryByGroup($lead->idctg),
             'travaux'              => $this->categoryModel->findAllCategories(),
             'stravaux'             => $this->souscategoryModel->findAllSousCategories(),
-            'nomLead'              => '',
-            'prenomLead'           => '',
-            'telLead'              => '', 
-            'emailLead'            => '', 
-            'adresseLead'          => '',
-            'codepostalLead'       => '',
-            'villeLead'            => '',
-            'typeTravauxLead'      => '',
-            'natureProjetLead'     => '',
-            'projetLead'           => '',
+            'nomLead'              => $lead->nom,
+            'prenomLead'           => $lead->prenom,
+            'telLead'              => $lead->tel, 
+            'emailLead'            => $lead->email, 
+            'adresseLead'          => $lead->adresse,
+            'codepostalLead'       => $lead->codepostal,
+            'villeLead'            => $lead->ville,
+            'projetLead'           => $lead->projet,
             // MESSAGE Error
             'nomLeadError'         => '',
             'prenomLeadError'      => '',
@@ -296,7 +307,12 @@ class Leads extends Controller {
             'typeTravauxLeadError' => '',
             'natureProjetLeadError'=> '',
             'projetLeadError'      => '',
+
+            //FormAction
+            'actionForm'           => '/leads/update/'.$lead->idlead,
+            'submitBtn'            => 'Modifier'
         ];
+
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Process form & Sanitize POST data
@@ -329,7 +345,11 @@ class Leads extends Controller {
                 'villeLeadError'       => '',
                 'typeTravauxLeadError' => '',
                 'natureProjetLeadError'=> '',
-                'projetLeadError'      => ''
+                'projetLeadError'      => '',
+
+                //FormAction
+                'actionForm'           => '/leads/update/'.$lead->idlead,
+                'submitBtn'            => 'Modifier'
             ];
 
 
@@ -413,16 +433,14 @@ class Leads extends Controller {
             'type-natureTravaux'   => $this->souscategoryModel->findSousCategoryByGroup($lead->idctg),
             'travaux'              => $this->categoryModel->findAllCategories(),
             'stravaux'             => $this->souscategoryModel->findAllSousCategories(),
-            'nomLead'              => '',
-            'prenomLead'           => '',
-            'telLead'              => '', 
-            'emailLead'            => '', 
-            'adresseLead'          => '',
-            'codepostalLead'       => '',
-            'villeLead'            => '',
-            'typeTravauxLead'      => '',
-            'natureProjetLead'     => '',
-            'projetLead'           => '',
+            'nomLead'              => $lead->nom,
+            'prenomLead'           => $lead->prenom,
+            'telLead'              => $lead->tel, 
+            'emailLead'            => $lead->email, 
+            'adresseLead'          => $lead->adresse,
+            'codepostalLead'       => $lead->codepostal,
+            'villeLead'            => $lead->ville,
+            'projetLead'           => $lead->projet,
             // MESSAGE Error
             'nomLeadError'         => '',
             'prenomLeadError'      => '',
@@ -434,6 +452,10 @@ class Leads extends Controller {
             'typeTravauxLeadError' => '',
             'natureProjetLeadError'=> '',
             'projetLeadError'      => '',
+
+            //FormAction
+            'actionForm'           => '/leads/delete/'.$lead->idlead,
+            'submitBtn'            => 'Supprimer'
         ];
 
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
