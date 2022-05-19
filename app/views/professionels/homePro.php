@@ -36,7 +36,7 @@
         echo SessionHelper::getSession("ErrorMessage");
     ?>
     
-    <div class="row row-cols-1 row-cols-md-3 g-3 my-5">
+    <div class="row row-cols-1 row-cols-md-3 g-3 mt-5">
         <?php if(!empty($data['jobs'])){ ?>
             <?php foreach($data['jobs'] as $job):?>
                 <div class="col-3 ">
@@ -60,6 +60,34 @@
             
     </div>
 </section>
+
+<section class="container">
+    <h4 class="text-center fw-bold ">Notre dernier blog</h4>
+    <hr>
+    <div class="row row-cols-1 row-cols-md-3 g-5 px-4 mt-4">
+            <?php 
+                $nbPost = 3;
+                foreach($data['posts'] as $key=>$post): if($key<$nbPost){?>
+            <div class="col-md-6 col-lg-4">
+                <div class="card border-0 shadow rounded-3 ">
+                    <img src="<?php echo URLROOT;?>/public/uploads/<?php echo $post->image;?>" class="card-img-top" alt="<?php echo substr($post->title, 0, 20); ?>">
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo substr($post->title, 0, 50)." .."; ?></h5>
+                        <small class="text-secondary"><?php echo $post->created_at; ?></small>
+                        <p class="card-text"><?php echo  substr($post->body, 0, 200)." ..."; ?></p>
+                        <a href="<?php echo URLROOT . "/pages/fullpost/".$post->idpost ?>" class="btn btn-dark">Lire la suite</a>
+                    </div>
+                    
+                </div>
+            </div>
+        <?php } endforeach; ?>
+    </div>
+
+    <div class="row justify-content-center px-5 mt-5">
+        <a href="<?php echo URLROOT ."/pages/blog" ?>" class=" col-md-2 btn btn-dark mb-5 d-inline">+ Posts</a>
+    </div>
+</section>
+
 
 
 

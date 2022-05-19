@@ -6,8 +6,8 @@
     require APPROOT . '/views/includes/navigation.php';
 ?>
 
-    <section class="container text-center my-3 p-1  ">
-        <h4 class="text-center my-4">Supprimer le Prixb defini</h4>
+    <section class="container text-star my-3 p-1  ">
+        <h4 class="text-center my-4">Supprimer le Prix defini</h4>
         <?php echo require_once 'formPrix.php';?>
     </section>
 

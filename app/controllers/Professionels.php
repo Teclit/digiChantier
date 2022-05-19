@@ -4,6 +4,7 @@ class professionels extends Controller {
         $this->professionelModel       = $this->model('Professionel');
         $this->categoryModel           = $this->model('Category');
         $this->souscategoryModel       = $this->model('Souscategory');
+        $this->postModel               = $this->model('Post');
     }
 
     public function indexPro() {
@@ -26,7 +27,8 @@ class professionels extends Controller {
             'category'  =>'',
             'scategory' =>'',
             'travaux'   => $this->categoryModel->findAllCategories(),
-            'stravaux'  => $this->souscategoryModel->findAllSousCategories()
+            'stravaux'  => $this->souscategoryModel->findAllSousCategories(),
+            'posts'     => $this->postModel->findAllPosts(),
         ];
         $this->view('professionels/homePro', $data);
     }
@@ -44,6 +46,7 @@ class professionels extends Controller {
             'scategory'          =>'',
             'travaux'            =>$this->categoryModel->findAllCategories(),
             'stravaux'           =>$this->souscategoryModel->findAllSousCategories(),
+            'posts'     => $this->postModel->findAllPosts(),
         ];
         
         if($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['travaux']) ){
@@ -64,6 +67,7 @@ class professionels extends Controller {
                         'jobs'     =>$this->professionelModel->GetJob($data),
                         'travaux'  =>$this->categoryModel->findAllCategories(),
                         'stravaux' =>$this->souscategoryModel->findAllSousCategories(),
+                        'posts'    => $this->postModel->findAllPosts(),
                     ];
                     $msg= "Voici les travaux à votre proposition.";
                     SessionHelper::setSession("SuccessMessage", $msg);

@@ -28,7 +28,17 @@ class Pages extends Controller {
         $this->view('index', $data);
     }
 
-
+    /**
+     * Get all Posts
+     *
+     * @return void
+     */
+    public function blog() {
+        $data = [
+            'posts' => $this->postModel->findAllPosts(),
+        ];
+        $this->view('pages/blog', $data);
+    }
     /**
      * Get all Posts
      *

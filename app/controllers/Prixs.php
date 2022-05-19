@@ -26,7 +26,7 @@ class Prixs extends Controller {
             'nbleadsError'     =>   '',
             //FormAction
             'actionForm'        => 'createPrix',
-            'submitBtn'         => 'Mofifier' 
+            'submitBtn'         => 'Creer' 
         ];
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
