@@ -17,6 +17,7 @@
         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/leads/index" target="_self">Leads</a></li>
         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/categories/indexCtg" target="_self">Category</a></li>
         <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/souscategories/indexSousctg" target="_self">Sous Category</a></li>
+        <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/pages/test/" target="_self">Test</a></li>
     </ul>
     <ul class="navbar-nav  text-center">
         <li class="nav-item"><a class="nav-link  fw-bold px-3" href="<?php echo URLROOT."/users/profile" ; ?>"><?php echo SessionHelper::getSession("userNom"); ?></a></li>

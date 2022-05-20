@@ -28,6 +28,17 @@ class Pages extends Controller {
         $this->view('index', $data);
     }
 
+    
+    public function test() {
+        $data = [
+                'posts'    => $this->postModel->findAllPosts(),
+                'travaux'  => $this->categoryModel->findAllCategories(),
+                'stravaux' => $this->souscategoryModel->findAllSousCategories(),
+        ];
+
+        $this->view('pages/test', $data);
+    }
+
     /**
      * Get all Posts
      *

@@ -25,40 +25,6 @@ class Leads extends Controller {
         $this->view('leads/index', $data);
     }
 
-    /**
-     * Searche  form leads 
-     *
-     * @return void
-     */
-    public function search() {
-        $leads = $this->leadModel->findAllLeads();
-        $data = [
-            'leads' => $leads
-        ];
-
-        if($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['search']) ){
-            $search = trim($_GET['search']);
-            $data = [
-                'searchLead' => $this->leadModel->findSearchLead($search),
-            ];
-            
-            
-            if (count($data['searchLead']) > 0) {
-                // Redirect to index page
-                $msg = COUNT($data['searchLead'])." - résultat trouvé pour la recherche  -> '".$search."'";
-                SessionHelper::setSession("SuccessMessage", $msg); 
-            } else {
-                //Redirect to the index
-                $msg= " Aucun résultat n'est trouvé pour la recherche  -> '".$search."'";
-                SessionHelper::setSession("ErrorMessage", $msg);
-            }
-            $this->view('leads/index', $data);
-        }else{
-            SessionHelper::redirectTo('/leads/index');
-        }
-    }
-
-
     
     /**
      * Get all information about lead
@@ -432,7 +398,6 @@ class Leads extends Controller {
      * @return void
      */
     public function delete($id) {
-
         $lead = $this->leadModel->findLeadById($id);
         $data = [
             'idlead'               => $lead->idlead,
@@ -514,6 +479,91 @@ class Leads extends Controller {
         }
         $this->view('leads/delete', $data);
     }
+
+
+    /**
+     * Searche  form leads 
+     *
+     * @return void
+     */
+    public function search() { 
+        $data = [ 'leads' => $this->leadModel->findAllLeads(), ];
+
+        if($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['search']) ){
+            $search = trim($_GET['search']);
+            $data = [ 'searchLead' => $this->leadModel->findSearchLead($search), ];
+            
+            if (count($data['searchLead']) > 0) {
+                // Redirect to index page
+                $msg = COUNT($data['searchLead'])." - résultat trouvé pour la recherche  -> '".$search."'";
+                SessionHelper::setSession("SuccessMessage", $msg); 
+            } else {
+                //Redirect to the index
+                $msg= "Aucun résultat n'est trouvé pour la recherche  -> '".$search."'";
+                SessionHelper::setSession("ErrorMessage", $msg);
+            }
+            $this->view('leads/index', $data);
+        } else{
+            SessionHelper::redirectTo('/leads/index');
+        }
+    }
+
+    /**Exporter Excel */
+    public function exporter() {
+
+        $fileType ="xls";
+        $leads = $this->leadModel->findAllLeads();
+        return $this->ExporterExcel( $fileType, $leads);
+        print_r($leads );
+    
+    }
+
+
+    public function ExporterExcel( $fileType, $leads){
+        
+        // Filter the excel data 
+        function filterData(&$str){ 
+            $str = preg_replace("/\t/", "\\t", $str); 
+            $str = preg_replace("/\r?\n/", "\\n", $str); 
+            if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
+        } 
+
+        // Excel file name for download 
+        $fileName = "Exportation Leads - " . date('Ymd') .".". $fileType; 
+        
+        // Column names 
+        $fields = array('N°     ', 'Nom     ', 'Prénom  ', 'Téléphone   ', 'Email   ', 'Adresse  ', 'Code Postal ', 'Ville   ', 'Date_created    ', 'Project '); 
+        // Display column names as first row 
+        $excelData = implode("\t", array_values($fields)) . "\n"; 
+        
+        if(!empty($leads)){
+        
+            foreach($leads as $index=>$lead) {
+                $rowData = array( $index+1, $lead->nom, $lead->prenom, $lead->tel, $lead->email, $lead->adresse, $lead->codepostal, $lead->ville, $lead->date_inscrption, $lead->projet );
+                array_walk($rowData, 'filterData'); 
+                $excelData .= implode("\t", array_values($rowData)) . "\n"; 
+            }
+
+        } else { 
+                $excelData .= 'No records found...'. "\n"; 
+            
+        }
+
+        header("Content-Encoding: UTF-8");
+        header("Content-Type: application/x-msexcel; charset=utf-8");
+        header("Content-Disposition: attachment; filename=".$fileName);
+        echo pack("CCC",0xef,0xbb,0xbf);
+
+        // Render excel data 
+        echo $excelData; 
+        
+        exit;
+
+        
+
+    }
+
+
     
 
 
