@@ -8,7 +8,7 @@
         <form class="row form-inline g-3 my-5 " action="<?php echo URLROOT; ?>/leads/addlead" method="GET" enctype="multipart/form-data" >
             <div class="col-md-9 form-group">
                 <select class="form-select" id="sel1" name="travaux">
-                    <option>Quels travaux souhaitez-vous réaliser ?</option>
+                    <option vallue="0">Quels travaux souhaitez-vous réaliser ?</option>
                     <?php foreach($data['travaux'] as $travail):?>
                         <optgroup class="mx-2" label="<?php echo $travail->ctgnom;?>">
                             <?php foreach($data['stravaux'] as $stravail): if($travail->idctg == $stravail->idctg ){?>

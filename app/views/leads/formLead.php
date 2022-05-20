@@ -40,7 +40,7 @@
                 <label for="typetravaux" class="form-label fw-bold">Type de Travaux:</label>
                 <select class="form-select  me-4" id="typetravaux" name="typetravaux"  required>
                     <option value="<?php echo $data['typeTravaux']->idctg;?>"><?php echo $data['typeTravaux']->ctgnom;?></option>
-                    <option>Quels est le type de travaux à réaliser ?</option>
+                    <option vallue="">Quels est le type de travaux à réaliser ?</option>
                     <?php foreach($data['travaux'] as $typtravail):  ?>
                         <option value="<?php echo $typtravail->idctg;?>"><?php echo $typtravail->ctgnom;?></option>
                     <?php endforeach; ?>

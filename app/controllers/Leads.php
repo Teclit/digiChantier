@@ -5,9 +5,10 @@ class Leads extends Controller {
      * Model instance 
      */
     public function __construct() {
-        $this->leadModel = $this->model('Lead');
-        $this->categoryModel = $this->model('Category');
-        $this->souscategoryModel = $this->model('Souscategory');
+        $this->leadModel          = $this->model('Lead');
+        $this->categoryModel      = $this->model('Category');
+        $this->souscategoryModel  = $this->model('Souscategory');
+        $this->postModel          = $this->model('Post');
     }
     
     /**
@@ -87,11 +88,15 @@ class Leads extends Controller {
      * @return void
      */
     public function addlead() {
-        if($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['travaux']) ){
+
+        $splitGetUrl = explode('/', trim($_GET['travaux']));
+        // var_dump($splitGetUrl );
+            
+        if($_SERVER['REQUEST_METHOD'] == 'GET' && count($splitGetUrl)>1 ){
             // Process form & Sanitize Get data
             $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
-            $splitGetUrl = explode('/', trim($_GET['travaux']));
             $data = [
+                'posts'              => $this->postModel->findAllPosts(),
                 'travaux'            =>  $this->categoryModel->findAllCategories(),
                 'stravaux'           =>  $this->souscategoryModel->findAllSousCategories() ,
                 'typeTravaux'        => $this->categoryModel->findCategoryByID($splitGetUrl[0]),
@@ -128,6 +133,7 @@ class Leads extends Controller {
 
         }else{
             $data = [
+                'posts'    => $this->postModel->findAllPosts(),
                 'travaux'  =>  $this->categoryModel->findAllCategories(),
                 'stravaux' =>  $this->souscategoryModel->findAllSousCategories() 
             ];
@@ -144,6 +150,7 @@ class Leads extends Controller {
      */
     public function create() {
         $data = [
+            'posts'              => $this->postModel->findAllPosts(),
             'typeTravaux'        => '',
             'natureTravaux'      => '',
             'type-natureTravaux' => '',
@@ -178,6 +185,7 @@ class Leads extends Controller {
             // Process form & Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $data = [
+                'posts'              => $this->postModel->findAllPosts(),
                 'typeTravaux'        => $this->categoryModel->findCategoryByID(trim($_POST['typetravaux'])),
                 'natureTravaux'      => $this->souscategoryModel->findSousCategoryByID(trim($_POST['naturetravaux'])),
                 'type-natureTravaux' => $this->souscategoryModel->findSousCategoryByGroup(trim($_POST['typetravaux'])),
@@ -191,6 +199,7 @@ class Leads extends Controller {
                 'typeTravauxLead'    => trim($_POST['typetravaux']),
                 'natureProjetLead'   => trim($_POST['naturetravaux']),
                 'projetLead'         => trim($_POST['projet']),
+                
                 // MESSAGE ERRORS 
                 'nomLeadError'         => '',
                 'prenomLeadError'      => '',
@@ -258,12 +267,12 @@ class Leads extends Controller {
                     // Redirect to index page
                     $msg= "Vous avez bien enregistrer le lead";
                     SessionHelper::setSession("SuccessMessage", $msg);
-                    SessionHelper::redirectTo('/leads/index');  
+                    SessionHelper::redirectTo('/index');  
                 } else {
                     //Redirect to the index
                     $msg= "Vous n'avez pas  enregistrer le lead";
                     SessionHelper::setSession("ErrorMessage", $msg);
-                    SessionHelper::redirectTo('/leads/index'); 
+                    SessionHelper::redirectTo('/index');
                 }
             }
             $this->view('leads/create', $data);
