@@ -15,7 +15,7 @@
             echo SessionHelper::getSession("ErrorMessage");
         ?>
         <div class="mb-2  d-flex justify-content-between align-items-center">
-            <form class="d-flex" action="ListAdmin.jsp" method="post">
+            <form class="d-flex" action="<?php echo URLROOT; ?>/administrateurs/search" method="GET">
                 <input class="form-control me-2" type="text" name="search" placeholder="Rechercher... " aria-label="Search">
                 <button class="btn btn-dark" type="submit">Rechercher</button>
             </form>
@@ -39,7 +39,15 @@
                 </thead>
                 <tbody>
 
-                    <?php foreach($data['administrateurs'] as $index=>$administrateurs):?>
+                    <?php 
+                        $listAdmins = '';
+                        if(isset($data['searchAdmin'])) {
+                            $listAdmins = $data['searchAdmin'];
+                        }else{
+                            $listAdmins = $data['administrateurs'];
+                        }
+                        foreach($listAdmins as $index=>$administrateurs):
+                    ?>
                     <tr>
                         <td scope="row"><?php echo $index+1;?></td>
                         <td><?php echo $administrateurs->nom;?></td>

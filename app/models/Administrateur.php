@@ -43,6 +43,26 @@ Class Administrateur {
         return $results;
     }
 
+    /**
+     * Find all leads
+     * @param String
+     * @return ArrayObject
+     * nom, prenom, tel, email, password, adresse, ville, codepostal
+     */
+    public function findSearchAdmin($search) {
+        $search=strtolower($search);
+        $this->db->query("SELECT * FROM administrateur  WHERE LOWER(nom) LIKE :search  
+        OR LOWER(prenom) LIKE :search OR LOWER(email) LIKE :search   
+        OR LOWER(adresse) LIKE :search OR LOWER(ville) LIKE :search OR codepostal LIKE :search OR tel LIKE :search
+        ORDER BY nom, prenom ASC ");
+        $this->db->bind(':search', '%'.$search.'%');
+        $results = $this->db->resultSet();
+        
+        return $results;
+        
+    }
+
+
     
     /**
      * Get Admin by Id

@@ -46,7 +46,7 @@ Class Professionel {
      * Find all leads
      * @param String
      * @return ArrayObject
-     * * nom, adresse, ville, codepostal, pays , nomcontact, prenomcontact, telcontact, emailcontact, password, fonctioncontact
+     * 
      */
     public function findSearchPro($search) {
         $search=strtolower($search);
@@ -58,7 +58,7 @@ Class Professionel {
         $results = $this->db->resultSet();
         
         return $results;
-            
+        
     }
 
 

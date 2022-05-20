@@ -17,13 +17,6 @@
             echo SessionHelper::getSession("SuccessMessage");
             echo SessionHelper::getSession("ErrorMessage");
         ?>
-
-        <div class="mb-2  d-flex justify-content-between align-items-center">
-			<form class="d-flex" action="ListAdmin.jsp" method="post">
-		        <input class="form-control me-2" type="text" name="search" placeholder="Rechercher... " aria-label="Search">
-		        <button class="btn btn-dark" type="submit">Rechercher</button>
-      	    </form>
-		</div>
 		
 		<div class="table-responsive mb-5">
             <table class="table table-responsive table-hover table-bordered">

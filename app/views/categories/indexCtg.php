@@ -42,8 +42,7 @@
                     }else{
                         $listCtgs = $data['categories'];
                     }
-
-                    // foreach($listCtgs as $index=>$lead):
+    
                     foreach( $listCtgs as $index=>$category):
                 ?>
                         <tr>

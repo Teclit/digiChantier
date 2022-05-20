@@ -6,6 +6,11 @@ class Administrateurs extends Controller {
         $this->administrateursModel = $this->model('Administrateur');
     }
 
+    /**
+     * Get all admins
+     *
+     * @return void
+     */
     public function indexAdmin() {
         $administrateurs = $this->administrateursModel->findAllAdministrateurs();
         $data = [
@@ -15,6 +20,45 @@ class Administrateurs extends Controller {
         $this->view('administrateurs/indexAdmin', $data);
     }
 
+    /**
+     * Searche form professionel 
+     *
+     * @return void
+     */
+    public function search() {
+        $data = ['administrateurs' => $this->administrateursModel->findAllAdministrateurs(), ];
+
+        // var_dump(!empty($_GET['search']));
+        if($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['search']) ){
+            $search = trim($_GET['search']);
+            $data = [
+                'searchAdmin' => $this->administrateursModel->findSearchAdmin($search),
+            ];
+            
+            
+            if (count($data['searchAdmin']) > 0) {
+                // Redirect to index page
+                $msg = COUNT($data['searchAdmin'])." - résultat trouvé pour la recherche  -> '".$search."'";
+                SessionHelper::setSession("SuccessMessage", $msg); 
+            } else {
+                //Redirect to the index
+                $msg= " Aucun résultat n'est trouvé pour la recherche  -> '".$search."'";
+                SessionHelper::setSession("ErrorMessage", $msg);
+            }
+            $this->view('administrateurs/indexAdmin', $data);
+        }else{
+            SessionHelper::redirectTo('/administrateurs/indexAdmin'); 
+        }
+
+    }
+
+
+    /**
+     * get infos administrateur
+     *
+     * @param [type] $idAdmin
+     * @return void
+     */
     public function detailAdmin($idAdmin) {
         $administrateurs = $this->administrateursModel->findAllAdministrateurByID($idAdmin);
         $data = [
@@ -25,7 +69,11 @@ class Administrateurs extends Controller {
     }
 
 
-
+    /**
+     * Register administrateur
+     *
+     * @return void
+     */
     public function createAdmin() {
 
         $data = [
@@ -161,6 +209,12 @@ class Administrateurs extends Controller {
     }
 
 
+    /**
+     * updatye administrateur
+     *
+     * @param [type] $idAdmin
+     * @return void
+     */
     public function updateAdmin($idAdmin) {
 
         $admins = $this->administrateursModel->findAllAdministrateurByID($idAdmin);
