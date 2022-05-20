@@ -42,7 +42,7 @@ class Leads extends Controller {
                 'searchLead' => $this->leadModel->findSearchLead($search),
             ];
             
-            //Register lead from model function
+            
             if (count($data['searchLead']) > 0) {
                 // Redirect to index page
                 $msg = COUNT($data['searchLead'])." - résultat trouvé pour la recherche  -> '".$search."'";
@@ -262,7 +262,7 @@ class Leads extends Controller {
                 empty($data['typeTravauxLeadError']) &&
                 empty($data['projetLeadError'])
             ){
-                //Register lead from model function
+                
                 if ($this->leadModel->CreateLead($data)) {
                     // Redirect to index page
                     $msg= "Vous avez bien enregistrer le lead";

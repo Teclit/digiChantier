@@ -13,7 +13,10 @@
             if (file_exists('../app/views/' . $view . '.php')) {
                 require_once '../app/views/' . $view . '.php';
             } else {
-                die("View does not exists.");
+                // die("View does not exists.");
+                $msg= "Aucun page n'est trouvé pour la recherche ";
+                SessionHelper::setSession("ErrorMessage", $msg);
+                SessionHelper::redirectTo('/index'); 
             }
         }
     }

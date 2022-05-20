@@ -5,11 +5,51 @@ class Categories extends Controller {
         $this->categoryModel = $this->model('Category');
     }
 
+    /**
+     * get pros controller
+     *
+     * @return void
+     */
     public function indexCtg() {
         $data = [ 'categories' =>  $this->categoryModel->findAllCategories() ];
         $this->view('categories/indexCtg', $data);
     }
 
+    /**
+     * Searche form categories 
+     *
+     * @return void
+     */
+    public function search() {
+    
+        //var_dump($_GET['search']);
+        if($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['search']) ){
+            $search = trim($_GET['search']);
+            $data = [
+                'searchCtg' => $this->categoryModel->findSearchCtg($search),
+            ];
+            
+            
+            if (count($data['searchCtg']) > 0) {
+                // Redirect to index page
+                $msg = COUNT($data['searchCtg'])." - résultat trouvé pour la recherche  -> '".$search."'";
+                SessionHelper::setSession("SuccessMessage", $msg); 
+            } else {
+                //Redirect to the index
+                $msg= " Aucun résultat n'est trouvé pour la recherche  -> '".$search."'";
+                SessionHelper::setSession("ErrorMessage", $msg);
+            }
+            $this->view('categories/indexCtg', $data);
+        }else{
+            SessionHelper::redirectTo('/categories/indexCtg'); 
+        }
+    }
+
+    /**
+     * Create pro controller
+     *
+     * @return void
+     */
     public function createCtg() {
         $data = [ 
             'nomCtg'      =>  '',
@@ -58,6 +98,12 @@ class Categories extends Controller {
     }
 
 
+    /**
+     * update pro controller
+     *
+     * @param [type] $idCtg
+     * @return void
+     */
     public function updateCtg($idCtg) {
         $ctg = $this->categoryModel->findCategoryByID($idCtg);
         $data = [ 

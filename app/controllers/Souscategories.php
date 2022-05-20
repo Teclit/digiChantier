@@ -14,6 +14,44 @@ class Souscategories extends Controller {
         $this->view('souscategories/indexSousctg', $data);
     }
 
+    /**
+     * Searche form sous categories 
+     *
+     * @return void
+     */
+    public function search() {
+    
+        //var_dump($_GET['search']);
+        if($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['search']) ){
+            $search = trim($_GET['search']);
+            $data = [
+                'searchSctg' => $this->souscategoryModel->findSearchSctg($search),
+                'categories'    =>  $this->categoryModel->findAllCategories()
+            ];
+            
+            if (count($data['searchSctg']) > 0) {
+                // Redirect to index page
+                $msg = COUNT($data['searchSctg'])." - résultat trouvé pour la recherche  -> '".$search."'";
+                SessionHelper::setSession("SuccessMessage", $msg); 
+            } else {
+                //Redirect to the index
+                $msg= " Aucun résultat n'est trouvé pour la recherche  -> '".$search."'";
+                SessionHelper::setSession("ErrorMessage", $msg);
+            }
+            $this->view('souscategories/indexSousctg', $data);
+            
+        }else{
+            SessionHelper::redirectTo('/souscategories/indexSousctg'); 
+        }
+
+    }
+
+
+    /**
+     * controller create sous category
+     *
+     * @return void
+     */
     public function createSousctg() {
         $data = [ 
             'categories'   =>  $this->categoryModel->findAllCategories(),
@@ -72,6 +110,12 @@ class Souscategories extends Controller {
     }
 
 
+    /**
+     * Controller uipdate sous category
+     *
+     * @param [type] $idSctg
+     * @return void
+     */
     public function updateSousctg($idSctg) {
         $sctg = $this->souscategoryModel->findSouscategoryByID($idSctg);
         $data = [ 

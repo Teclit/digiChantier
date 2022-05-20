@@ -16,7 +16,7 @@
             echo SessionHelper::getSession("ErrorMessage");
         ?>
         <div class="mb-2  d-flex justify-content-between align-items-center">
-			<form class="d-flex" action="ListAdmin.jsp" method="post">
+			<form class="d-flex" action="<?php echo URLROOT; ?>/categories/search" method="GET">
 		        <input class="form-control me-2" type="text" name="search" placeholder="Rechercher... " aria-label="Search">
 		        <button class="btn btn-dark" type="submit">Rechercher</button>
       	    </form>
@@ -34,7 +34,18 @@
                 </thead>
                 <tbody>
 
-                <?php foreach($data['categories'] as $index=>$category):?>
+                <?php 
+
+                    $listCtgs = '';
+                    if(isset($data['searchCtg'])) {
+                        $listCtgs = $data['searchCtg'];
+                    }else{
+                        $listCtgs = $data['categories'];
+                    }
+
+                    // foreach($listCtgs as $index=>$lead):
+                    foreach( $listCtgs as $index=>$category):
+                ?>
                         <tr>
                             <td scope="row"><?php echo $index+1;?></td>
                             <td><?php echo $category->ctgnom;?></td>

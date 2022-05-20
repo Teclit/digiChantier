@@ -21,7 +21,24 @@ class Souscategory {
     }
 
     /**
-     * Undocumented function
+     * Find all leads
+     * @param String
+     * @return ArrayObject
+     *
+     */
+    public function findSearchSctg($search) {
+        $search=strtolower($search);
+        $this->db->query("SELECT * FROM souscategory  WHERE LOWER(sctgnom) LIKE :search  ORDER BY sctgnom ASC");
+        $this->db->bind(':search', '%'.$search.'%');
+        $results = $this->db->resultSet();
+        
+        return $results;
+            
+    }
+
+
+    /**
+     * Get sous category by id  
      *
      * @param Int $idsctg
      * @return object

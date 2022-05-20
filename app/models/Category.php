@@ -23,6 +23,23 @@ class Category {
 
 
     /**
+     * Find all leads
+     * @param String
+     * @return ArrayObject
+     *
+     */
+    public function findSearchCtg($search) {
+        $search=strtolower($search);
+        $this->db->query("SELECT * FROM category  WHERE LOWER(ctgnom) LIKE :search ORDER BY ctgnom ASC ");
+        $this->db->bind(':search', '%'.$search.'%');
+        $results = $this->db->resultSet();
+        
+        return $results;
+            
+    }
+
+
+    /**
      * Get lead  par  id
      *
      * @param Int $idctg

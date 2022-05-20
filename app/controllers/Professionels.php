@@ -34,7 +34,7 @@ class professionels extends Controller {
                 'searchPro' => $this->professionelModel->findSearchPro($search),
             ];
             
-            //Register lead from model function
+            
             if (count($data['searchPro']) > 0) {
                 // Redirect to index page
                 $msg = COUNT($data['searchPro'])." - résultat trouvé pour la recherche  -> '".$search."'";
@@ -324,7 +324,7 @@ class professionels extends Controller {
             ){
                 //Hash password
                 $data['passwordPro'] = password_hash($data['passwordPro'], PASSWORD_DEFAULT);
-                //Register lead from model function
+                
                 
                 if ($this->professionelModel->CreatePro($data)){
                         $idPro = $this->professionelModel->GetLastID();
@@ -521,7 +521,7 @@ class professionels extends Controller {
                 //Hash password
                 $data['passwordPro'] = password_hash($data['passwordPro'], PASSWORD_DEFAULT);
                 // $data['passwordPro'] = password_hash($data['passwordPro'], PASSWORD_DEFAULT);
-                //Register lead from model function
+                
                 
                 if ($this->professionelModel->updatePro($data)){
                         

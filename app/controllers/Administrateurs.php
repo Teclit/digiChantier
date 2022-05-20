@@ -141,7 +141,7 @@ class Administrateurs extends Controller {
             ){
                 // Hash password
                 $data['passwordAdmin'] = password_hash($data['passwordAdmin'], PASSWORD_DEFAULT);
-                //Register lead from model function
+                
                 
 
                 if ($this->administrateursModel->CreateAdmin($data)){
@@ -279,7 +279,7 @@ class Administrateurs extends Controller {
             ){
                 // Hash password
                 $data['passwordAdmin'] = password_hash($data['passwordAdmin'], PASSWORD_DEFAULT);
-                //Register lead from model function
+                
                 echo  $data['passwordAdmin'];
 
                 if ($this->administrateursModel->UpdateAdmin($data) ){

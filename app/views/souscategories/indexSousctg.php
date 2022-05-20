@@ -15,7 +15,7 @@
             echo SessionHelper::getSession("ErrorMessage");
         ?>
         <div class="mb-2 d-flex justify-content-between align-items-center">
-			<form class="d-flex" action="ListAdmin.jsp" method="post">
+			<form class="d-flex" action="<?php echo URLROOT; ?>/souscategories/search" method="GET">
 		        <input class="form-control me-2" type="text" name="search" placeholder="Rechercher... " aria-label="Search">
 		        <button class="btn btn-dark" type="submit">Rechercher</button>
       	    </form>
@@ -34,7 +34,16 @@
                 </thead>
                 <tbody>
 
-                <?php foreach($data['souscategories'] as $index=>$souscategory):?>
+                <?php 
+                    $listSctgs = '';
+                    if(isset($data['searchSctg'])) {
+                        $listSctgs = $data['searchSctg'];
+                    }else{
+                        $listSctgs = $data['souscategories'];
+                    }
+
+                    foreach($listSctgs as $index=>$souscategory):
+                ?>
                     <tr>
                         <td scope="row"><?php echo $index+1;?></td>
                         <td><?php echo $souscategory->sctgnom;?></td>
@@ -42,8 +51,8 @@
                             if($souscategory->idctg == $category->idctg){?>
                             <td><?php echo $category->ctgnom;?></td>
                         <?php } endforeach; ?>
-                        <td><a href="<?php echo URLROOT . "/souscategories/updateSousctg/".$souscategory->idsctg;?>"  class="btn btn-outline-success btn-sm" >Modifier</a></td>
-                        <td><a href="<?php echo URLROOT . "/souscategories/deleteSousctg/".$souscategory->idsctg;?>"  class="btn btn btn-outline-danger btn-sm">supprimer</a></td>
+                        <td><a href="<?php echo URLROOT . "/souscategories/updateSousctg/".$souscategory->idsctg;?>"  class="btn btn-success btn-sm" >Modifier</a></td>
+                        <td><a href="<?php echo URLROOT . "/souscategories/deleteSousctg/".$souscategory->idsctg;?>"  class="btn btn-danger btn-sm">supprimer</a></td>
                     </tr>
                 <?php endforeach; ?>
                     

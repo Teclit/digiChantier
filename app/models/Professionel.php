@@ -44,6 +44,7 @@ Class Professionel {
 
     /**
      * Find all leads
+     * @param String
      * @return ArrayObject
      * * nom, adresse, ville, codepostal, pays , nomcontact, prenomcontact, telcontact, emailcontact, password, fonctioncontact
      */
