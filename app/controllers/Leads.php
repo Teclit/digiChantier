@@ -532,7 +532,7 @@ class Leads extends Controller {
         $fileName = "Exportation Leads - " . date('Ymd') .".". $fileType; 
         
         // Column names 
-        $fields = array('N°     ', 'Nom     ', 'Prénom  ', 'Téléphone   ', 'Email   ', 'Adresse  ', 'Code Postal ', 'Ville   ', 'Date_created    ', 'Project '); 
+        $fields = array('Nb     ', 'Nom     ', 'Prenom  ', 'Telephone   ', 'Email   ', 'Adresse  ', 'Code Postal ', 'Ville   ', 'Date_created    ', 'Project '); 
         // Display column names as first row 
         $excelData = implode("\t", array_values($fields)) . "\n"; 
         
@@ -552,7 +552,7 @@ class Leads extends Controller {
         header("Content-Encoding: UTF-8");
         header("Content-Type: application/x-msexcel; charset=utf-8");
         header("Content-Disposition: attachment; filename=".$fileName);
-        echo pack("CCC",0xef,0xbb,0xbf);
+        // echo pack("CCC",0xef,0xbb,0xbf);
 
         // Render excel data 
         echo $excelData; 

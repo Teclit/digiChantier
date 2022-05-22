@@ -9,9 +9,12 @@
 ?>
 
 <section class="container my-4">
-        <div class="container mt-5">  
-            <a class="btn bg-success text-light" href="<?php echo URLROOT; ?>/professionels/createPro">Add Professionel</a>
+        <div class="d-flex justify-content-start align-items-center">
+            <a class="btn bg-success mt-3 me-3 text-light" href="<?php echo URLROOT; ?>/professionels/createPro">Add Professionel</a>
+            <a class="btn bg-dark text-light mt-3 px-4" href="<?php echo URLROOT; ?>/professionels/exporter">Exporter en Excel</a>
         </div>
+
+        
 
         <h5 class="text-center my-5">List des professionels</h5>
         <?php 

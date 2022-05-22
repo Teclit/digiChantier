@@ -24,7 +24,7 @@ class professionels extends Controller {
     public function search() {
         $professionels = $this->professionelModel->findAllProfessionels();
         $data = [
-            'leads' => $professionels
+            'professionels' => $professionels
         ];
 
         // var_dump(!empty($_GET['search']));
@@ -642,6 +642,63 @@ class professionels extends Controller {
         }
         $this->view('professionels/deletePro', $data);
     }
+
+
+    /**Exporter Excel */
+    public function exporter() {
+
+        $fileType ="xls";
+        $professionels = $this->professionelModel->findAllProfessionels();;
+        return $this->ExporterExcel( $fileType, $professionels);
+        print_r($professionels );
+    
+    }
+
+
+    public function ExporterExcel($fileType, $professionels){
+        
+        // Filter the excel data 
+        function filterData(&$str){ 
+            $str = preg_replace("/\t/", "\\t", $str); 
+            $str = preg_replace("/\r?\n/", "\\n", $str); 
+            if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
+        } 
+
+        // Excel file name for download 
+        $fileName = "Exportation professionels - " . date('Ymd') .".". $fileType; 
+        
+        // Column names 
+        $fields = array('Nb     ', 'Nom     ', 'Prenom  ', 'Telephone   ', 'Email   ', 'Adresse  ', 'Code Postal ', 'Ville   ', 'Date_created    ', 'Pays'); 
+        // Display column names as first row 
+        $excelData = implode("\t", array_values($fields)) . "\n"; 
+        
+        if(!empty($professionels)){
+        
+            foreach($professionels as $index=>$professionel) {
+                $rowData = array( $index+1, $professionel->nom, $professionel->prenomcontact, $professionel->telcontact, $professionel->emailcontact, $professionel->adresse, $professionel->codepostal, $professionel->ville, $professionel->dateinscription , $professionel->pays );
+                array_walk($rowData, 'filterData'); 
+                $excelData .= implode("\t", array_values($rowData)) . "\n"; 
+            }
+
+        } else { 
+                $excelData .= 'No records found...'. "\n"; 
+            
+        }
+
+        header("Content-Encoding: UTF-8");
+        header("Content-Type: application/x-msexcel; charset=utf-8");
+        header("Content-Disposition: attachment; filename=".$fileName);
+        // echo pack("CCC",0xef,0xbb,0xbf);
+
+        // Render excel data 
+        echo $excelData; 
+        
+        exit;
+
+        
+
+    }
+
 
 
 }
