@@ -36,7 +36,7 @@ class Posts extends Controller {
         ];
         
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
             
             $data = [
                 'title'    => trim($_POST['title']),
@@ -112,7 +112,7 @@ class Posts extends Controller {
         ];
 
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
 
             $data = [
                 'idpost'      => $postID,
@@ -208,7 +208,7 @@ class Posts extends Controller {
                 'actionForm'                => '/posts/deletePost/'.$postID,
                 'submitBtn'                 => 'Supprimer'
             ];
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
 
             if($this->postModel->DeletePost($data)) {
                 $msg= "Vous avez bien supprimer le post";

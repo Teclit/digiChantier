@@ -3,13 +3,14 @@
     require APPROOT . '/views/includes/navigation.php';
 ?>
 
-    <section class="container text-center my-3 p-1  ">
+    <section class="container text-center my-auto p-1  ">
         <div class="row">
-            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="col-sm-10 col-md-8 col-lg-7 mx-auto">
                 <div class="card border-0 shadow rounded-3 my-5">
                     <div class="card-body p-4 p-sm-5">
-                        <p class="card-title text-center fw-light fs-5"> Saisir votre adresse mail pour  changer votre mot de passe. </p>
-                        <form action="<?php echo URLROOT; ?>/views/users/login" method ="POST">
+                        <h6 class="card-title text-center  fs-5"> Saisir votre adresse mail pour  changer votre mot de passe. </h6>
+                        <form action="<?php echo URLROOT; ?>/users/login" method ="POST">
+                        
 
                             <div class="form-floating mb-3">
                                 <input type="email" class="form-control" name="userEmail" id="email" placeholder="Email">

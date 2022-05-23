@@ -66,7 +66,7 @@ class Souscategories extends Controller {
         ];
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
             $data = [
                 'categories'    => $this->categoryModel->findAllCategories(),
                 'nomSctg'       => trim($_POST['nomSctg']),
@@ -132,7 +132,7 @@ class Souscategories extends Controller {
     
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
             $data = [
                 'categories'    => $this->categoryModel->findAllCategories(),
                 'idSctg'        => $idSctg,

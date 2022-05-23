@@ -60,7 +60,7 @@ class Categories extends Controller {
         ];
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
             $data = [
             'nomCtg'                   => trim($_POST['nomCtg']),
             // MESSAGE Error
@@ -117,7 +117,7 @@ class Categories extends Controller {
         ];
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
             $data = [
                 'idCtg'       => $idCtg,
                 'nomCtg'      => trim($_POST['nomCtg']),

@@ -60,7 +60,7 @@ class Leads extends Controller {
             
         if($_SERVER['REQUEST_METHOD'] == 'GET' && count($splitGetUrl)>1 ){
             // Process form & Sanitize Get data
-            $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+            
             $data = [
                 'posts'              => $this->postModel->findAllPosts(),
                 'travaux'            =>  $this->categoryModel->findAllCategories(),
@@ -149,7 +149,7 @@ class Leads extends Controller {
         
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Process form & Sanitize POST data
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
             $data = [
                 'posts'              => $this->postModel->findAllPosts(),
                 'typeTravaux'        => $this->categoryModel->findCategoryByID(trim($_POST['typetravaux'])),
@@ -291,7 +291,7 @@ class Leads extends Controller {
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Process form & Sanitize POST data
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
             $data = [
                 'idlead'               => $lead->idlead,
                 'lead'                 => $lead,
@@ -433,7 +433,7 @@ class Leads extends Controller {
         ];
 
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
             $data = [
                 'idlead'               => $lead->idlead,
                 'lead'                 => $lead,

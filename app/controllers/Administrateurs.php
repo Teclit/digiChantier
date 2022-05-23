@@ -103,7 +103,7 @@ class Administrateurs extends Controller {
         ];
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
             $data = [
             'nomAdmin'             => trim($_POST['nom']),
             'prenomAdmin'          => trim($_POST['prenom']),
@@ -246,7 +246,7 @@ class Administrateurs extends Controller {
         ];
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
             $data = [
             'idAdmin'              => $admins->id,
             'nomAdmin'             => trim($_POST['nom']),
@@ -388,7 +388,7 @@ class Administrateurs extends Controller {
         ];
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
             $data = [
             'idAdmin'              => $admins->id,
             'actionForm'           => 'deleteAdmin/'.$admins->id,

@@ -30,7 +30,7 @@ class Prixs extends Controller {
         ];
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
             $data = [
                 'codepack'       => trim($_POST['codepack']),
                 'prix'           => trim($_POST['prix']),
@@ -93,7 +93,7 @@ class Prixs extends Controller {
         ];
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
             $data = [
                 'idprix'      =>  $prix->idprix,
                 'codepack'       => trim($_POST['codepack']),

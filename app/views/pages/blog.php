@@ -21,9 +21,9 @@
                 </div>
             <?php endforeach; ?>
         </div>
-        <div class="row justify-content-center px-5 ">
-            <a href="<?php echo URLROOT ."/pages/blog" ?>" class="col-md-2 btn btn-dark my-5 d-inline">+ Posts</a>
-        </div>
+        <!-- <div class="row justify-content-center px-5 ">
+            <a href="<//?php echo URLROOT ."/pages/blog" ?>" class="col-md-2 btn btn-dark my-5 d-inline">+ Posts</a>
+        </div> -->
     </section>
 
 

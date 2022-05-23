@@ -18,7 +18,7 @@ class Users extends Controller {
         //Check for post
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             //Sanitize post data
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
 
             $data = [
                 'userEmail'         => trim($_POST['userEmail']),
@@ -100,15 +100,23 @@ class Users extends Controller {
         SessionHelper::redirectTo('/personnels/indexPerso/'.$user->idpro);
     }
 
-    //Redirect to rofile page
+    /**
+     * Redirect to Pofile page
+     *
+     * @return void
+     */
     public function  profile(){
-        //$admins = $this->adminModel->findAllAdministrateurByID(SessionHelper::getSession("userId"));
         $data = [
             'file' => "Profile.php",
         ];
         $this->view('/users/profile', $data);
     }
 
+    /**
+     * Modifier un mot de passe
+     *
+     * @return void
+     */
     public function forgetpd() {
         $data = [
             'userEmail' => '',
@@ -121,6 +129,11 @@ class Users extends Controller {
         $this->view('users/forgetpd', $data);
     }
 
+    /**
+     * Logout et destroy all  Sessions
+     * 
+     * 
+     */
     public function logout() {
         SessionHelper::destroySessions();
         SessionHelper::redirectTo('/pages/index');

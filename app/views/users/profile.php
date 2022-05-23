@@ -15,7 +15,6 @@
 
                 <?php if(SessionHelper::getSession("userRoleAdmin")){   ?>
 
-
                     <h5 class="card-title fw-bold"><?php echo SessionHelper::getSession("userNom") . " ". SessionHelper::getSession("userPrenom"); ; ?></h5>
                     <p class="card-text"><span class="fw-bold">Téléphone:</span> <?php echo SessionHelper::getSession("userTel"); ?></p>
                     <p class="card-text"><span class="fw-bold">Email:</span> <?php echo  SessionHelper::getSession("userEmail"); ?></p>

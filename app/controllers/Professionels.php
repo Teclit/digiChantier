@@ -224,7 +224,7 @@ class professionels extends Controller {
         ];
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
             $data = [
                 'choixDomains'       =>  $this->categoryModel->findAllCategories(),
                 'nomEnt'             => trim($_POST['nomEnt']),
@@ -413,7 +413,7 @@ class professionels extends Controller {
         ];
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
             $data = [
                 'idPro'              => $professionel->idpro,
                 'choixDomains'       =>  $this->categoryModel->findAllCategories(),
@@ -616,7 +616,7 @@ class professionels extends Controller {
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
             $data = [
                 'idpro'            => $professionel->idpro,
                 //FormAction
