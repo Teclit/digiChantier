@@ -77,15 +77,33 @@ Class Administrateur {
         return $row;
     }
 
+
+    /**
+     * Get Admin by Email
+     *
+     * @param String $idAdmin
+     * @return ArrayObject
+     */
+    public function GetAdminByEmail(String $email){
+        $this->db->query('SELECT * FROM administrateur WHERE email = :email');
+        $this->db->bind(':email', $email);
+        $row = $this->db->single();
+        return $row;
+    }
+
+
+
+
+
     /**
      * Find Administrateur by email. email is passed in by the Controller.
      *
-     * @param ArrayObject $email
+     * @param ArrayObject $data
      * @return Boolean
      */
     public function findAdminByEmail($data) {
         $this->db->query('SELECT COUNT(*) As nbemail FROM administrateur WHERE email = :email');
-        $this->db->bind(':email', $$data['email']);
+        $this->db->bind(':email', $data['email']);
         $result = $this->db->single();
         if($result->nbemail > 0) {
             return true;

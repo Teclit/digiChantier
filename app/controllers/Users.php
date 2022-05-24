@@ -6,7 +6,11 @@ class Users extends Controller {
     }
 
     
-
+    /**
+     * User login
+     *
+     * @return void
+     */
     public function login() {
         $data = [
             'userEmail' => '',
@@ -18,23 +22,26 @@ class Users extends Controller {
         //Check for post
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             //Sanitize post data
-            
-
             $data = [
                 'userEmail'         => trim($_POST['userEmail']),
                 'userPassword'      => trim($_POST['userPassword']),
                 'userEmailError'    => '',
                 'userPasswordError' => '',
             ];
-            //Validate userEmail
+
+            //Validate email and telephone
             if (empty($data['userEmail'])) {
-                $data['userEmailError'] = 'Please enter a userEmail.';
+                $data['userEmailError'] = 'Veuillez saisir un email addresse.';
+            } elseif (!filter_var($data['userEmail'], FILTER_VALIDATE_EMAIL)) {
+                $data['userEmailError'] = 'Veuillez saisir un correct un correct format.';
             }
 
             //Validate password
             if (empty($data['userPassword'])) {
-                $data['userPasswordError'] = 'Please enter a password.';
+                $data['userPasswordError'] = 'Veuillez saisir un mot de passe.';
             }
+
+            
 
             //Check if all errors are empty
             if (empty($data['userEmailError']) && empty($data['userPasswordError'])) {
@@ -59,6 +66,12 @@ class Users extends Controller {
         }
     }   
 
+    /**
+     * Create admin session and profile
+     *
+     * @param ArrayObject $user
+     * @return void
+     */
     public function createUserSessionAdmin($user) {
         $date = new DateTime();
         SessionHelper::setSession("userLogin", $date->getTimestamp());
@@ -78,6 +91,12 @@ class Users extends Controller {
         SessionHelper::redirectTo('/pages/dashboard');
     }
 
+    /**
+     * Create professionel session and profile
+     *
+     * @param ArrayObject $user
+     * @return void
+     */
     public function createUserSessionPro($user) {
         $date = new DateTime();
         SessionHelper::setSession("userLogin", $date->getTimestamp());
@@ -124,8 +143,35 @@ class Users extends Controller {
         ];
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+            $data = [
+                'userEmail'      => trim($_POST['userEmail']),
+                'userEmailError' => '',
+            ];
+
+
+            //Validate email and telephone
+            if (empty($data['userEmail'])) {
+                $data['userEmailError'] = 'Veuillez saisir un email addresse.';
+            } elseif (!filter_var($data['userEmail'], FILTER_VALIDATE_EMAIL)) {
+                $data['userEmailError'] = 'Veuillez saisir un correct un correct format.';
+            }
+
+            if(empty($data['userEmailError'])){
+                $getEmail = $this->adminModel->GetAdminByEmail($data['userEmail']);
+                if($getEmail){
+                    echo $getEmail->email;echo "<hr>";
+                
+                    $data['userEmail'] = $getEmail->email;
+                }
+                $this->view('users/mailrecover', $data);
+            }
+            // var_dump($data);
+            // echo (!empty($data['userEmailError']));
             
+            $this->view('users/forgetpd', $data);
         }
+
         $this->view('users/forgetpd', $data);
     }
 

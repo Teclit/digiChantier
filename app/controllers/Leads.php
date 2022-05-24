@@ -518,7 +518,13 @@ class Leads extends Controller {
     
     }
 
-
+    /**
+     * Dowload execel
+     *
+     * @param String $fileType
+     * @param ArrayObject $leads
+     * @return void
+     */
     public function ExporterExcel( $fileType, $leads){
         
         // Filter the excel data 
