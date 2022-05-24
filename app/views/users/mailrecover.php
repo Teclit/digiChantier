@@ -32,7 +32,7 @@
     // Mail subject
     $mail->Subject = 'Email from local host to test';
     // Mail body content
-    $bodyContent = '<h3>'.$data['userEmail']."  id-  ".$data['userId'].'Modifier votre mot de passe</h3>';
+    $bodyContent = '<h3>'.$data['userEmail'].'Modifier votre mot de passe</h3>';
     $bodyContent .= '<p>En cliquant le le lien, vou pouvez modifier votre mot de passe.<b>Digicotek</b></p>';
     $bodyContent .= '<button><a href="http://localhost/DigicotekStage/digicotekchantier/users/editpassword/'.$data['userId'].'"> Cliquer ici<a><button>';
     $mail->Body   = $bodyContent;

@@ -172,11 +172,11 @@ Class Administrateur {
      * @return Boolean
      */
     public function updatePassword($data) {
-        $this->db->query('UPDATE professionel SET  password=:password WHERE id=:id AND email=:email' );
+        $this->db->query('UPDATE administrateur SET  password=:password WHERE id=:id AND email=:email' );
         //Bind values
         $this->db->bind(':email',      $data['userEmail']);
-        $this->db->bind(':password',          $data['userPassword']);
-        $this->db->bind(':id',               $data['userId']);
+        $this->db->bind(':password',   $data['userPassword']);
+        $this->db->bind(':id',          $data['userId']);
 
         if ($this->db->execute()) {
             return true;

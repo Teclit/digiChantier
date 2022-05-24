@@ -164,7 +164,7 @@ class Users extends Controller {
                 if($this->adminModel->GetAdminByEmail($data['userEmail'])){
                     $getEmail = $this->adminModel->GetAdminByEmail($data['userEmail']);
                     $data['userEmail'] = $getEmail->email;
-                    $data['userId']    = $getEmail->idpro;
+                    $data['userId']    = $getEmail->id;
                 }elseif($this->proModel->GetProsByEmail($data['userEmail'])){
                     $getEmail = $this->proModel->GetProsByEmail($data['userEmail']);
                     $data['userEmail'] = $getEmail->emailcontact;
@@ -226,37 +226,34 @@ class Users extends Controller {
             } elseif (!filter_var($data['userEmail'], FILTER_VALIDATE_EMAIL)) {
                 $data['userEmailError'] = 'Veuillez saisir un correct un correct format.';
             } 
-                // $this->professionelModel ->GetProsByEmail($data['userEmail']);
-                // $this->administrateursModel->findAdminByEmail($data['userEmail']);
-                
 
             // Make sure that errors are empty
             if (empty($data['userEmailError'])  && empty($data['adresseProError'])){
                 //Hash password
                 $data['userPassword'] = password_hash($data['userPassword'], PASSWORD_DEFAULT);
 
-                if($this->professionelModel ->GetProsByEmail($data['userEmail'])) {
-                    $this->professionelModel->updatePassword($data);
-
+                if($this->proModel ->GetProsByEmail($data['userEmail'])) {
+                    if($this->proModel->updatePassword($data)) {
+                        $msg= "Vous avez bien modifier le mot de passe";
+                        SessionHelper::setSession("SuccessMessage", $msg);
+                        SessionHelper::redirectTo('/users/forgetpd');
+                    }
                     // Redirect to index page
-                    // $msg= "Vous avez bien modifier le professionel";
-                    // SessionHelper::setSession("SuccessMessage", $msg);
-                    // SessionHelper::redirectTo('/users/editpassword');
+                    
 
-                }elseif($this->administrateursModel->findAdminByEmail($data['userEmail'])){
+                }elseif($this->adminModel->GetAdminByEmail($data['userEmail'])){
 
-                    $this->administrateursModel->updatePassword($data);
+                    if($this->adminModel->updatePassword($data)){
+                        $msg= "Vous avez bien modifier le mot de passe";
+                        SessionHelper::setSession("SuccessMessage", $msg);
+                        SessionHelper::redirectTo('/users/forgetpd');
+                        //$this->view('users/forgetpd', $data);
+                    }
                 }else {
                     $msg= "Vous n'avez pas modifier le mot de passe";
                     SessionHelper::setSession("ErrorMessage", $msg);
-                    SessionHelper::redirectTo('/users/editpassword');
+                    SessionHelper::redirectTo('/users/forgetpd');
                 }
-
-
-                // $this->professionelModel ->GetProsByEmail($data['userEmail']);
-                // $this->administrateursModel->findAdminByEmail($data['userEmail']);
-                
-                var_dump($data);
         
             }
             //var_dump($data);
