@@ -75,6 +75,19 @@ Class Professionel {
         return $row;
     }
 
+    /**
+     * Get Professionel by Email
+     *
+     * @param String $email
+     * @return ArrayObject
+     */
+    public function GetProsByEmail(String $email){
+        $this->db->query('SELECT * FROM professionel WHERE emailcontact = :email');
+        $this->db->bind(':email', $email);
+        $row = $this->db->single();
+        return $row;
+    }
+
 
     /**
      * Find Professionel by email. email is passed in by the Controller.
@@ -160,6 +173,27 @@ Class Professionel {
         $this->db->bind(':password',          $data['passwordPro']);
         $this->db->bind(':fonctioncontact',   $data['fonctionPro']);
         $this->db->bind(':idpro',             $data['idPro']);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+ 
+    /**
+     * Update Prof update
+     * @param ArrayObject $data
+     * @return Boolean
+     */
+    public function updatePassword($data) {
+        $this->db->query('UPDATE professionel SET  password=:password WHERE idpro=:idpro AND emailcontact=:emailcontact' );
+        //Bind values
+        $this->db->bind(':emailcontact',      $data['userEmail']);
+        $this->db->bind(':password',          $data['userPassword']);
+        $this->db->bind(':idpro',             $data['userId']);
 
         if ($this->db->execute()) {
             return true;

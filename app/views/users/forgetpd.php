@@ -8,6 +8,10 @@
             <div class="col-sm-10 col-md-8 col-lg-7 mx-auto">
                 <div class="card border-0 shadow rounded-3 my-5">
                     <div class="card-body p-4 p-sm-5">
+                        <?php 
+                            echo SessionHelper::getSession("SuccessMessage");
+                            echo SessionHelper::getSession("ErrorMessage");
+                        ?>
                         <h6 class="card-title text-center  fs-5"> Saisir votre adresse mail pour  changer votre mot de passe. </h6>
                         <form action="<?php echo URLROOT; ?>/users/forgetpd" method ="POST">
                             <div class="form-floating mb-3">

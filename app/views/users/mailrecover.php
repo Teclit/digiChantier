@@ -32,15 +32,23 @@
     // Mail subject
     $mail->Subject = 'Email from local host to test';
     // Mail body content
-    $bodyContent = '<h1>How to Send Email from Localhost using PHP by Digicotek </h1>';
-    $bodyContent .= '<p>This HTML email is sent from the localhost server using PHP by <b>Digicotek</b></p>';
-    $mail->Body    = $bodyContent;
+    $bodyContent = '<h3>'.$data['userEmail']."  id-  ".$data['userId'].'Modifier votre mot de passe</h3>';
+    $bodyContent .= '<p>En cliquant le le lien, vou pouvez modifier votre mot de passe.<b>Digicotek</b></p>';
+    $bodyContent .= '<button><a href="http://localhost/DigicotekStage/digicotekchantier/users/editpassword/'.$data['userId'].'"> Cliquer ici<a><button>';
+    $mail->Body   = $bodyContent;
 
     // Send email 
     if(!$mail->send()) { 
-        echo 'Message could not be sent. Mailer Error: '.$mail->ErrorInfo; 
+       // echo 'Message could not be sent. Mailer Error: '.$mail->ErrorInfo; 
+        $msg= "Le lien n'a pas pu être envoyé. Erreur de messagerie : vérifiez que votre adresse e-mail est correcte.";
+        SessionHelper::setSession("useremail", $data['userEmail']);
+        SessionHelper::setSession("ErrorMessage", $msg);
+        SessionHelper::redirectTo('/users/forgetpd');
     } else { 
-        echo 'Message has been sent.'; 
+        //echo 'Message has been sent.'; 
+        $msg= "Le lien a été envoyé. vérifiez votre email pour changer votre mot de passe.";
+        SessionHelper::setSession("SuccessMessage", $msg);
+        SessionHelper::redirectTo('/users/forgetpd'); 
     } 
 
 

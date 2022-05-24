@@ -132,12 +132,13 @@ class Users extends Controller {
     }
 
     /**
-     * Modifier un mot de passe
+     * forget mot de passe un mot de passe
      *
      * @return void
      */
     public function forgetpd() {
         $data = [
+            'userId' => '',
             'userEmail' => '',
             'userEmailError' => '',
         ];
@@ -158,22 +159,113 @@ class Users extends Controller {
             }
 
             if(empty($data['userEmailError'])){
-                $getEmail = $this->adminModel->GetAdminByEmail($data['userEmail']);
-                if($getEmail){
-                    echo $getEmail->email;echo "<hr>";
+                $getEmail = '';
                 
+                if($this->adminModel->GetAdminByEmail($data['userEmail'])){
+                    $getEmail = $this->adminModel->GetAdminByEmail($data['userEmail']);
                     $data['userEmail'] = $getEmail->email;
+                    $data['userId']    = $getEmail->idpro;
+                }elseif($this->proModel->GetProsByEmail($data['userEmail'])){
+                    $getEmail = $this->proModel->GetProsByEmail($data['userEmail']);
+                    $data['userEmail'] = $getEmail->emailcontact;
+                    $data['userId']    = $getEmail->idpro;
+
                 }
+                //var_dump($getEmail);
                 $this->view('users/mailrecover', $data);
             }
-            // var_dump($data);
-            // echo (!empty($data['userEmailError']));
-            
             $this->view('users/forgetpd', $data);
         }
 
         $this->view('users/forgetpd', $data);
     }
+
+    /**
+     * Redirect to edit password
+     *
+     * @return void
+     */
+    public function  editpassword($idpro){
+        $data = [
+            'file'                     => "editpassword",
+            'userId'                   => $idpro,
+            'userEmail'                => '',
+            'userPassword'             => '',
+            'userConfirmpassword'      => '',
+            'userPasswordError'        => '',
+            'userConfirmpasswordError' => '',
+        ];
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+            $data = [
+                'file'                     => "editpassword",
+                'userId'                   => $idpro,
+                'userEmail'                => trim($_POST['userEmail']),
+                'userPassword'             =>trim($_POST['userPassword']),
+                'userConfirmpassword'      =>trim($_POST['userConfirmpassword']),
+                'userPasswordError'        => '',
+                'userConfirmpasswordError' => '',
+                'userEmailError'            => ''
+            ];
+            
+            $passwordValidation    = "/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/";
+            if (empty($data['userPassword']) || !preg_match($passwordValidation, $data['userPassword']) || (strlen($data['userPassword'])<6)){ 
+                $data['passwordError'] = 'Veuillez saisir un valide mot de passe.';
+            } elseif (empty($data['userConfirmpassword']) || !preg_match($passwordValidation, $data['userConfirmpassword'])){ 
+                $data['userConfirmpasswordError'] = 'Veuillez confirmer votre mot de passe.';
+            } else {
+                if ($data['userPassword'] != $data['userConfirmpassword']) {
+                $data['userConfirmpasswordError'] = 'Les mots de passe ne correspondent pas, Veuillez réessayer.';
+                }
+            }
+
+            //Validate email and telephone
+            if (empty($data['userEmail'])) {
+                $data['userEmailError'] = 'Veuillez saisir un email addresse.';
+            } elseif (!filter_var($data['userEmail'], FILTER_VALIDATE_EMAIL)) {
+                $data['userEmailError'] = 'Veuillez saisir un correct un correct format.';
+            } 
+                // $this->professionelModel ->GetProsByEmail($data['userEmail']);
+                // $this->administrateursModel->findAdminByEmail($data['userEmail']);
+                
+
+            // Make sure that errors are empty
+            if (empty($data['userEmailError'])  && empty($data['adresseProError'])){
+                //Hash password
+                $data['userPassword'] = password_hash($data['userPassword'], PASSWORD_DEFAULT);
+
+                if($this->professionelModel ->GetProsByEmail($data['userEmail'])) {
+                    $this->professionelModel->updatePassword($data);
+
+                    // Redirect to index page
+                    // $msg= "Vous avez bien modifier le professionel";
+                    // SessionHelper::setSession("SuccessMessage", $msg);
+                    // SessionHelper::redirectTo('/users/editpassword');
+
+                }elseif($this->administrateursModel->findAdminByEmail($data['userEmail'])){
+
+                    $this->administrateursModel->updatePassword($data);
+                }else {
+                    $msg= "Vous n'avez pas modifier le mot de passe";
+                    SessionHelper::setSession("ErrorMessage", $msg);
+                    SessionHelper::redirectTo('/users/editpassword');
+                }
+
+
+                // $this->professionelModel ->GetProsByEmail($data['userEmail']);
+                // $this->administrateursModel->findAdminByEmail($data['userEmail']);
+                
+                var_dump($data);
+        
+            }
+            //var_dump($data);
+            $this->view('/users/editpassword', $data);
+        }
+
+        $this->view('/users/editpassword', $data);
+    }
+
 
     /**
      * Logout et destroy all  Sessions
