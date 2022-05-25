@@ -37,8 +37,8 @@
 
         <div class="col-lg-10 px-4">
             <h4 class="text-start text-secondary">Mes Projet accepté:</h4>
-            <div class="bg-light p-3">
-                <table class="table table-hover">
+            <div class="bg-light">
+                <table class="table  table-responsive table-hover table-bordered">
                     <thead>
                         <tr>
                             <th class="fw-bold">N°.</th>

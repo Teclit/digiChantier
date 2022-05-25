@@ -310,12 +310,7 @@ class Administrateurs extends Controller {
                 $data['emailAdminError'] = 'Veuillez saisir un email addresse.';
             } elseif (!filter_var($data['emailAdmin'], FILTER_VALIDATE_EMAIL)) {
                 $data['emailAdminError'] = 'Veuillez saisir un correct un correct format.';
-            } else {
-                // Check if email exists.
-                if ($this->administrateursModel->findAdminByEmail($data['emailAdmin'])) {
-                    $data['emailAdminError'] = 'Cet e-mail est déjà pris.Si vous avez oublier votre mot de passe, Veuillez modifier.';
-                }
-            }
+            } 
 
             // Make sure that errors are empty
             if (

@@ -495,12 +495,14 @@ class professionels extends Controller {
                 $data['emailProError'] = 'Veuillez saisir un email addresse.';
             } elseif (!filter_var($data['emailPro'], FILTER_VALIDATE_EMAIL)) {
                 $data['emailProError'] = 'Veuillez saisir un correct un correct format.';
-            } else {
-                // Check if email exists.
-                if ($this->professionelModel ->findProByEmail($data) ) {
-                    $data['emailProError'] = 'Cet e-mail est déjà pris. Si vous avez oublier votre mot de passe, Veuillez modifier.';
-                }
-            }
+            } 
+            
+            // else {
+            //     // Check if email exists.
+            //     if ($this->professionelModel ->findProByEmail($data) ) {
+            //         $data['emailProError'] = 'Cet e-mail est déjà pris. Si vous avez oublier votre mot de passe, Veuillez modifier.';
+            //     }
+            // }
 
             // Make sure that errors are empty
             if (
