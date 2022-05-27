@@ -50,6 +50,7 @@
                             <th class="fw-bold d-none d-lg-table-cell">Code Postale</th>
                             <th class="fw-bold d-none d-lg-table-cell">Date inscrption</th>
                             <th class="fw-bold">Projet</th>
+                            <th class="fw-bold">Supprimer</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,6 +65,7 @@
                         <td class="d-none d-lg-table-cell"><?php echo $lead->codepostal;?></td>
                         <td class="d-none d-lg-table-cell"><?php echo $lead->date_inscrption;?></td>
                         <td ><a href="<?php echo URLROOT."/personnels/leadDetail/".$lead->idlead ?>" class="btn btn-success btn-sm">Infos</a></td>
+                        <td ><a href="<?php echo URLROOT."/personnels/deleteclient/".$lead->idlead ?>" class="btn btn-danger btn-sm">Supprimer</a></td>
                     </tr>
                     <?php endforeach; ?>
                         

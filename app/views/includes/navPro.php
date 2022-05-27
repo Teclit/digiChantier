@@ -4,7 +4,6 @@
         <li class="nav-item me-2"><a class="nav-link  text-light fw-bold" href="<?php echo URLROOT."/personnels/indexPerso/".SessionHelper::getSession("userId") ; ?>">Mes Projet Accepté</a></li>
         <li class="nav-item me-2"><a class="nav-link text-light fw-bold" href="<?php echo URLROOT."/personnels/projetDisponible/".SessionHelper::getSession("userId") ; ?>">Projet Disponible</a></li>
         <li class="nav-item bg-dark"><a class="nav-link text-light fw-bold px-3" href="<?php echo URLROOT."/commandes/panier"; ?>"> Mon Panier</a></li>
-        <li class="nav-item bg-dark"><a class="nav-link text-light fw-bold px-3" href="<?php echo URLROOT."/commandes/payPanier"; ?>"> Payment</a></li>
         
 
     </ul>

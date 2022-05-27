@@ -48,7 +48,7 @@
                     </h2>
                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                         <div class="accordion-body py-5">
-                            <form class="row g-3 justify-content-space-between border border-2 p-3 ">
+                            <form action="<?php echo URLROOT; ?>/commandes/commandepayer" method ="POST" enctype="multipart/form-data"  class="row g-3 justify-content-space-between border border-2 p-3 ">
                                 <div class= "col-md-5">
                                     <label for="cardNb" class="form-label">Card Number</label>
                                     <input type="text"  name="cardNb" id="cardNb" size="20" autocomplete="off" class="form-control" >
@@ -60,8 +60,9 @@
                                 <div class="col-md-4">
                                     <label for="date_exp" class="form-label">Expiration (MM/YYYY)</label>
                                     <div class="input-group" id="date_ex ">
-                                        <input type="text" name="month" size="2" class="form-control">
-                                        <input type="text" name="year"  size="4" class="form-control">
+                                        <input type="number" name="month" class="form-control" size="2" min="01" max="12" step="01" value="<?php echo date("m"); ?>" />
+                                        <input type="number" name="year" class="form-control" size="4" min="1900" max="2099" step="1" value="<?php echo date("Y"); ?>" />
+                                        
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-center my-3">

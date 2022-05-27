@@ -104,7 +104,7 @@ class Commandes extends Controller {
      * @param Int $idLead
      * @return void
      */
-    public function payPanier(){
+    public function commandepayer(){
         $key =  'panier-'.SessionHelper::getSession("userId");
         $monPanier = [];
 
@@ -117,12 +117,68 @@ class Commandes extends Controller {
         }
 
         $data = [
-            'prixunite'     => $this->commandeModel->GetUnitePrixLead($this->prixUnite),
-            'panier'        => $monPanier,
+            'prixunite'         => $this->commandeModel->GetUnitePrixLead($this->prixUnite),
+            'panier'            => $monPanier,
+            'paid'              =>'',
+            'transactionstatus' =>'',
+            'totalprix'         =>'',
+            'pymdate'           =>'',
+            'idpro'             =>'',
+            'cardNb'            => '',
+            'cardCvc'           => '',
+            'cardExp'           => '',
+            'cardNbError'       => '',
+            'cardCvcError'      => '',
+            'cardExpError'      => '',
         ];
         
-        
-        $this->view('commandes/payPanier', $data);
+        if($_SERVER['REQUEST_METHOD'] == 'POST' ){
+
+            $totalPrix = count($data['panier'])*$data['prixunite']->prix;
+            
+            $data = [
+                'prixunite'         => $this->commandeModel->GetUnitePrixLead($this->prixUnite),
+                'panier'            => $monPanier,
+                'paid'              =>1,
+                'transactionstatus' =>1,
+                'totalprix'         =>$totalPrix,
+                'pymdate'           =>date("Y-m-d H:i:s"),
+                'idpro'             =>intval(SessionHelper::getSession("userId")),
+                'cardNb'            => $_POST['cardNb'],
+                'cardCvc'           => $_POST['cvc'],
+                'cardExpMonth'      => $_POST['month'],
+                'cardExpYear'       => $_POST['year'],
+                'cardNbError'       => '',
+                'cardCvcError'      => '',
+                'cardExpError'      => '',
+            ];
+            
+            //ADD payment Api
+                /**-- sTRIPE */
+
+            //Traitment des Erreures 
+
+            //ADD commande
+            if($this->commandeModel->AddCommand($data)){
+                $lastCmdId = $this->commandeModel->CommandLastID($data['idpro']);
+                //ADD COMMANDE LINE 
+                foreach ($data['panier'] as $lead) {
+                    $cmLine =[
+                        'idlead'  => $lead->idlead,
+                        'idcmd'   => $lastCmdId,
+                    ];
+                    $this->commandeModel->AddCommandLine($cmLine);
+                }
+                //Delete panier
+                SessionHelper::setSession($key, '');
+                $msg ="Vous avez bien payé votre commande.";
+                SessionHelper::setSession("SuccessMessage", $msg); 
+                SessionHelper::redirectTo('/personnels/indexPerso/'.$data['idpro']);
+            }
+
+        }
+
+        $this->view('commandes/panier', $data);
     }
 
 

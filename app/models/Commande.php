@@ -64,7 +64,7 @@ class Commande {
         return $row;
     }
 
-
+/**############################# Comand line #############################**/
     /**
      *   
      *  Get All commandelines by professionel
@@ -81,6 +81,60 @@ class Commande {
         $this->db->bind(':paid',  $paid);
         $results = $this->db->resultSet();
         return $results;
+    }
+
+    /**
+     * Add commande
+     *
+     * @param Arrayobject $data
+     * @return void
+     */
+    public function AddCommand($data){
+        $this->db->query('INSERT INTO commande ( paid, transactionstatus, totalprix, idpro, pymdate) 
+        VALUES(:paid, :transactionstatus, :totalprix, :idpro, :pymdate)');
+
+        $this->db->bind(':paid',               $data['paid']);
+        $this->db->bind(':transactionstatus',  $data['transactionstatus']);
+        $this->db->bind(':totalprix',          $data['totalprix']);
+        $this->db->bind(':idpro',              $data['idpro']);
+        $this->db->bind(':pymdate',            $data['pymdate']);
+        //Execute function
+        if ($this->db->execute()) {
+            return  true;
+        } else {
+            return   false;
+        }
+    }
+
+    /**
+     * Get last id addes to command by pro
+     *
+     * @return Integer
+     */
+    public function CommandLastID(int $idpro){
+        $this->db->query('SELECT MAX(idcmd) As idcmd FROM commande WHERE idpro=:idpro');
+        $this->db->bind(':idpro', $idpro);
+        $row = $this->db->single();
+        return $row->idcmd;
+    }
+
+
+    /**
+     * Add commande line 
+     *
+     * @param Array $data
+     * @return void
+     */
+    public function AddCommandLine($data){
+        $this->db->query('INSERT INTO commandeline ( idlead, idcmd) VALUES(:idlead, :idcmd)');
+        $this->db->bind(':idlead', $data['idlead']);
+        $this->db->bind(':idcmd',  $data['idcmd']);
+        //Execute function
+        if ($this->db->execute()) {
+            return  true;
+        } else {
+            return   false;
+        }
     }
 
 
