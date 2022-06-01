@@ -17,7 +17,7 @@
             <div class="card border-4 shadow   mb-4">
                 <div class="card-body px-4 text-center border-dark">
                     <h4 class="card-title text-secondary">Commandes</h4>
-                    <h2 class="card-text text-primary"><?php echo $data['commandes']->totalcmd; ?></h2>
+                    <h2 class="card-text text-primary"><a href="<?php echo URLROOT."/personnels/commandes/".SessionHelper::getSession("userId") ; ?>"><?php echo $data['commandes']->totalcmd; ?></a></h2>
                 </div>
             </div>
             <div class="card  border-4 shadow  mb-4">

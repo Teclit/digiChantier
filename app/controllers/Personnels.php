@@ -28,12 +28,33 @@ class Personnels extends Controller {
     public function indexPerso(int $idPro) { 
         $data = [
             'professionel'  => $this->professionelModel->findProfessionelByID($idPro),
-            'commandes'     => $this->commandeModel->findAllCommandeByPRO($idPro),
+            'commandes'     => $this->commandeModel->findTotalCommandeByPRO($idPro),
             'commandeLines' => $this->commandeModel->findAllCommandLineByPRO($idPro),
             'leads'         => $this->commandeModel->findAllLeadsDispo($idPro),
             'prixunite'     => $this->commandeModel->GetUnitePrixLead($this->prixUnite),
         ];
         $this->view('personnels/indexPerso', $data);
+    }
+
+
+    public function commandes($idPro){
+        $cmds = $this->commandeModel->findAllCommandesByPRO($idPro);
+        $cmdLine = [];
+
+        //Get all commande line by commande id
+        // foreach($cmds as $commande){
+        //    // array_push($cmdLine, $this->commandeModel->getAllcommandeLineBYCmd($commande->idcmd) );
+        //     var_dump($commande->idcmd);
+        //     echo "<br>";
+        //     var_dump($this->commandeModel->getAllcommandeLineBYCmd($commande->idcmd));
+        // }
+
+        $data = [
+            'commandes'     => $cmds,
+            'commandeLines' => $cmdLine,
+        ];
+
+        $this->view('personnels/commandes', $data);
     }
 
 
@@ -49,7 +70,7 @@ class Personnels extends Controller {
         
         $data = [
             'professionel'  => $this->professionelModel->findProfessionelByID($idPro),
-            'commandes'     => $this->commandeModel->findAllCommandeByPRO($idPro),
+            'commandes'     => $this->commandeModel->findTotalCommandeByPRO($idPro),
             'commandeLines' => $this->commandeModel->findAllCommandLineByPRO($idPro),
             'leads'         => $this->commandeModel->findAllLeadsDispo($idPro),
             'prixunite'     => $this->commandeModel->GetUnitePrixLead($this->prixUnite),

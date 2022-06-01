@@ -49,15 +49,28 @@ class Commande {
     }
 
 
+    /**
+     * Get All commandes by professionel
+     * 
+     * @param Int $idprix
+     * @return int
+     */
+    public function findAllCommandesByPRO(Int $idpro) {
+        $this->db->query('SELECT commande.paid, commande.cmddate, commande.pymdate, commande.totalprix, commande.idpro, commande.idcmd, COUNT(commandeline.idcmd) as totalcml FROM commande 
+                        LEFT JOIN commandeline  ON commande.idcmd = commandeline.idcmd GROUP BY commande.idcmd HAVING commande.idpro=:idpro');
+        $this->db->bind(':idpro', $idpro);
+        $results = $this->db->resultSet();
+        return $results;
+    }
 
 
     /**
-     * Get All commande by professionel
+     * Get Total commande by professionel  
      *
      * @param Int $idprix
      * @return int
      */
-    public function findAllCommandeByPRO(Int $idpro) {
+    public function findTotalCommandeByPRO(Int $idpro) {
         $this->db->query('SELECT COUNT(*) AS totalcmd FROM  commande WHERE idpro = :idpro');
         $this->db->bind(':idpro', $idpro);
         $row = $this->db->single();
@@ -155,16 +168,18 @@ class Commande {
     }
 
     /**
-     * Get last id addes to command by pro
+     * Get last id addes to command by pro SELECT idcmd, COUNT(*) FROM commandeline WHERE idcmd=25; 
      *
      * @return Integer
      */
-    // public function TotalCommande(){
-    //     $this->db->query('SELECT COUNT(*) As totalcommande FROM commandeline WHERE idcmd=:idcmd');
-    //     $this->db->bind(':idcmd', $idcmd);
-    //     $row = $this->db->single();
-    //     return $row->totalcommande;
-    // }
+    public function getAllcommandeLineBYCmd($idcmd){
+        $this->db->query('SELECT idcmd, COUNT(*) as tcmdline FROM commandeline  WHERE idcmd=:idcmd');
+        $this->db->bind(':idcmd', $idcmd);
+        // $row = $this->db->single();
+        // return $row;
+        $results = $this->db->resultSet();
+        return $results;
+    }
 
     
 
