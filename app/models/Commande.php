@@ -138,6 +138,36 @@ class Commande {
     }
 
 
+    /**
+     * delete commandeline
+     * @param ArrayObject $data
+     * @return Boolean
+     */
+    public function DeleteCommandLine($data) { 
+        $this->db->query(' DELETE FROM commandeline WHERE idlead=:idlead AND idcmd IN (SELECT idcmd FROM commande WHERE idpro =:idpro)');
+        $this->db->bind(':idlead', $data['idLead']);
+        $this->db->bind(':idpro',  $data['idPro']);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Get last id addes to command by pro
+     *
+     * @return Integer
+     */
+    // public function TotalCommande(){
+    //     $this->db->query('SELECT COUNT(*) As totalcommande FROM commandeline WHERE idcmd=:idcmd');
+    //     $this->db->bind(':idcmd', $idcmd);
+    //     $row = $this->db->single();
+    //     return $row->totalcommande;
+    // }
+
+    
+
 
 
 

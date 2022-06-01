@@ -26,6 +26,7 @@
                         <p class="card-text mb-3"><?php echo $data['lead']->projet ?></p>
                     <hr>
                     <a class="btn btn-dark text-light fw-bold my-3 px-5" href="<?php echo URLROOT."/personnels/indexPerso/".SessionHelper::getSession("userId") ; ?>">Retour</a>
+                    <a class="btn btn-danger text-light fw-bold my-3 px-5" href="<?php echo URLROOT."/personnels/deleteClient/".$data['lead']->idlead ; ?>">Supprimer</a>
                     </div>
                 </div>
             </div>

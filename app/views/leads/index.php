@@ -9,7 +9,7 @@
     
 <section class="container">
     <div class="d-flex justify-content-start align-items-center">
-        <a class="btn bg-success text-light mt-5 me-3" href="<?php echo URLROOT; ?>/leads/addlead">Add Lead</a>
+        <a class="btn bg-success text-light mt-5 me-3" href="<?php echo URLROOT; ?>/index">Add Lead</a>
         <a class="btn bg-dark text-light mt-5 px-4" href="<?php echo URLROOT; ?>/leads/exporter">Exporter en Excel</a>
         
     </div>

@@ -101,9 +101,9 @@ Class Administrateur {
      * @param ArrayObject $data
      * @return Boolean
      */
-    public function findAdminByEmail($data) {
+    public function findAdminByEmail($email) {
         $this->db->query('SELECT COUNT(*) As nbemail FROM administrateur WHERE email = :email');
-        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':email', $email);
         $result = $this->db->single();
         if($result->nbemail > 0) {
             return true;

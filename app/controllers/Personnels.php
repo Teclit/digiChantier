@@ -18,19 +18,6 @@ class Personnels extends Controller {
 
     }
 
-    /**
-     * test file
-     *
-     * @param [type] $idLead
-     * @return void
-     */
-    public function test(int $idLead){
-        $data = [ 
-            'prixs' => 20,
-        ];
-
-        $this->view('personnels/test', $data);
-    }
 
     /**
      * Undocumented function
@@ -113,6 +100,32 @@ class Personnels extends Controller {
         ];
 
         $this->view('personnels/leadPotentiel', $data);
+    }
+
+    /**
+     * Delete Commande line
+     *
+     * @param INT $idLead
+     * @return void
+     */
+    public function deleteClient(Int $idLead){
+        $idPro = SessionHelper::getSession("userId");
+        $data = [
+            'idLead' =>intval($idLead),
+            'idPro'  =>intval($idPro),
+        ];
+
+        var_dump($data);
+
+        
+        if($this->commandeModel->DeleteCommandLine($data)) {
+            $msg= "Vous avez bien supprimer le commmande line.";
+            SessionHelper::setSession("SuccessMessage", $msg);
+        } else {
+            $msg= "Vous n'avez pas supprimer le commmande line.";
+            SessionHelper::setSession("ErrorMessage", $msg);
+        }
+        SessionHelper::redirectTo("/personnels/indexPerso/".SessionHelper::getSession("userId"));
     }
 
 

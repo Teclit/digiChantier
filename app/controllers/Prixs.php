@@ -60,6 +60,7 @@ class Prixs extends Controller {
                 
                 if ($this->prixModel->CreatePrix($data)){
                     // Redirect to index page
+                    //define('packUnite',      'PKUNITE'); //Prix un lead by unite
                     $msg= "Vous avez bien definir un nouveau prix .";
                     SessionHelper::setSession("SuccessMessage", $msg);
                     SessionHelper::redirectTo('/prixs/indexPrix');  

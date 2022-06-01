@@ -57,8 +57,8 @@ Class Lead {
      * @return Boolean
      */
     public function createLead($data) {
-        $this->db->query('INSERT INTO lead (nom, prenom, tel, email, adresse, ville, codepostal, idctg, idsctg, projet, prix)
-        VALUES(:nom, :prenom, :tel, :email, :adresse, :ville, :codepostal, :idctg, :idsctg, :projet, :prix)');
+        $this->db->query('INSERT INTO lead (nom, prenom, tel, email, adresse, ville, codepostal, idctg, idsctg, projet)
+        VALUES(:nom, :prenom, :tel, :email, :adresse, :ville, :codepostal, :idctg, :idsctg, :projet)');
     
         //Bind values
         $this->db->bind(':nom',        $data['nomLead']);
@@ -71,7 +71,6 @@ Class Lead {
         $this->db->bind(':idctg',      $data['typeTravauxLead']);
         $this->db->bind(':idsctg',     $data['natureProjetLead']);
         $this->db->bind(':projet',     $data['projetLead']);
-        $this->db->bind(':prix',       $data['prixLead']);
 
         //Execute function
         if ($this->db->execute()) {

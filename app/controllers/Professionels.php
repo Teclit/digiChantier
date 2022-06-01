@@ -1,6 +1,7 @@
 <?php
 class professionels extends Controller {
     public function __construct() {
+        $this->administrateursModel    = $this->model('Administrateur');
         $this->professionelModel       = $this->model('Professionel');
         $this->categoryModel           = $this->model('Category');
         $this->souscategoryModel       = $this->model('Souscategory');
@@ -286,7 +287,7 @@ class professionels extends Controller {
                 $data['emailProError'] = 'Veuillez saisir un email addresse.';
             } elseif (!filter_var($data['emailPro'], FILTER_VALIDATE_EMAIL)) {
                 $data['emailProError'] = 'Veuillez saisir un correct un correct format.';
-            } elseif ($this->professionelModel->findProByEmail($data)) {
+            } elseif ($this->professionelModel->findProByEmail($data) && $this->administrateursModel->findAdminByEmail($data['emailPro'])) {
                     $data['emailProError'] = 'Cet e-mail est déjà pris. Si vous avez oublier votre mot de passe, Veuillez modifier.';
             }elseif (empty($data['adressePro'])){ 
                 $data['adresseProError'] = 'Veuillez remplir saisir votre adresse';
@@ -305,7 +306,6 @@ class professionels extends Controller {
                 $data['confirmpasswordProError'] = 'Les mots de passe ne correspondent pas, Veuillez réessayer.';
                 }
             }
-
 
             // Make sure that errors are empty
             if (
@@ -332,7 +332,7 @@ class professionels extends Controller {
                         foreach ($secteuActivite as $item) {
                             $activite = [
                                 'idctg'        =>intval($item),
-                                'idpro'              =>$idPro,
+                                'idpro'        =>$idPro,
                             ];
                             $this->professionelModel->AddActivitePro($activite);
                         }
@@ -496,13 +496,7 @@ class professionels extends Controller {
             } elseif (!filter_var($data['emailPro'], FILTER_VALIDATE_EMAIL)) {
                 $data['emailProError'] = 'Veuillez saisir un correct un correct format.';
             } 
-            
-            // else {
-            //     // Check if email exists.
-            //     if ($this->professionelModel ->findProByEmail($data) ) {
-            //         $data['emailProError'] = 'Cet e-mail est déjà pris. Si vous avez oublier votre mot de passe, Veuillez modifier.';
-            //     }
-            // }
+        
 
             // Make sure that errors are empty
             if (
