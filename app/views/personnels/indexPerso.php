@@ -27,12 +27,6 @@
                 </div>
             </div>
 
-            <div class="card  border-4 shadow  mb-4">
-                <div class="card-body px-4 text-center">
-                    <h4 class="text-secondary">Prospects achetés</h4>
-                    <h2 class="card-text text-danger ">0</h2>
-                </div>
-            </div>
         </div>
 
         <div class="col-lg-10 px-4">
