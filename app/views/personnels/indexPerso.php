@@ -17,7 +17,7 @@
             <div class="card border-4 shadow   mb-4">
                 <div class="card-body px-4 text-center border-dark">
                     <h4 class="card-title text-secondary">Commandes</h4>
-                    <h2 class="card-text text-primary"><a href="<?php echo URLROOT."/personnels/commandes/".SessionHelper::getSession("userId") ; ?>"><?php echo $data['commandes']->totalcmd; ?></a></h2>
+                    <h2 class="card-text text-primary"><a class="text-decoration-none" href="<?php echo URLROOT."/personnels/userCommandes/".SessionHelper::getSession("userId") ; ?>"><?php echo $data['commandes']->totalcmd; ?></a></h2>
                 </div>
             </div>
             <div class="card  border-4 shadow  mb-4">
@@ -53,20 +53,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <?php foreach($data['commandeLines'] as $index=>$lead): ?>
-                    <tr>
-                        <td scope="row"><?php echo $index+1;?></td>
-                        <td><?php echo $lead->nom;?></td>
-                        <td class="d-none d-lg-table-cell"><?php echo $lead->prenom;?></td>
-                        <td class=""><?php echo$lead->tel;?></td>
-                        <td class="d-none d-lg-table-cell"><?php echo $lead->email;?></td>
-                        <td class="d-none d-md-table-cell"><?php echo $lead->ville;?></td>
-                        <td class="d-none d-lg-table-cell"><?php echo $lead->codepostal;?></td>
-                        <td class="d-none d-lg-table-cell"><?php echo $lead->date_inscrption;?></td>
-                        <td ><a href="<?php echo URLROOT."/personnels/leadDetail/".$lead->idlead ?>" class="btn btn-success btn-sm">Infos</a></td>
-                    </tr>
-                    <?php endforeach; ?>
-                        
+                        <?php foreach($data['commandeLines'] as $index=>$lead): ?>
+                        <tr>
+                            <td scope="row"><?php echo $index+1;?></td>
+                            <td><?php echo $lead->nom;?></td>
+                            <td class="d-none d-lg-table-cell"><?php echo $lead->prenom;?></td>
+                            <td class=""><?php echo$lead->tel;?></td>
+                            <td class="d-none d-lg-table-cell"><?php echo $lead->email;?></td>
+                            <td class="d-none d-md-table-cell"><?php echo $lead->ville;?></td>
+                            <td class="d-none d-lg-table-cell"><?php echo $lead->codepostal;?></td>
+                            <td class="d-none d-lg-table-cell"><?php echo $lead->date_inscrption;?></td>
+                            <td ><a href="<?php echo URLROOT."/personnels/leadDetail/".$lead->idlead ?>" class="btn btn-success btn-sm">Infos</a></td>
+                        </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

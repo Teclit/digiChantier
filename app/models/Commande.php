@@ -77,6 +77,25 @@ class Commande {
         return $row;
     }
 
+    /**
+     * Delete user commande by id commande and id user
+     *
+     * @param object $data
+     * @return void
+     */
+    public function DeleteUserCommande(array $data){
+        // var_dump($data);
+        $this->db->query('DELETE FROM commande WHERE idcmd=:idcmd  AND idpro = :idpro');
+        $this->db->bind(':idcmd', $data['idcmd']);
+        $this->db->bind(':idpro', $data['idPro']);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 /**############################# Comand line #############################**/
     /**
      *   
@@ -166,6 +185,23 @@ class Commande {
             return false;
         }
     }
+
+    /**
+     * Delete user Commande line by commande Id
+     *
+     * @param array $data
+     * @return void
+     */
+    public function  DeleteUserCommandLine($data) { 
+        $this->db->query(' DELETE FROM commandeline WHERE idcmd=:idcmd');
+        $this->db->bind(':idcmd', $data['idcmd']);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     /**
      * Get last id addes to command by pro SELECT idcmd, COUNT(*) FROM commandeline WHERE idcmd=25; 

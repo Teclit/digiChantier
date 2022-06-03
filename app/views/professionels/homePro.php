@@ -36,7 +36,7 @@
         echo SessionHelper::getSession("ErrorMessage");
     ?>
     
-    <div class="row row-cols-1 row-cols-md-3 g-3 mt-5">
+    <div class="row row-cols-1 row-cols-md-3 g-3 my-5">
         <?php if(!empty($data['jobs'])){ ?>
             <?php foreach($data['jobs'] as $job):?>
                 <div class="col-3 ">

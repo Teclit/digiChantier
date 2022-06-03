@@ -37,22 +37,48 @@ class Personnels extends Controller {
     }
 
 
-    public function commandes($idPro){
-        $cmds = $this->commandeModel->findAllCommandesByPRO($idPro);
-        $cmdLine = [];
+    /**
+     * Show Total commandelines of commande by professionel
+     *
+     * @param int $idPro
+     * @return void
+     */
+    public function userCommandes(int $idPro){
+        $data = ['commandes'     => $this->commandeModel->findAllCommandesByPRO($idPro),];
+        $this->view('personnels/commandes', $data);
+    }
 
-        //Get all commande line by commande id
-        // foreach($cmds as $commande){
-        //    // array_push($cmdLine, $this->commandeModel->getAllcommandeLineBYCmd($commande->idcmd) );
-        //     var_dump($commande->idcmd);
-        //     echo "<br>";
-        //     var_dump($this->commandeModel->getAllcommandeLineBYCmd($commande->idcmd));
-        // }
 
-        $data = [
-            'commandes'     => $cmds,
-            'commandeLines' => $cmdLine,
+    /**
+     * Delete commande of user by 
+     *
+     * @param integer $idPro
+     * @return void
+     */
+    public function deleteUserCommande(int $idCmd){
+        $idPro = intval(SessionHelper::getSession("userId"));
+        $dataCmd = [
+            'idcmd'         =>$idCmd,
+            'idPro'         =>$idPro,
         ];
+
+        if($this->commandeModel->DeleteUserCommandLine($dataCmd)){
+            // var_dump($this->commandeModel->DeleteUserCommandLine($dataCmd));
+            if($this->commandeModel->DeleteUserCommande($dataCmd)){
+                $msg ="Vous avez bien supprimer votre commande";
+                SessionHelper::setSession("SuccessMessage", $msg);
+            }else{
+                $msg ="Vous n'avez pas supprimer votre commande";
+                SessionHelper::setSession("ErrorMessage", $msg);
+            }
+        }else{
+
+            $msg= "Vous n'avez pas supprimer le commmande line.";
+            SessionHelper::setSession("ErrorMessage", $msg);
+        }
+        
+
+        $data = ['commandes'     => $this->commandeModel->findAllCommandesByPRO($idPro),];
 
         $this->view('personnels/commandes', $data);
     }

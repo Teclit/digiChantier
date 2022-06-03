@@ -20,6 +20,7 @@
             } catch (PDOException $e) {
                 $this->error = $e->getMessage();
                 echo $this->error;
+                echo "Votre base de données n'est pas trouvé. ";
             }
         }
 
