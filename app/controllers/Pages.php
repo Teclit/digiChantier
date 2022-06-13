@@ -101,6 +101,17 @@ class Pages extends Controller {
         $this->view('pages/about', $data);
     }
 
+    
+    /**
+     * Page contact
+     *
+     * @return void
+     */
+    public function contact() {
+        $data = ['pageName ' => 'contact page'];
+        $this->view('pages/contact', $data);
+    }
+
 
     /**
      * Page dashbord

@@ -1,9 +1,10 @@
     <ul class="mx-auto navbar-nav  text-center ">
         <li class="nav-item me-2"><a class="nav-link active fw-bold" href="<?php echo URLROOT; ?>/index" target="_self">Accueil</a></li>
-        <li class="nav-item me-2"><a class="nav-link  text-light fw-bold px-3" target="_self" href="<?php echo URLROOT."/professionels/homePro"?>">Offre</a></li>
+        <li class="nav-item me-2"><a class="nav-link  text-light fw-bold px-3" target="_self" href="<?php echo URLROOT."/professionels/homePro"?>">Blog</a></li>
         <li class="nav-item me-2"><a class="nav-link  text-light fw-bold" href="<?php echo URLROOT."/personnels/indexPerso/".SessionHelper::getSession("userId") ; ?>">Mes Projet Accepté</a></li>
         <li class="nav-item me-2"><a class="nav-link text-light fw-bold" href="<?php echo URLROOT."/personnels/projetDisponible/".SessionHelper::getSession("userId") ; ?>">Projet Disponible</a></li>
         <li class="nav-item bg-dark"><a class="nav-link text-light fw-bold px-3" href="<?php echo URLROOT."/commandes/panier"; ?>"> Mon Panier</a></li>
+        <li class="nav-item me-2"><a class="nav-link" href="<?php echo URLROOT; ?>/pages/contact" target="_self">Contact </a></li>
         
 
     </ul>

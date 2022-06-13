@@ -106,7 +106,7 @@ class professionels extends Controller {
                         'stravaux' =>$this->souscategoryModel->findAllSousCategories(),
                         'posts'    => $this->postModel->findAllPosts(),
                     ];
-                    $msg= "Voici les travaux à votre proposition.";
+                    $msg= count($data['jobs'])." - "."  travaux à votre proposition.";
                     SessionHelper::setSession("SuccessMessage", $msg);
                     $this->view('professionels/homePro', $data);  
                 } else {
@@ -287,9 +287,7 @@ class professionels extends Controller {
                 $data['emailProError'] = 'Veuillez saisir un email addresse.';
             } elseif (!filter_var($data['emailPro'], FILTER_VALIDATE_EMAIL)) {
                 $data['emailProError'] = 'Veuillez saisir un correct un correct format.';
-            } elseif ($this->professionelModel->findProByEmail($data) && $this->administrateursModel->findAdminByEmail($data['emailPro'])) {
-                    $data['emailProError'] = 'Cet e-mail est déjà pris. Si vous avez oublier votre mot de passe, Veuillez modifier.';
-            }elseif (empty($data['adressePro'])){ 
+            } elseif (empty($data['adressePro'])){ 
                 $data['adresseProError'] = 'Veuillez remplir saisir votre adresse';
             } elseif (empty($data['codepostalPro']) || !preg_match($codepostalValidation, $data['codepostalPro'])){ 
                 $data['codepostalProError'] = 'Veuillez saisir votre code postal.<br>Example: 75100';
@@ -305,6 +303,12 @@ class professionels extends Controller {
                 if ($data['passwordPro'] != $data['confirmpasswordPro']) {
                 $data['confirmpasswordProError'] = 'Les mots de passe ne correspondent pas, Veuillez réessayer.';
                 }
+            }
+
+
+
+            if ($this->professionelModel->findProByEmail($data) ) {
+                $data['emailProError'] = 'Cet e-mail est déjà pris. Si vous avez oublier votre mot de passe, Veuillez modifier.';
             }
 
             // Make sure that errors are empty
@@ -329,6 +333,7 @@ class professionels extends Controller {
                 if ($this->professionelModel->CreatePro($data)){
                         $idPro = $this->professionelModel->GetLastID();
                         $secteuActivite = explode(",", $data['domainesEnt']);
+
                         foreach ($secteuActivite as $item) {
                             $activite = [
                                 'idctg'        =>intval($item),
@@ -336,6 +341,9 @@ class professionels extends Controller {
                             ];
                             $this->professionelModel->AddActivitePro($activite);
                         }
+
+
+
                     // Redirect to index page
                     $msg= "Vous avez bien enregistrer le professionel";
                     SessionHelper::setSession("SuccessMessage", $msg);

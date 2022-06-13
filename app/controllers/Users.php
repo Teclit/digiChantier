@@ -159,22 +159,23 @@ class Users extends Controller {
             }
 
             if(empty($data['userEmailError'])){
-                $getEmail = '';
-                
+            
                 if($this->adminModel->GetAdminByEmail($data['userEmail'])){
                     $getEmail = $this->adminModel->GetAdminByEmail($data['userEmail']);
                     $data['userEmail'] = $getEmail->email;
                     $data['userId']    = $getEmail->id;
+                    $this->view('users/mailrecover', $data);
                 }elseif($this->proModel->GetProsByEmail($data['userEmail'])){
                     $getEmail = $this->proModel->GetProsByEmail($data['userEmail']);
                     $data['userEmail'] = $getEmail->emailcontact;
                     $data['userId']    = $getEmail->idpro;
-
+                    $this->view('users/mailrecover', $data);
                 }
-                //var_dump($getEmail);
-                $this->view('users/mailrecover', $data);
+
+                $data['userEmailError'] = 'Email n\'exist pas Veuillez saisir un correct email adresse.';
+                $this->view('users/forgetpd', $data);
             }
-            $this->view('users/forgetpd', $data);
+            
         }
 
         $this->view('users/forgetpd', $data);
