@@ -113,7 +113,10 @@ Class Professionel {
      * @return void
      */
     public function GetJob($data) {
-        $this->db->query('SELECT * FROM  lead WHERE idctg=:idctg OR idsctg=:idsctg');
+       // SELECT * FROM  lead WHERE idctg=:idctg OR idsctg=:idsctg
+       // SELECT * FROM lead Left JOIN souscategory ON lead.idsctg = souscategory.idsctg WHERE souscategory.idctg=5 or lead.idsctg=5; 
+        $this->db->query('SELECT * FROM lead Left JOIN souscategory ON lead.idsctg = souscategory.idsctg 
+                        WHERE souscategory.idctg=:idctg or lead.idsctg=:idsctg');
         $this->db->bind(':idctg',  $data['category']);
         $this->db->bind(':idsctg', $data['scategory']);
         $results = $this->db->resultSet();

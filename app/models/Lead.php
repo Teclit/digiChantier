@@ -12,7 +12,10 @@ Class Lead {
      * @return ArrayObject
      */
     public function findAllLeads() {
-        $this->db->query('SELECT * FROM lead  ORDER BY date_inscrption DESC');
+        $this->db->query('SELECT * FROM  lead 
+        LEFT JOIN souscategory ON lead.idsctg = souscategory.idsctg
+        LEFT JOIN  category   ON  category.idctg = souscategory.idctg  
+        ORDER BY date_inscrption DESC');
         $results = $this->db->resultSet();
         return $results;
     }
@@ -42,7 +45,10 @@ Class Lead {
      * @return ArrayObject
      */
     public function findLeadById(int $id){
-        $this->db->query('SELECT * FROM lead  WHERE idlead = :idlead');
+        $this->db->query(' SELECT * FROM  lead 
+                LEFT JOIN souscategory ON lead.idsctg = souscategory.idsctg
+                LEFT JOIN  category   ON  category.idctg = souscategory.idctg
+                WHERE lead.idlead = :idlead');
         $this->db->bind(':idlead', $id);
         $row = $this->db->single();
         return $row;
@@ -86,7 +92,7 @@ Class Lead {
      * @return Boolean
      */
     public function UpdateLead($data) {
-        $this->db->query('UPDATE lead SET nom=:nom, prenom=:prenom, tel=:tel, email=:email, adresse=:adresse, ville=:ville, codepostal=:codepostal, idctg=:idctg, idsctg=:idsctg, projet=:projet WHERE idlead = :idlead');
+        $this->db->query('UPDATE lead SET nom=:nom, prenom=:prenom, tel=:tel, email=:email, adresse=:adresse, ville=:ville, codepostal=:codepostal, idsctg=:idsctg, projet=:projet WHERE idlead = :idlead');
         //Bind values
         $this->db->bind(':idlead',     $data['idlead']);
         $this->db->bind(':nom',        $data['nomLead']);
@@ -96,7 +102,6 @@ Class Lead {
         $this->db->bind(':adresse',    $data['adresseLead']);
         $this->db->bind(':ville',      $data['villeLead']);
         $this->db->bind(':codepostal', $data['codepostalLead']);
-        $this->db->bind(':idctg',      $data['typeTravauxLead']);
         $this->db->bind(':idsctg',     $data['natureProjetLead']);
         $this->db->bind(':projet',     $data['projetLead']);
 

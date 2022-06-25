@@ -13,7 +13,6 @@
                     <h5 class="card-header p-3 fw-bold"> <?php echo $data['typeTravaux']->ctgnom;?> </h5>
                     <div class="card-body text-dark">
                         <h6 class="card-title"> <?php echo $data['natureTravaux']->sctgnom;?> </h6>
-                        <p class="card-text "><?php echo $data['lead']->adresse ?> </p>
                         <p class="card-text fw-bold"> <?php echo $data['lead']->codepostal ?></p> 
                         <p class="card-text fw-bold"><?php echo $data['lead']->ville ?></p> 
                         <div class="bg-transparent border-dark">

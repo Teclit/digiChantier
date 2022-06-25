@@ -99,7 +99,7 @@ class Personnels extends Controller {
             'commandes'     => $this->commandeModel->findTotalCommandeByPRO($idPro),
             'commandeLines' => $this->commandeModel->findAllCommandLineByPRO($idPro),
             'leads'         => $this->commandeModel->findAllLeadsDispo($idPro),
-            'prixunite'     => $this->commandeModel->GetUnitePrixLead($this->prixUnite),
+            // 'prixunite'     => $this->commandeModel->GetUnitePrixLead($this->prixUnite),
 
         ];
         $this->view('personnels/projetDisponible', $data);
@@ -175,5 +175,12 @@ class Personnels extends Controller {
         SessionHelper::redirectTo("/personnels/indexPerso/".SessionHelper::getSession("userId"));
     }
 
+    
 
+    public function commandeLines(int $idcmd) { 
+        $data = [
+            'commandeLines' => $this->commandeModel->getAllcommandeLineBYCmd($idcmd),
+        ];
+        $this->view('personnels/commandelines', $data);
+    }
 }

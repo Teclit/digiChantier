@@ -15,14 +15,16 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                <th class="fw-bold">N°.</th>
-                <th class="fw-bold">Titre</th>
-                <th class="fw-bold d-none d-lg-table-cell">Image</th>
-                <th class="fw-bold d-none d-sm-table-cell">Date Created</th>
-                <th class="fw-bold d-none d-lg-table-cell">Content</th>
-                <th class="fw-bold">Preview</th>
-                <th class="fw-bold">Modifier</th>
-                <th class="fw-bold">Supprimer</th>
+                    <th class="fw-bold">N°.</th>
+                    <th class="fw-bold">Titre</th>
+                    <th class="fw-bold ">Auteur</th>
+                    <th class="fw-bold d-none d-lg-table-cell">Image</th>
+                    <th class="fw-bold d-none d-sm-table-cell">Date Created</th>
+                    <th class="fw-bold d-none d-lg-table-cell">Content</th>
+                    <th class="fw-bold">Preview</th>
+                    <th class="fw-bold">Modifier</th>
+                    <th class="fw-bold">Supprimer</th>
+                    
                 </tr>
             </thead>
             
@@ -31,6 +33,7 @@
                     <tr>
                         <td scope="row"><?php echo $index+1;?></td>
                         <td><?php echo substr($post->title, 0, 20)." .."; ?></td>
+                        <td class=""><?php echo $post->prenom;?></td>
                         <td class="d-none d-lg-table-cell"><img src="<?php echo URLROOT;?>/public/uploads/<?php echo $post->image; ?>" width="180px;" height="70px" alt="<?php echo substr($post->title, 0, 10); ?>"></td>
                         <td class="d-none d-sm-table-cell"><?php echo $post->created_at;?></td>
                         <td class="d-none d-lg-table-cell"><?php echo substr($post->body, 0, 150)." ...";?></td>

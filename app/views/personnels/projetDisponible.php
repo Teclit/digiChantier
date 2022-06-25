@@ -29,7 +29,7 @@
                     <td class=""><?php echo $lead->codepostal;?></td>
                     <td class="d-none d-lg-table-cell"><?php echo substr($lead->projet, 0, 100)."..";?></td>
                     <td><a href="<?php echo URLROOT."/personnels/leadPotentiel/".$lead->idlead ?>" class="btn btn-secondary btn-sm">Voir</a></td>
-                    <td><?php echo $data['prixunite']->prix ."€";?></td>
+                    <td><?php echo $lead->prix ."€";?></td>
                     <td><a href="<?php echo URLROOT."/commandes/addPanier/".$lead->idlead ?>" class="btn btn-dark btn-sm">Ajouter</a></td>
                 </tr>
             <?php  endforeach; ?>  

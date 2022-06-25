@@ -12,7 +12,7 @@ class Post {
      * @return void
      */
     public function findAllPosts() {
-        $this->db->query('SELECT * FROM posts ORDER BY created_at DESC');
+        $this->db->query('SELECT * FROM posts LEFT JOIN administrateur ON posts.adminid = administrateur.id ORDER BY created_at DESC');
         $results = $this->db->resultSet();
         return $results;
     }

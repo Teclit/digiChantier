@@ -9,7 +9,7 @@
     <section class="container text-center my-3 p-1  ">
             <div class="mb-3">
                 <div class="card border-dark mb-3" >
-                    <div class="card-header bg-transparent border-dark">Mon Prospect</div>
+                    <h3 class="card-header bg-transparent border-dark">Mon Prospect</h3>
                     <div class="card-body text-dark">
                         <p class="fw-bold"><?php echo $data['lead']->nom .' '. $data['lead']->prenom ;?></p> 
                         <p class="fw-bold "><?php echo $data['lead']->tel ?> </p> 
@@ -21,8 +21,8 @@
                         </div>
                     </div>
                     <div class="card-footer bg-transparent border-dark">
-                    <h5 class="card-title"> <?php echo $data['typeTravaux']->ctgnom;?> </h5>
-                        <h6 class="card-title"> <?php echo $data['natureTravaux']->sctgnom;?> </h6>
+                    <h5 class="card-title"> <?php echo $data['lead']->ctgnom;?> </h5>
+                        <h6 class="card-title"> <?php echo $data['lead']->sctgnom;?> </h6>
                         <hr>
                         <p class="card-text mb-3 text-wrap"><?php echo $data['lead']->projet ?></p>
                         <hr>

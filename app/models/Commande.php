@@ -39,7 +39,9 @@ class Commande {
      * @return array
      */
     public function findAllLeadsDispo($idpro){
-        $this->db->query('SELECT * FROM lead WHERE idlead NOT IN (
+        $this->db->query('SELECT * FROM lead 
+            LEFT JOIN prixlead ON prixlead.idprix = lead.idprix
+            WHERE idlead NOT IN (
             SELECT commandeline.idlead FROM commande 
             INNER JOIN commandeline ON commande.idcmd = commandeline.idcmd 
             WHERE commande.idpro = :idpro )');
@@ -204,15 +206,13 @@ class Commande {
 
 
     /**
-     * Get last id addes to command by pro SELECT idcmd, COUNT(*) FROM commandeline WHERE idcmd=25; 
+     * Get last id addes to command ; 
      *
      * @return Integer
      */
     public function getAllcommandeLineBYCmd($idcmd){
-        $this->db->query('SELECT idcmd, COUNT(*) as tcmdline FROM commandeline  WHERE idcmd=:idcmd');
+        $this->db->query('SELECT * FROM commandeline LEFT JOIN lead ON lead.idlead = commandeline.idlead WHERE idcmd=:idcmd');
         $this->db->bind(':idcmd', $idcmd);
-        // $row = $this->db->single();
-        // return $row;
         $results = $this->db->resultSet();
         return $results;
     }

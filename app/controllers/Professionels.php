@@ -83,7 +83,7 @@ class professionels extends Controller {
             'scategory'          =>'',
             'travaux'            =>$this->categoryModel->findAllCategories(),
             'stravaux'           =>$this->souscategoryModel->findAllSousCategories(),
-            'posts'     => $this->postModel->findAllPosts(),
+            'posts'              => $this->postModel->findAllPosts(),
         ];
         
         if($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['travaux']) ){

@@ -64,7 +64,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="projet" class="form-label fw-bold">Ville:</label>
+                <label for="projet" class="form-label fw-bold">Détailer votre projet:</label>
                 <textarea class="form-control text-start" name="projet" id="projet"  rows="3" placeholder="Votre Projet">
                     <?php echo $data['projetLead'] ?>
                 </textarea>
