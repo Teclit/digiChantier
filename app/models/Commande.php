@@ -21,7 +21,7 @@ class Commande {
     }
 
     /**
-     * Undocumented function
+     * Get prix lead
      *
      * @return array
      */
@@ -32,6 +32,24 @@ class Commande {
         return $row;
     }
 
+    /**
+     * Find all leads
+     * @return ArrayObject
+     */
+    public function findSearchLead($search) {
+        $search=strtolower($search);
+        $this->db->query("SELECT * FROM lead  
+        JOIN prixlead ON lead.idprix = prixlead.nbleads  
+        WHERE LOWER(ville) LIKE :search OR codepostal LIKE :searc AND  idlead NOT IN (
+            SELECT commandeline.idlead FROM commande 
+            INNER JOIN commandeline ON commande.idcmd = commandeline.idcmd 
+            WHERE commande.idpro = :idpro )'");
+        $this->db->bind(':search', '%'.$search.'%');
+        $results = $this->db->resultSet();
+        
+        return $results;
+            
+    }
 
     /**
      * Undocumented function

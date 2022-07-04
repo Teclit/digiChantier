@@ -16,13 +16,13 @@
         <div class="col-lg-2 ">
             <div class="card border-4 shadow   mb-4">
                 <div class="card-body px-4 text-center border-dark">
-                    <h4 class="card-title text-secondary">Commandes</h4>
+                    <h4 class="card-title text-secondary">Total Commandes</h4>
                     <h2 class="card-text text-primary"><a class="text-decoration-none" href="<?php echo URLROOT."/personnels/userCommandes/".SessionHelper::getSession("userId") ; ?>"><?php echo $data['commandes']->totalcmd; ?></a></h2>
                 </div>
             </div>
             <div class="card  border-4 shadow  mb-4">
                 <div class="card-body px-4 text-center">
-                    <h4 class="card-title text-secondary">Prospects Livrés</h4>
+                    <h4 class="card-title text-secondary">Leads Livrés</h4>
                     <h2 class="card-text text-success"><?php echo Count($data['commandeLines']); ?></h2>
                 </div>
             </div>

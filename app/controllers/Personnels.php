@@ -84,7 +84,32 @@ class Personnels extends Controller {
     }
 
 
+    /**
+     * Searche  form leads 
+     *
+     * @return void
+     */
+    public function search() { 
+        $data = [ 'leads' => $this->commandeModel->findAllLeadsDispo(SessionHelper::getSession("userId")), ];
 
+        if($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['search']) ){
+            $search = trim($_GET['search']);
+            $data = [ 'searchLead' => $this->leadModel->findSearchLead($search), ];
+            
+            if (count($data['searchLead']) > 0) {
+                // Redirect to index page
+                $msg = COUNT($data['searchLead'])." - résultat trouvé pour la recherche  -> '".$search."'";
+                SessionHelper::setSession("SuccessMessage", $msg); 
+            } else {
+                //Redirect to the index
+                $msg= "Aucun résultat n'est trouvé pour la recherche  -> '".$search."'";
+                SessionHelper::setSession("ErrorMessage", $msg);
+            }
+            $this->view('personnels/projetDisponible', $data);
+        } else{
+            SessionHelper::redirectTo('/personnels/projetDisponible/'.SessionHelper::getSession("userId"));
+        }
+    }
 
     /**
      * projetDisponible function

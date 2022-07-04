@@ -491,7 +491,7 @@ class Leads extends Controller {
 
         if($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['search']) ){
             $search = trim($_GET['search']);
-            $data = [ 'searchLead' => $this->leadModel->findSearchLead($search), ];
+            $data = [ 'searchProjet' => $this->leadModel->findSearchLead($search), ];
             
             if (count($data['searchLead']) > 0) {
                 // Redirect to index page

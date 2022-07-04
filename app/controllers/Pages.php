@@ -14,7 +14,7 @@ class Pages extends Controller {
     }
 
     /**
-     * Page d'acceuille
+     * Welcome page
      *
      * @return void
      */
@@ -28,16 +28,6 @@ class Pages extends Controller {
         $this->view('index', $data);
     }
 
-    
-    public function test() {
-        $data = [
-                'posts'    => $this->postModel->findAllPosts(),
-                'travaux'  => $this->categoryModel->findAllCategories(),
-                'stravaux' => $this->souscategoryModel->findAllSousCategories(),
-        ];
-
-        $this->view('pages/test', $data);
-    }
 
     /**
      * Get all Posts

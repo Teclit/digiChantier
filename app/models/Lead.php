@@ -26,7 +26,9 @@ Class Lead {
      */
     public function findSearchLead($search) {
         $search=strtolower($search);
-        $this->db->query("SELECT * FROM lead  WHERE LOWER(nom) LIKE :search OR LOWER(prenom) LIKE :search OR LOWER(email) LIKE :search 
+        $this->db->query("SELECT * FROM lead  
+        JOIN prixlead ON lead.idprix = prixlead.nbleads 
+        WHERE LOWER(nom) LIKE :search OR LOWER(prenom) LIKE :search OR LOWER(email) LIKE :search 
         OR LOWER(adresse) LIKE :search OR LOWER(ville) LIKE :search OR codepostal LIKE :search OR tel  LIKE :search
         ORDER BY nom, prenom, email, adresse, ville, codepostal, tel  ASC ");
         $this->db->bind(':search', '%'.$search.'%');
@@ -63,8 +65,8 @@ Class Lead {
      * @return Boolean
      */
     public function createLead($data) {
-        $this->db->query('INSERT INTO lead (nom, prenom, tel, email, adresse, ville, codepostal, idctg, idsctg, projet)
-        VALUES(:nom, :prenom, :tel, :email, :adresse, :ville, :codepostal, :idctg, :idsctg, :projet)');
+        $this->db->query('INSERT INTO lead (nom, prenom, tel, email, adresse, ville, codepostal,  idsctg, projet)
+        VALUES(:nom, :prenom, :tel, :email, :adresse, :ville, :codepostal, :idsctg, :projet)');
     
         //Bind values
         $this->db->bind(':nom',        $data['nomLead']);
@@ -74,7 +76,6 @@ Class Lead {
         $this->db->bind(':adresse',    $data['adresseLead']);
         $this->db->bind(':ville',      $data['villeLead']);
         $this->db->bind(':codepostal', $data['codepostalLead']);
-        $this->db->bind(':idctg',      $data['typeTravauxLead']);
         $this->db->bind(':idsctg',     $data['natureProjetLead']);
         $this->db->bind(':projet',     $data['projetLead']);
 

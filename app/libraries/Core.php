@@ -10,10 +10,8 @@
     protected $params = [];
 
     public function __construct(){
-      //print_r($this->getUrl());
 
       $url = $this->getUrl();
-
       // Look in BLL for first value
       if(!empty($url[0]) && file_exists('../app/controllers/' . ucwords($url[0]). '.php')){
         // If exists, set as controller
@@ -22,7 +20,7 @@
         unset($url[0]);
       }
 
-      // Require the controller
+      // Require the Controller classe
       require_once '../app/controllers/'. $this->currentController . '.php';
 
       // Instantiate controller class

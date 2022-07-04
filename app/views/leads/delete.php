@@ -7,7 +7,7 @@
 ?>
 
     <section class="container text-start my-3 p-1  ">
-        <h4 class="text-center my-4"> Supprimer le Lead</h4>
+        <h4 class="text-center my-4"> Comfirmer la Suppression du lead</h4>
 
         <?php echo require_once 'formLead.php';?>
 

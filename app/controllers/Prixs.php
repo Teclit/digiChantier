@@ -53,7 +53,12 @@ class Prixs extends Controller {
             }elseif (empty($data['nbleads'])){
                 $data['nbleadsError']   = 'Veuillez saisir nombre de lead';
             }
-
+            
+            //Check if the pris est déja definie
+            if ($this->prixModel->PrixnbLead($data['nbleads'])) {
+                $data['nbleadsError']   = 'Le prix de '.$data['nbleads'].'lead/s est déja defini. Vous le pouvez modifier';
+            }
+            
 
             // Make sure that errors are empty
             if (empty($data['codepackError']) && empty($data['prixError']) && empty($data['nbleadsError'])){
@@ -65,7 +70,7 @@ class Prixs extends Controller {
                     SessionHelper::setSession("SuccessMessage", $msg);
                     SessionHelper::redirectTo('/prixs/indexPrix');  
                 } else {
-                    $msg= "Vous n'avez pas definir un nouveau prix .";
+                    $msg= "Vous n'avez pas definir ce nouveau prix/quantité .";
                     SessionHelper::setSession("ErrorMessage", $msg);
                     SessionHelper::redirectTo('/prixs/indexPrix');
                 }
